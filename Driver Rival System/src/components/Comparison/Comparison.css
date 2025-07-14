@@ -39,16 +39,23 @@
 }
 
 .comparison-stat {
-    display: grid;
+    display: flex;
+    width: 100%;
     gap: 1rem;
-    grid-template-columns: 1fr 1fr;
     margin-top: 0.5rem;
 }
 
 .comparison-bar {
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
     text-align: center;
     border-radius: 50vh;
+    width: 100%;
+    min-width: fit-content;
+    transition: width 0.25s ease-in-out;
+}
+
+.comparison-bar.winner {
+    border: var(--clr-neutral-100) solid 3px;
 }
 
 .driver-stats {
@@ -65,4 +72,11 @@
 
 .driver-stat-item h2 {
     color: var(--clr-neutral-200);
+}
+
+@media (max-width: 32em) {
+    .comparison-header {
+      flex-direction: column;
+      gap: 2rem;
+    }
 }

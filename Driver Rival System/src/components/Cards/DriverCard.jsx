@@ -8,7 +8,6 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
     const lastRef = useRef(lastName);
 
     useEffect(() => {
-        console.log("calling")
         getDriverNationality();
     }, [firstName, lastName, country])
 
@@ -18,7 +17,6 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
 
     function getDriverNationality() {
         const name = `${firstName} ${lastName}`
-        console.log(name)
 
         switch (name) {
             case "Max Verstappen":
@@ -76,8 +74,6 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
     }
 
     function convertCountryCode() {
-        console.log(alpha3);
-
         switch (alpha3) {
             case "ARG":
                 setAlpha2("ar")
@@ -143,8 +139,8 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
 
     return (
         // <div className="driver-card" style={{ backgroundColor: `#${color}` }}>
-        <div className="driver-card-outer" style={{ backgroundColor: `${primaryColor}` }}>
-            <div className="driver-card">
+        <div className="card-wrapper" style={{ backgroundColor: `${primaryColor}` }}>
+            <div className="card driver-card" style={{ backgroundColor: `${primaryColor}` }}>
                 <div className="driver-card-header">
                     <div className="driver-card-title">
                         <h1>{`${firstName} ${lastName}`}</h1>
@@ -158,7 +154,9 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                 </div>
                 <div className="driver-card-footer">
                     <h1 className="driver-acronym">{acronym}</h1>
-                    <span className={`fi fi-${alpha2} driver-flag`}></span>
+                    <div className="flag-container">
+                        <span className={`fi fi-${alpha2} driver-flag`}></span>
+                    </div>
                 </div>
             </div >
         </div>

@@ -9,54 +9,67 @@ import EmptyCard from "../components/Cards/EmptyCard";
 import Header from "../components/Header";
 
 function Home() {
-    const { drivers, firstDriverIdx, setFirstDriverIdx, secondDriverIdx, setSecondDriverIdx, team1Primary, team1Accent, team2Primary, team2Accent } = useDriverContext();
+    const { drivers, firstDriverNumber, setFirstDriverNumber, secondDriverNumber, setSecondDriverNumber, team1Primary, team1Accent, team2Primary, team2Accent } = useDriverContext();
 
     const handleUpdatedDriver1 = (idx) => {
-        setFirstDriverIdx(idx);
+        // FIX ME: find better solution for getting driver number
+        setFirstDriverNumber(drivers.keys().toArray()[idx]);
     };
 
     const handleUpdatedDriver2 = (idx) => {
-        setSecondDriverIdx(idx);
+        setSecondDriverNumber(drivers.keys().toArray()[idx]);
     };
+
+    useEffect(() => {
+
+    }, [drivers])
 
     return (
         <>
             <Header></Header>
             <div className="driver-container">
-                {drivers.length > 0 ? <>
+                {drivers.size > 0 ? <>
                     <div className="driver-wrapper">
                         <ComboxBox
                             title="Driver Selection"
-                            options={drivers.map((driver, idx) => ({ id: idx, name: `${driver.first_name} ${driver.last_name}` }))}
-                            updaterFunction={handleUpdatedDriver1}>
+                            options={Array.from(drivers.keys()).map((number, idx) => (
+                                {
+                                    id: idx,
+                                    value: `${drivers.get(number).fullName}`,
+                                }))}
+                            updaterFunction={handleUpdatedDriver1}
+                            searchable={true}>
                         </ComboxBox>
-                        {firstDriverIdx > -1 ? <DriverCard
-                            firstName={drivers[firstDriverIdx].first_name}
-                            lastName={drivers[firstDriverIdx].last_name}
-                            team={drivers[firstDriverIdx].team_name}
-                            number={drivers[firstDriverIdx].driver_number}
-                            acronym={drivers[firstDriverIdx].name_acronym}
-                            image={drivers[firstDriverIdx].headshot_url}
+                        {firstDriverNumber > -1 ? <DriverCard
+                            firstName={drivers.get(firstDriverNumber).firstName}
+                            lastName={drivers.get(firstDriverNumber).lastName}
+                            team={drivers.get(firstDriverNumber).team}
+                            number={drivers.get(firstDriverNumber).number}
+                            acronym={drivers.get(firstDriverNumber).acronym}
+                            image={drivers.get(firstDriverNumber).image}
                             primaryColor={team1Primary}
                             accentColor={team1Accent}
                         ></DriverCard> : <EmptyCard></EmptyCard>}
-
                     </div>
 
                     <div className="driver-wrapper align-right">
                         <ComboxBox
                             title="Driver Selection"
-                            options={drivers.map((driver, idx) => ({ id: idx, name: `${driver.first_name} ${driver.last_name}` }))}
-                            updaterFunction={handleUpdatedDriver2}>
-
+                            options={Array.from(drivers.keys()).map((number, idx) => (
+                                {
+                                    id: idx,
+                                    value: `${drivers.get(number).fullName}`
+                                }))}
+                            updaterFunction={handleUpdatedDriver2}
+                            searchable={true}>
                         </ComboxBox>
-                        {secondDriverIdx > -1 ? <DriverCard
-                            firstName={drivers[secondDriverIdx].first_name}
-                            lastName={drivers[secondDriverIdx].last_name}
-                            team={drivers[secondDriverIdx].team_name}
-                            number={drivers[secondDriverIdx].driver_number}
-                            acronym={drivers[secondDriverIdx].name_acronym}
-                            image={drivers[secondDriverIdx].headshot_url}
+                        {secondDriverNumber > -1 ? <DriverCard
+                            firstName={drivers.get(secondDriverNumber).firstName}
+                            lastName={drivers.get(secondDriverNumber).lastName}
+                            team={drivers.get(secondDriverNumber).team}
+                            number={drivers.get(secondDriverNumber).number}
+                            acronym={drivers.get(secondDriverNumber).acronym}
+                            image={drivers.get(secondDriverNumber).image}
                             primaryColor={team2Primary}
                             accentColor={team2Accent}
                         ></DriverCard> : <EmptyCard></EmptyCard>}

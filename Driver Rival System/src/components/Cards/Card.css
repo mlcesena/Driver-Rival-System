@@ -1,32 +1,48 @@
-.driver-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-}
-
 .driver-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.driver-card-outer {
-    width: 432px;
-    border: white solid 0.5rem;           
+.card-wrapper {
+    max-width: 425px;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-height: 550px;
+    border: var(--clr-neutral-100) solid 0.45rem;           
     border-radius: 2rem;
     padding: 0.5rem;
     background: #071245;
     display: inline-block;
 }
 
-.driver-card {
+.card-wrapper:has(div.empty-card) {
+    border: var(--clr-neutral-800) solid 0.45rem;           
+    background: transparent;
+}
+
+.card {
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: 550px;
+    /* width: 400px; */
+    width: 100%;
+    /* height: 550px; */
+    height: 100%;
     padding: 1.5rem;
-    border: white solid 0.25rem;
     border-radius: 1rem;
+    background-color: var(--clr-neutral-800);
+    overflow: hidden;
+}
+
+.empty-card {
+    align-items: center;
+    justify-content: center;
+    color: var(--clr-neutral-400);
+    border: var(--clr-neutral-800) solid 0.25rem;
+}
+
+.driver-card {
+    border: var(--clr-neutral-100) solid 0.25rem;
 }
 
 .driver-card-header {
@@ -41,13 +57,16 @@
     text-align: left;
     gap: 0.5rem;
     max-width: 400px;
+    color: var(--clr-neutral-100);
 }
 
 .driver-card-title h1 {
     font-family: var(--ff-primary);
     font-weight: var(--fw-bold);
-    font-size: var(--fs-secondary-heading);
-    line-height: var(--fs-secondary-heading);
+    /* font-size: var(--fs-secondary-heading); */
+    font-size: clamp(1.5rem, 4vw, var(--fs-secondary-heading));
+    line-height: clamp(1.5rem, 4vw, var(--fs-secondary-heading));
+    /* text-shadow: 3px 3px var(--clr-neutral-800); */
 }
 
 .driver-card-title h2 {
@@ -60,7 +79,8 @@
     font-family: var(--ff-primary);
     font-size: var(--fs-secondary-heading);
     background-color: crimson;
-    padding: 0.25rem 1rem;
+    color: var(--clr-neutral-100);
+    padding: 0.25rem 1rem 0.25rem 0.5rem;
     font-weight: bold;
     font-style: italic;
     font-size: 3rem;
@@ -68,6 +88,9 @@
     margin-left: auto;
     height: fit-content;
     width: fit-content;
+    text-shadow: 2px 2px var(--clr-neutral-800);
+    box-shadow: 0.125em 0.125em 0 0 var(--clr-neutral-800) 0.25em 0.25em 0 0 rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0.25em 0.25em 0 0 rgba(0, 0, 0, 0.25); */
 }
 
 .driver-img-container {
@@ -80,23 +103,37 @@
 }
 
 .driver-img {
-    aspect-ratio: auto;
-    height: 300px;
+    aspect-ratio: 1/1;
+    max-height: 300px;
 }
 
 .driver-card-footer {
-    margin-top: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* margin-top: auto; */
+    display: flex;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
     height: fit-content;
     align-items: center;
+    margin: auto -1.5rem -1.5rem;
 }
 
 .driver-acronym {
+    margin-left: 1.5rem;
     text-align: left;
     font-weight: var(--fw-bold);
     font-size: var(--fs-secondary-heading);
     font-family: var(--ff-primary);
+    color: var(--clr-neutral-100);
+}
+
+.flag-container {
+    display: flex;
+    background-color: var(--clr-neutral-100);
+    padding: 1.25rem 0.75rem 1rem 1.25rem;
+    border-radius: 3rem 0 0 0;
+    align-items: center;
+    width: fit-content;
+    margin-left: auto;
 }
 
 .driver-flag {
@@ -106,19 +143,41 @@
     display: inline-block;
     border-radius: 5px;
     overflow: hidden;
-    margin-left: auto;
+    /* margin-left: auto; */
 }
 
-.empty-card {
-    display: flex;
-    width: 400px;
-    height: 550px;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    background-color: var(--clr-neutral-800);
-    align-items: center;
-    justify-content: center;
-    font-family: var(--ff-body);
-    color: var(--clr-neutral-400)
-    
+@media (max-width: 42em) {
+    .card {
+        padding: 0.75rem 0.5rem 0.5rem;
+    }
+
+    .driver-card-title h1 {
+        /* font-size: var(--fs-sub-heading) !important; */
+        font-size: clamp(1rem, 3vw, var(--fs-sub-heading))  !important;
+        line-height: clamp(1rem, 3vw, var(--fs-sub-heading)) !important;
+    }
+
+    .driver-card-title h2 {
+        font-size: var(--fs-detail) !important;
+    }
+
+    .driver-number {
+        font-size: var(--fs-sub-heading) !important;
+    }
+
+    .driver-acronym {
+        font-size: var(--fs-sub-heading) !important;
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .flag-container {
+        border-radius: 2rem 0 0 0;
+        padding: 0.75rem 1.25rem 1.5rem 0.75rem;
+    }
+
+    .driver-flag {
+        height: 30px !important;
+    }
 }
+

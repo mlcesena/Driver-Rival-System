@@ -1,8 +1,12 @@
 import "./ComboBox.css"
 import { useState, useRef, useEffect } from "react";
 
-function ComboxBox({ title = "", options = [], updaterFunction }) {
-    const [selectedIdx, setSelectedIdx] = useState(-1);
+function defaultUpdater() {
+
+};
+
+function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater, searchable = false }) {
+    const [selectedIdx, setSelectedIdx] = useState(searchable ? -1 : 0);
     const [expanded, setExpanded] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const inputRef = useRef();
@@ -29,11 +33,11 @@ function ComboxBox({ title = "", options = [], updaterFunction }) {
             inputRef.current.blur()
             setExpanded(false)
 
-            setSearchQuery(options[selectedIdx].name)
+            setSearchQuery(options[selectedIdx].value)
         }
     }
 
-    const filterOptions = searchQuery === "" ? options : options.filter((option) => option.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    const filterOptions = searchQuery === "" ? options : options.filter((option) => option.value.toLowerCase().includes(searchQuery.toLowerCase()))
 
     return (
         <div className="combobox">
@@ -43,18 +47,18 @@ function ComboxBox({ title = "", options = [], updaterFunction }) {
                     <input
                         className="combo-input"
                         ref={inputRef}
-                        value={searchQuery}
-                        onChange={(event) => (setSearchQuery(event.target.value))}>
+                        value={searchable ? searchQuery : options[selectedIdx].value}
+                        onChange={(event) => (setSearchQuery(event.target.value))}
+                        disabled={!searchable}>
                     </input>
-                    {/* <button className="combo-btn" onClick={handleClick}>&#x2304;</button> */}
                     <button className={`combo-btn${expanded ? " open" : ""}`} onClick={handleClick}>
                         <svg width="50" height="10" viewBox="0 0 50 50">
-                            <path d="M0 10 L25 40 L50 10" stroke="white" stroke-width="10" fill="none" strokeLinejoin="round" strokeLinecap="round" />
+                            <path d="M0 10 L25 40 L50 10" stroke="white" strokeWidth="10" fill="none" strokeLinejoin="round" strokeLinecap="round" />
                         </svg>
                     </button>
                 </div>
             </div>
-            {true && (<ul className={`combo-options${expanded ? "" : " collapsed"}`} ref={optionsRef}>
+            {expanded && (<ul className={`combo-options${expanded ? "" : " collapsed"}`} ref={optionsRef}>
                 {filterOptions.map((option, idx) => (
                     <li
                         className={selectedIdx === idx ? "active" : ""}
@@ -63,8 +67,8 @@ function ComboxBox({ title = "", options = [], updaterFunction }) {
                             setSelectedIdx(option.id);
                             setExpanded(false);
                             updaterFunction(option.id);
-                            setSearchQuery(option.name)
-                        }}>{option.name}</li>
+                            setSearchQuery(option.value)
+                        }}>{option.value}</li>
                 ))}
             </ul>)
             }

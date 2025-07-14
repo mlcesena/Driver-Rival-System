@@ -5,7 +5,8 @@
 
     --clr-tertiary-400: #1B4F72;
 
-    --clr-neutral-100: #FFFFFF;
+    /* --clr-neutral-100: #FFFFFF; */
+    --clr-neutral-100: #E0E0E0;
     --clr-neutral-200: #CCCCCC; 
     --clr-neutral-300: #AAAAAA;
     --clr-neutral-400: #808080;
@@ -23,7 +24,7 @@
     --fw-semi-bold: 600;
     --fw-bold: 700;
 
-    --fs-300: .875rem;
+    --fs-300: 1rem;
     --fs-400: 1.25rem;
     --fs-450: 2rem;
     --fs-500: 2.75rem;
@@ -206,6 +207,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  color: var(--clr-neutral-100);
 }
 
 main {
@@ -231,6 +233,12 @@ h1 {
     align-items: end;
 }
 
+.driver-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
 .selection-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -242,4 +250,11 @@ h1 {
     height: 1px;
     border-radius: 2px;
     background-color: white;
+}
+
+@media (max-width: 32em) {
+    .driver-container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
 }
