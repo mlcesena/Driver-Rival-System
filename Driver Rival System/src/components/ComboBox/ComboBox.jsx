@@ -11,17 +11,42 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
     const [searchQuery, setSearchQuery] = useState("");
     const inputRef = useRef();
     const optionsRef = useRef();
-    // const [showOptions, setShowOptions] = useState(false);
+    const [showOptions, setShowOptions] = useState(false);
 
-    // useEffect(() => {
-    //     if (expanded) {
-    //         setShowOptions(true); // Show immediately when expanding
-    //     } else if (showOptions) {
-    //         // Wait for animation before hiding
-    //         const timeout = setTimeout(() => setShowOptions(false), 250); // match your CSS transition
-    //         return () => clearTimeout(timeout);
-    //     }
-    // }, [expanded]);
+    useEffect(() => {
+        if (expanded) {
+            setShowOptions(true)
+        } else if (!expanded && optionsRef.current) {
+            optionsRef.current.animate(
+                [
+                    { maxHeight: "300px", },
+                    { maxHeight: "0px", }
+                ],
+                { duration: 250, easing: "ease-in-out" }
+            );
+
+            setTimeout(() => {
+                optionsRef.current.style.maxHeight = "0px";
+                setShowOptions(false);
+            }, 250);
+
+        }
+    }, [expanded]);
+
+    useEffect(() => {
+        if (showOptions && optionsRef.current) {
+            optionsRef.current.style.maxHeight = "0px";
+            optionsRef.current.animate(
+                [
+                    { maxHeight: "0px", },
+                    { maxHeight: "300px", }
+                ],
+                { duration: 250, easing: "ease-in-out" }
+            );
+
+            optionsRef.current.style.maxHeight = "300px";
+        }
+    }, [showOptions])
 
     function handleClick() {
         if (!expanded) {
@@ -33,11 +58,12 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
             inputRef.current.blur()
             setExpanded(false)
 
-            setSearchQuery(options[selectedIdx].value)
+            if (selectedIdx >= 0)
+                setSearchQuery(options[selectedIdx].value)
         }
     }
 
-    const filterOptions = searchQuery === "" ? options : options.filter((option) => option.value.toLowerCase().includes(searchQuery.toLowerCase()))
+    const filterOptions = searchQuery === "" ? options : options.filter((option) => option.value.toLowerCase().includes(searchQuery.toLowerCase()));
 
     return (
         <div className="combobox">
@@ -49,7 +75,10 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
                         ref={inputRef}
                         value={searchable ? searchQuery : options[selectedIdx].value}
                         onChange={(event) => (setSearchQuery(event.target.value))}
-                        disabled={!searchable}>
+                        disabled={!searchable}
+                        autoCapitalize="off"
+                        autoCorrect="off"
+                        spellCheck="false">
                     </input>
                     <button className={`combo-btn${expanded ? " open" : ""}`} onClick={handleClick}>
                         <svg width="50" height="10" viewBox="0 0 50 50">
@@ -58,20 +87,23 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
                     </button>
                 </div>
             </div>
-            {expanded && (<ul className={`combo-options${expanded ? "" : " collapsed"}`} ref={optionsRef}>
-                {filterOptions.map((option, idx) => (
-                    <li
-                        className={selectedIdx === idx ? "active" : ""}
-                        key={idx}
-                        onClick={() => {
-                            setSelectedIdx(option.id);
-                            setExpanded(false);
-                            updaterFunction(option.id);
-                            setSearchQuery(option.value)
-                        }}>{option.value}</li>
-                ))}
-            </ul>)
-            }
+            {showOptions && (
+                <ul
+                    className={`combo-options`}
+                    ref={optionsRef}>
+                    {filterOptions.map((option, idx) => (
+                        <li
+                            className={selectedIdx === idx ? "active" : ""}
+                            key={idx}
+                            onClick={() => {
+                                setSelectedIdx(option.id);
+                                setExpanded(false);
+                                updaterFunction(option.id);
+                                setSearchQuery(option.value)
+                            }}>{option.value}</li>
+                    ))}
+                </ul>
+            )}
         </div >
     )
 }

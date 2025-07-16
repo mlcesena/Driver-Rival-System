@@ -115,7 +115,7 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                 setAlpha2("nl")
                 break;
             case "NZL":
-                setAlpha2("mz")
+                setAlpha2("nz")
                 break;
             case "ESP":
                 setAlpha2("es")

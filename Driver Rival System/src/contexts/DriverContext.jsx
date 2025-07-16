@@ -1,6 +1,6 @@
 import { fetchDriverInfo, fetchMeetingKeys, fetchSessionInfo } from "../services/DriverInfo";
 import { createContext, useState, useContext, useEffect } from "react";
-
+import { useGlobalStateContext } from "./GlobalStateContext";
 const DriverContext = createContext();
 
 export const useDriverContext = () => useContext(DriverContext);
@@ -13,10 +13,12 @@ export const DriverProvider = ({ children }) => {
 
     const [firstDriverNumber, setFirstDriverNumber] = useState(-1);
     const [secondDriverNumber, setSecondDriverNumber] = useState(-1);
-    const [team1Primary, setTeam1Primary] = useState("#808080")
-    const [team2Primary, setTeam2Primary] = useState("#808080")
-    const [team1Accent, setTeam1Accent] = useState("#808080")
-    const [team2Accent, setTeam2Accent] = useState("#808080")
+    const [team1Primary, setTeam1Primary] = useState("#808080");
+    const [team2Primary, setTeam2Primary] = useState("#808080");
+    const [team1Accent, setTeam1Accent] = useState("#808080");
+    const [team2Accent, setTeam2Accent] = useState("#808080");
+
+    const { loading, setLoading } = useGlobalStateContext();
 
     useEffect(() => {
         getDriverInfo();
@@ -49,6 +51,12 @@ export const DriverProvider = ({ children }) => {
             updateDrivers();
         }
     }, [sessionData, driverData]);
+
+    useEffect(() => {
+        if (loading && drivers.size > 0) {
+            setLoading(false);
+        }
+    }, [drivers]);
 
     const getDriverInfo = async () => {
         try {
@@ -105,8 +113,13 @@ export const DriverProvider = ({ children }) => {
                     wins: 0,
                     podiums: 0,
                     points: 0,
-                    races: 0,
                     laps: 0,
+                    completedRaceCount: 0,
+                    incompleteRaceCount: 0,
+                    totalRaceCount: 0,
+                    dnf: 0,
+                    dns: 0,
+                    dsq: 0,
                 });
             }
             for (let i = 0; i < sessionData.length; i++) {
@@ -115,19 +128,20 @@ export const DriverProvider = ({ children }) => {
                 const podium = sessionData[i].position <= 3 && sessionData[i].position != null ? 1 : 0;
                 const win = sessionData[i].position === 1 ? 1 : 0;
                 const points = !sessionData[i].dsq ? sessionData[i].points : 0;
-
-                if (driverNumber === 16)
-                    console.log(sessionData[i]);
-
-
+                const finished = !sessionData[i].dnf && !sessionData[i].dns;
 
                 newMap.set(driverNumber, {
                     ...prevStats,
                     wins: (prevStats.wins || 0) + win,
                     podiums: (prevStats.podiums || 0) + podium,
                     points: (prevStats.points || 0) + points,
-                    races: (prevStats.races || 0) + 1,
+                    completedRaceCount: (prevStats.completedRaceCount || 0) + (finished ? 1 : 0),
+                    incompleteRaceCount: (prevStats.incompleteRaceCount || 0) + (finished ? 0 : 1),
+                    totalRaceCount: (prevStats.totalRaceCount || 0) + 1,
                     laps: (prevStats.laps || 0) + sessionData[i].number_of_laps,
+                    dnf: (prevStats.dnf || 0) + (sessionData[i].dnf ? 1 : 0),
+                    dns: (prevStats.dns || 0) + (sessionData[i].dns ? 1 : 0),
+                    dsq: (prevStats.dsq || 0) + (sessionData[i].dsq ? 1 : 0),
                 });
             }
             return newMap;
