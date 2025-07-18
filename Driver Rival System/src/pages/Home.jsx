@@ -2,8 +2,7 @@ import { useGlobalStateContext } from "../contexts/GlobalStateContext";
 import { useDriverContext } from "../contexts/DriverContext";
 import { useState, useEffect } from "react";
 import DriverCard from '../components/Cards/DriverCard'
-import ComparisonBarChart from '../components/Comparison/ComparisonBarChart'
-import DonutChartContainer from '../components/Comparison/DonutChartContainer'
+import Comparison from '../components/Comparison/Comparison'
 import "../css/main.css"
 import '../App.css'
 import ComboxBox from "../components/ComboBox/ComboBox";
@@ -90,8 +89,7 @@ function Home() {
                     </>
                         : <></>}
                 </div>
-                <ComparisonBarChart title="Highlights"></ComparisonBarChart>
-                <DonutChartContainer title="Race Statistics"></DonutChartContainer>
+                <Comparison></Comparison>
             </>
     );
 }

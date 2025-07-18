@@ -21,6 +21,20 @@ function DonutChartContainer({ title = "Null" }) {
                     driverTotal2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).totalRaceCount : 0}
                 ></DonutChart>
                 <DonutChart
+                    label="Top 10 Finishes"
+                    driverValue1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).top10 : 0}
+                    driverTotal1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).totalRaceCount : 0}
+                    driverValue2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).top10 : 0}
+                    driverTotal2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).totalRaceCount : 0}
+                ></DonutChart>
+                <DonutChart
+                    label="Top 3 Finishes"
+                    driverValue1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).podiums : 0}
+                    driverTotal1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).totalRaceCount : 0}
+                    driverValue2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).podiums : 0}
+                    driverTotal2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).totalRaceCount : 0}
+                ></DonutChart>
+                <DonutChart
                     label="Disqualifications"
                     driverValue1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).dsq : 0}
                     driverTotal1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).totalRaceCount : 0}
@@ -40,3 +54,15 @@ function DonutChartContainer({ title = "Null" }) {
 }
 
 export default DonutChartContainer;
+
+{/* <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: "0.25rem" }}>
+                    <rect width="16" height="16" x="0" y="0" fill="black" />
+                    <rect width="16" height="16" x="16" y="0" fill="white" />
+                    <rect width="16" height="16" x="32" y="0" fill="black" />
+                    <rect width="16" height="16" x="0" y="16" fill="white" />
+                    <rect width="16" height="16" x="16" y="16" fill="black" />
+                    <rect width="16" height="16" x="32" y="16" fill="white" />
+                    <rect width="16" height="16" x="0" y="32" fill="black" />
+                    <rect width="16" height="16" x="16" y="32" fill="white" />
+                    <rect width="16" height="16" x="32" y="32" fill="black" />
+                </svg> */}

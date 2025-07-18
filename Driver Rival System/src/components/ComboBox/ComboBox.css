@@ -80,6 +80,7 @@
   /* scrollbar-color: white; */
   scroll-margin-right: 0.5rem;
   position: absolute;
+  z-index: 10;
 }
 
 /* .combo-options::-webkit-scrollbar {

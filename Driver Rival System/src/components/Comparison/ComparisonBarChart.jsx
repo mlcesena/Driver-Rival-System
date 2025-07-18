@@ -1,17 +1,19 @@
 import { useDriverContext } from "../../contexts/DriverContext";
 import ComboBox from "../ComboBox/ComboBox"
+import ToggleButton from "../Controls/Toggle/ToggleButton";
 import ComparisonItem from './ComparisonItem'
 import "./Comparison.css"
 import "./../Cards/Card.css"
+import { useEffect } from "react";
 
-function ComparisonChart({ title = "Null" }) {
-    const { drivers, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary, driverStats } = useDriverContext();
+function ComparisonChart({ title = "Null", type = "", data = new Map(), description = "" }) {
+    const { drivers, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary } = useDriverContext();
 
     return (
         <div className="comparison-container">
             <div className="comparison-header">
                 <h1>{title}</h1>
-                <ComboBox title="Calendar Year" options={[{ id: 0, value: "2025" }]}></ComboBox>
+                {type === "combobox" && <ComboBox title="Calendar Year" options={[{ id: 0, value: "2025" }]}></ComboBox>}
             </div>
             <span className="divider"></span>
             <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -26,24 +28,17 @@ function ComparisonChart({ title = "Null" }) {
                     </div>
                 </div>
                 <ul className="driver-stats">
-                    <ComparisonItem title='Wins' team1={team1Primary} team2={team2Primary}
-                        stat1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).wins : 0}
-                        stat2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).wins : 0}></ComparisonItem>
-                    <ComparisonItem title='Podiums' team1={team1Primary} team2={team2Primary}
-                        stat1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).podiums : 0}
-                        stat2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).podiums : 0}></ComparisonItem>
-                    <ComparisonItem title='Points' team1={team1Primary} team2={team2Primary}
-                        stat1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).points : 0}
-                        stat2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).points : 0}></ComparisonItem>
-                    <ComparisonItem title='Grand Prix' team1={team1Primary} team2={team2Primary}
-                        stat1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).totalRaceCount : 0}
-                        stat2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).totalRaceCount : 0}></ComparisonItem>
-                    <ComparisonItem title='Laps' team1={team1Primary} team2={team2Primary}
-                        stat1={firstDriverNumber > 0 ? drivers.get(firstDriverNumber).laps : 0}
-                        stat2={secondDriverNumber > 0 ? drivers.get(secondDriverNumber).laps : 0}></ComparisonItem>
+                    {data.size > 0 && Array.from(data.keys()).map((item, idx) => (
+                        <ComparisonItem title={item} key={idx} team1={team1Primary} team2={team2Primary}
+                            stat1={data.get(item)[0]}
+                            stat2={data.get(item)[1]}
+                        ></ComparisonItem>
+                    ))}
                 </ul>
             </div>
-
+            <div className="comparison-desc">
+                <p style={{ whiteSpace: 'pre-wrap' }}>{description}</p>
+            </div>
         </div>
     )
 }

@@ -14,6 +14,7 @@
   padding: 0.5rem;
   background: #071245;
   display: inline-block;
+  transition: background 0.25s ease-in-out;
 }
 
 .card-wrapper:has(div.empty-card) {
@@ -32,6 +33,7 @@
   border-radius: 1rem;
   background-color: var(--clr-neutral-800);
   overflow: hidden;
+  transition: background 0.25s ease-in-out;
 }
 
 .empty-card {
@@ -95,17 +97,48 @@
 }
 
 .driver-img-container {
+  --racing-stripe-clr: var(--clr-neutral-100);
   display: flex;
   height: 100%;
   width: 100%;
   margin-block: 1rem;
+  padding-inline: -1.5rem;
   overflow: hidden;
   justify-content: center;
 }
 
+.driver-img-container::before,
+.driver-img-container::after {
+  content: "";
+  width: 100%;
+  height: 1.25rem;
+  border-top: var(--racing-stripe-clr) solid 6px;
+  border-bottom: var(--racing-stripe-clr) solid 6px;
+  border-left: none;
+  border-right: none;
+  margin-block: auto;
+}
+
+.driver-img-container::before {
+  width: 100%;
+  margin-right: 0.5rem;
+  margin-left: -2rem;
+}
+.driver-img-container::after {
+  width: 100%;
+  margin-left: 0.5rem;
+  margin-right: -2rem;
+}
+
 .driver-img {
   aspect-ratio: 1/1;
+  background-color: var(--clr-neutral-100);
+  border: var(--clr-neutral-200) solid 8px;
+  border-radius: 100vh;
+  padding: 1rem;
   max-height: 300px;
+  margin: 0.25rem;
+  filter: saturate(0.7);
 }
 
 .driver-card-footer {
