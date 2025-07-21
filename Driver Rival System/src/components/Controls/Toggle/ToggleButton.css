@@ -7,7 +7,7 @@
   border-radius: 100vh;
 }
 
-.toggle-buttons {
+.toggle-group {
   height: fit-content;
   display: flex;
   list-style: none;
@@ -15,30 +15,31 @@
   margin: 0.5rem;
 }
 
-.toggle-buttons input[type="radio"][name="toggles"] {
+.toggle-group input[type="radio"] {
   display: none;
 }
 
-.toggle-btn {
-  border-radius: 100vh;
-  /* background-color: var(--clr-accent-400); */
-  padding: 0.5rem 1rem;
-  transition: all 0.25s ease-in-out;
-}
-
-.toggle-btn:hover {
-  /* background-color: var(--clr-accent-300); */
-  transition: all 0.25s ease-in-out;
+.toggle-group input[type="radio"]:hover + label {
+  background-color: var(--clr-neutral-300);
   cursor: pointer;
+  transition: all 0.25s ease-in-out;
 }
 
-.toggle-btn input {
-  background-color: aqua;
+.toggle-group input[type="radio"]:checked + label {
+  background-color: var(--clr-accent-400);
+  transition: all 0.25s ease-in-out;
+}
+
+.toggle-group input[type="radio"]:checked:hover + label {
+  background-color: var(--clr-accent-300);
+  transition: all 0.25s ease-in-out;
+}
+
+.toggle-btn label {
   width: 100%;
   height: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 100vh;
   font-family: var(--ff-body);
-}
-
-.toggle-btn input[type="radio"][name="toggles"] + :checked {
-  background-color: blueviolet;
+  color: var(--clr-neutral-100);
 }

@@ -318,7 +318,7 @@ h1 {
   margin: 0.25rem 0;
 }
 
-@media (max-width: 32em) {
+@media (max-width: 35em) {
   #root {
     padding: 1.25rem;
   }
@@ -326,6 +326,6 @@ h1 {
   .driver-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    max-width: 425px;
+    /* max-width: 425px; */
   }
 }

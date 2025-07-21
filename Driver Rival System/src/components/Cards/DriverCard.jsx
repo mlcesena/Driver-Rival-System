@@ -138,7 +138,6 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
     }
 
     return (
-        // <div className="driver-card" style={{ backgroundColor: `#${color}` }}>
         <div className="card-wrapper" style={{ backgroundColor: `${primaryColor}` }}>
             <div className="card driver-card" style={{ backgroundColor: `${primaryColor}` }}>
                 <div className="driver-card-header">
@@ -164,23 +163,3 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
 }
 
 export default DriverCard;
-
-// Full name
-// Nationality
-// Team
-// Driver number
-// Profile image (if API provides or use static assets)
-
-
-// broadcast_name: "M VERSTAPPEN"
-// country_code: null
-// driver_number: 1
-// first_name: "Max"
-// full_name: "Max VERSTAPPEN"
-// headshot_url: "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col…"
-// last_name: "Verstappen"
-// meeting_key: 1277
-// name_acronym: "VER"
-// session_key: 9947
-// team_colour: "4781D7"
-// team_name: "Red Bull Racing"

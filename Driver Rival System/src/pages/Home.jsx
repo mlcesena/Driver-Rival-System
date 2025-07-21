@@ -47,16 +47,16 @@ function Home() {
                                 options={Array.from(drivers.keys()).map((number, idx) => (
                                     {
                                         id: idx,
-                                        value: `${drivers.get(number).fullName}`,
+                                        value: `${drivers.get(number).full_name}`,
                                     }))}
                                 updaterFunction={handleUpdatedDriver1}
                                 searchable={true}>
                             </ComboxBox>
                             {firstDriverNumber > -1 ? <DriverCard
-                                firstName={drivers.get(firstDriverNumber).firstName}
-                                lastName={drivers.get(firstDriverNumber).lastName}
+                                firstName={drivers.get(firstDriverNumber).first_name}
+                                lastName={drivers.get(firstDriverNumber).last_name}
                                 team={drivers.get(firstDriverNumber).team}
-                                number={drivers.get(firstDriverNumber).number}
+                                number={drivers.get(firstDriverNumber).driver_number}
                                 acronym={drivers.get(firstDriverNumber).acronym}
                                 image={drivers.get(firstDriverNumber).image}
                                 primaryColor={team1Primary}
@@ -70,16 +70,16 @@ function Home() {
                                 options={Array.from(drivers.keys()).map((number, idx) => (
                                     {
                                         id: idx,
-                                        value: `${drivers.get(number).fullName}`
+                                        value: `${drivers.get(number).full_name}`
                                     }))}
                                 updaterFunction={handleUpdatedDriver2}
                                 searchable={true}>
                             </ComboxBox>
                             {secondDriverNumber > -1 ? <DriverCard
-                                firstName={drivers.get(secondDriverNumber).firstName}
-                                lastName={drivers.get(secondDriverNumber).lastName}
+                                firstName={drivers.get(secondDriverNumber).first_name}
+                                lastName={drivers.get(secondDriverNumber).last_name}
                                 team={drivers.get(secondDriverNumber).team}
-                                number={drivers.get(secondDriverNumber).number}
+                                number={drivers.get(secondDriverNumber).driver_number}
                                 acronym={drivers.get(secondDriverNumber).acronym}
                                 image={drivers.get(secondDriverNumber).image}
                                 primaryColor={team2Primary}

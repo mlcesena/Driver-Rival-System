@@ -14,6 +14,7 @@
   padding: 0.5rem;
   background: #071245;
   display: inline-block;
+  /* container-type: inline-size; */
   transition: background 0.25s ease-in-out;
 }
 
@@ -58,7 +59,9 @@
   flex-direction: column;
   text-align: left;
   gap: 0.5rem;
-  max-width: 400px;
+  /* max-width: 400px; */
+  width: 100%;
+  max-width: 100%;
   color: var(--clr-neutral-100);
 }
 
@@ -66,8 +69,10 @@
   font-family: var(--ff-primary);
   font-weight: var(--fw-bold);
   /* font-size: var(--fs-secondary-heading); */
-  font-size: clamp(1.5rem, 3vw, var(--fs-secondary-heading));
-  line-height: clamp(1.5rem, 3vw, var(--fs-secondary-heading));
+  font-size: clamp(1rem, 3.5vw, var(--fs-secondary-heading));
+  line-height: 1.1;
+  width: 100%;
+  max-width: 100%;
   /* text-shadow: 3px 3px var(--clr-neutral-800); */
 }
 
@@ -191,7 +196,7 @@
   }
 }
 
-@media (max-width: 42em) {
+@media (min-width: 35em) and (max-width: 44em) {
   .card {
     padding: 0.75rem 0.5rem 0.5rem;
   }
@@ -202,8 +207,7 @@
 
   .driver-card-title h1 {
     /* font-size: var(--fs-sub-heading) !important; */
-    font-size: clamp(1rem, 6vw, var(--fs-sub-heading)) !important;
-    line-height: clamp(1rem, 6vw, var(--fs-sub-heading)) !important;
+    font-size: clamp(1rem, 3.5vw, var(--fs-sub-heading)) !important;
   }
 
   .driver-card-title h2 {
@@ -227,5 +231,16 @@
 
   .driver-flag {
     height: 30px !important;
+  }
+}
+
+@media (max-width: 34.999em) {
+  .card {
+    padding: 0.75rem;
+  }
+
+  .driver-card-title h1 {
+    /* font-size: var(--fs-sub-heading) !important; */
+    font-size: clamp(1rem, 6vw, var(--fs-sub-heading)) !important;
   }
 }
