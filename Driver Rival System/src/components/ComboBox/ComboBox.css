@@ -77,7 +77,7 @@
   border: var(--clr-neutral-100) solid 3px;
   overflow-y: auto;
   overflow-x: hidden;
-  /* scrollbar-color: white; */
+  scrollbar-color: white;
   scroll-margin-right: 0.5rem;
   position: absolute;
   z-index: 10;

@@ -10,7 +10,7 @@ const db = new sqlite3.Database('./drivers.db');
 
 // Setup tables
 db.serialize(() => {
-    //     db.run(`
+    // db.run(`
     //     CREATE TABLE IF NOT EXISTS drivers (
     //       driver_number INTEGER PRIMARY KEY,
     //       first_name TEXT NOT NULL,
@@ -39,7 +39,7 @@ db.serialize(() => {
     //     )
     //   `);
 
-    //     db.run(`
+    // db.run(`
     //     CREATE TABLE IF NOT EXISTS sessions (
     //       session_key INTEGER PRIMARY KEY,
     //       meeting_key INTEGER NOT NULL,
@@ -51,7 +51,7 @@ db.serialize(() => {
     //     )
     //   `);
 
-    //     db.run(`
+    // db.run(`
     //     CREATE TABLE IF NOT EXISTS session_results (
     //         result_id INTEGER PRIMARY KEY,
     //         session_key INTEGER,
@@ -99,7 +99,7 @@ async function populateDrivers() {
                 `${driver.first_name} ${driver.last_name}`,
                 driver.team_name,
                 driver.name_acronym,
-                driver.headshot_url !== null ? driver.headshot_url.slice(0, driver.headshot_url.indexOf(".transform")) : ""
+                driver.headshot_url !== null ? driver.headshot_url.slice(0, driver.headshot_url.indexOf(".transform")) : `https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/${driver.first_name[0].toUpperCase()}/${driver.first_name.substring(0, 3).toUpperCase()}${driver.last_name.substring(0, 3).toUpperCase()}01_${driver.first_name}_${driver.last_name}/${driver.first_name.substring(0, 3).toLowerCase()}${driver.last_name.substring(0, 3).toLowerCase()}01.png`
             );
         }));
 
@@ -360,10 +360,10 @@ async function updateDriverStats() {
     });
 }
 
-// await populateDrivers();
-// await populateSessions();
-// await populateSessionResults();
-// await updateDriverStats();
+await populateDrivers();
+await populateSessions();
+await populateSessionResults();
+await updateDriverStats();
 
 
 app.get("/api/drivers/", (req, res) => {

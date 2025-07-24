@@ -17,8 +17,8 @@ function Donut({ color = "#FFFFFF", value = 0, total = 0 }) {
     return (
         <div className="donut-container">
             <svg width="130px" height="130px" xmlns="http://www.w3.org/2000/svg">
-                <circle className="donut-chart" cx="65" cy="65" r={radius} stroke-width="1.5rem" fill="none" />
-                <circle className="donut-arc" cx="65" cy="65" r={radius} stroke={color} stroke-width="1.5rem" strokeLinecap="" fill="none" strokeDasharray={`${circumference * percentage} ${circumference}`} transform="rotate(-90 65 65) scale(1, -1) translate(0, -130)" />
+                <circle className="donut-chart" cx="65" cy="65" r={radius} strokeWidth="1.5rem" fill="none" />
+                <circle className="donut-arc" cx="65" cy="65" r={radius} stroke={color} strokeWidth="1.5rem" strokeLinecap="" fill="none" strokeDasharray={`${circumference * percentage} ${circumference}`} transform="rotate(-90 65 65) scale(1, -1) translate(0, -130)" />
             </svg>
             <h2>{`${value}/${total}`}</h2>
         </div>

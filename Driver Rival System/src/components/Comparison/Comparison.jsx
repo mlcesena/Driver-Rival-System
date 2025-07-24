@@ -9,6 +9,7 @@ import ComparisonContainer from "./ComparisonContainer";
 
 function Comparison() {
     const [raceOption, setRaceOption] = useState(1);
+    const [qualiOption, setQualiOption] = useState(1);
     const { drivers, raceResults, qualiResults, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary, } = useDriverContext();
     const highlightMap = new Map([
         ["Wins", [
@@ -65,10 +66,10 @@ function Comparison() {
 
     const racePointData = [[], []];
     const racePositionData = [[], []];
+    const qualiPositionData = [[], []];
     let i = 1;
 
     for (const [key, value] of raceResults) {
-
         racePointData[0].push({ x: i, y: firstDriverNumber > 0 && value.has(firstDriverNumber) ? value.get(firstDriverNumber).points : 0, track: key })
         racePointData[1].push({ x: i, y: secondDriverNumber > 0 && value.has(secondDriverNumber) ? value.get(secondDriverNumber).points : 0, track: key })
         racePositionData[0].push({ x: i, y: firstDriverNumber > 0 && value.has(firstDriverNumber) ? value.get(firstDriverNumber).position : 0, track: key })
@@ -83,6 +84,10 @@ function Comparison() {
         //     secondDriverNumber > 0 ? value.get(secondDriverNumber).position : 0])
     }
 
+    for (const [key, value] of qualiResults) {
+        qualiPositionData[0].push({ x: i, y: firstDriverNumber > 0 && value.has(firstDriverNumber) ? value.get(firstDriverNumber).position : 0, z: 200, track: key })
+        qualiPositionData[1].push({ x: i, y: secondDriverNumber > 0 && value.has(secondDriverNumber) ? value.get(secondDriverNumber).position : 0, z: 200, track: key })
+    }
 
     return (
         <>
@@ -92,21 +97,25 @@ function Comparison() {
                 childComponent={<ComparisonBarChart data={highlightMap}></ComparisonBarChart>}>
             </ComparisonContainer>
             <ComparisonContainer
-                title="Race Statistics"
+                title="Race Overview"
                 childComponent={<DonutChartContainer></DonutChartContainer>}>
             </ComparisonContainer>
             <ComparisonContainer
                 title="Race Results"
                 controlType="toggle"
-                controlProps={{ label1: "Points", label2: "Position", updaterFunction: (option) => { console.log(option); setRaceOption(option) } }}
+                controlProps={{ label1: "Points", label2: "Position", updaterFunction: (option) => { setRaceOption(option) } }}
                 childComponent={<ScatterChartContainer
                     xAxisLabel="Circuit"
                     yAxisLabel={raceOption === 1 ? "Points" : "Position"}
                     driver1Data={raceOption === 1 ? racePointData[0] : racePositionData[0]}
                     driver2Data={raceOption === 1 ? racePointData[1] : racePositionData[1]}
                     yAxisMin={0}
-                    yAxisMax={raceOption === 1 ? 25 : 20}></ScatterChartContainer>}
-                description={raceOption === 1 ? "Higher is better" : "Lower is better"}>
+                    yAxisMax={raceOption === 1 ? 25 : 20}
+                    reversed={raceOption === 1 ? false : true}
+                    tooltipLabel={raceOption === 1 ? "Points" : "Position"}></ScatterChartContainer>}
+                description={raceOption === 1 ?
+                    "After each race concludes, drivers score points based on their final position. Drivers in the top 10 positions are awarded points in decreasing amounts from 25 to 1. Outside of those positions 0 points are received."
+                    : "At the end of each race, final driver positions are based on where the driver finished and any time penalties. First being indicated by 1 (best) and last indicated by 20 (worst)."}>
                 {/* childComponent={<ComparisonBarChart data={
                     raceOption === 1 ? racePointData : racePositionData
                 }
@@ -116,9 +125,20 @@ function Comparison() {
             <ComparisonContainer
                 title="Qualifying"
                 controlType="toggle"
-                controlProps={{ label1: "Summary", label2: "Results" }}
+                controlProps={{ label1: "Summary", label2: "Results", updaterFunction: (option) => { setQualiOption(option) } }}
                 description={`Q1-Q3 represent the 3 different qualifying stages for each race weekend.\n*Each round, the slowest 5 drivers exit qualifying and do not move on to the next round.`}
-                childComponent={<ComparisonBarChart data={qualiMap}></ComparisonBarChart>}>
+                childComponent={qualiOption === 1 ?
+                    <ComparisonBarChart data={qualiMap}></ComparisonBarChart>
+                    : <ScatterChartContainer
+                        xAxisLabel="Circuit"
+                        yAxisLabel={"Position"}
+                        driver1Data={racePositionData[0]}
+                        driver2Data={racePositionData[1]}
+                        yAxisMin={0}
+                        yAxisMax={20}
+                        reversed={true}
+                        tooltipLabel="Position"
+                    ></ScatterChartContainer>}>
             </ComparisonContainer>
 
         </>
