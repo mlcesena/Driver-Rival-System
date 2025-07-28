@@ -1,0 +1,23 @@
+.disclaimer-container {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--clr-neutral-700);
+  padding: 1rem;
+  border-radius: 1rem;
+  font-family: var(--ff-body);
+}
+
+.disclaimer-container h1 {
+  font-size: var(--fs-body);
+  margin-left: 1rem;
+}
+
+.disclaimer-container div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.disclaimer-container p {
+  font-size: var(--fs-detail);
+}

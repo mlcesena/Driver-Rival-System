@@ -35,9 +35,23 @@ db.serialize(() => {
     //       q2_count INTEGER DEFAULT 0,
     //       q3_count INTEGER DEFAULT 0,
     //       q1_exits INTEGER DEFAULT 0,
-    //       q2_exits INTEGER DEFAULT 0
+    //       q2_exits INTEGER DEFAULT 0,
+    //       complete_sprint_count INTEGER DEFAULT 0,
+    //       incomplete_sprint_count INTEGER DEFAULT 0,
+    //       total_sprint_count INTEGER DEFAULT 0,
+    //       sprint_wins INTEGER DEFAULT 0,
+    //       sprint_pole_count INTEGER DEFAULT 0,
+    //       sprint_q1_count INTEGER DEFAULT 0,
+    //       sprint_q2_count INTEGER DEFAULT 0,
+    //       sprint_q3_count INTEGER DEFAULT 0,
+    //       sprint_q1_exits INTEGER DEFAULT 0,
+    //       sprint_q2_exits INTEGER DEFAULT 0
     //     )
     //   `);
+
+
+
+
 
     // db.run(`
     //     CREATE TABLE IF NOT EXISTS sessions (
@@ -266,18 +280,28 @@ async function updateDriverStats() {
                     SUM(CASE WHEN position <= 3 AND session_name IN ('Race', 'Sprint') THEN 1 ELSE 0 END) AS podiums,
                     SUM(CASE WHEN position <= 10 AND session_name IN ('Race', 'Sprint') THEN 1 ELSE 0 END) AS top_10,
                     SUM(CASE WHEN session_name IN ('Race', 'Sprint') THEN laps END) AS laps,
-                    COUNT(CASE WHEN session_name IN ('Race', 'Sprint') THEN 1 END) AS total_race_count,
-                    COUNT(CASE WHEN session_name IN ('Race', 'Sprint') AND dnf != 1 AND dns != 1 AND dsq != 1 THEN 1 END) AS complete_race_count,
-                    COUNT(CASE WHEN session_name IN ('Race', 'Sprint') AND (dnf = 1 OR dns = 1 OR dsq = 1) THEN 1 END) AS incomplete_race_count,
-                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') AND dnf = 1 THEN 1 ELSE 0 END) AS dnf,
-                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') AND dns = 1 THEN 1 ELSE 0 END) AS dns,
-                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') AND dsq = 1 THEN 1 ELSE 0 END) AS dsq,
-                    COUNT(CASE WHEN session_name IN ('Qualifying', 'Sprint Qualifying') AND position = 1 THEN 1 END) AS pole_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying', 'Sprint Qualifying') THEN 1 END) AS q1_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying', 'Sprint Qualifying') AND position <= 15 THEN 1 END) AS q2_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying', 'Sprint Qualifying') AND position <= 10 THEN 1 END) AS q3_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying', 'Sprint Qualifying') AND position > 15 THEN 1 END) AS q1_exits,
-                    COUNT(CASE WHEN session_name IN ('Qualifying', 'Sprint Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS q2_exits
+                    COUNT(CASE WHEN session_name IN ('Race') THEN 1 END) AS total_race_count,
+                    COUNT(CASE WHEN session_name IN ('Race') AND dnf != 1 AND dns != 1 AND dsq != 1 THEN 1 END) AS complete_race_count,
+                    COUNT(CASE WHEN session_name IN ('Race') AND (dnf = 1 OR dns = 1 OR dsq = 1) THEN 1 END) AS incomplete_race_count,
+                    SUM(CASE WHEN session_name IN ('Race') AND dnf = 1 THEN 1 ELSE 0 END) AS dnf,
+                    SUM(CASE WHEN session_name IN ('Race') AND dns = 1 THEN 1 ELSE 0 END) AS dns,
+                    SUM(CASE WHEN session_name IN ('Race') AND dsq = 1 THEN 1 ELSE 0 END) AS dsq,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position = 1 THEN 1 END) AS pole_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') THEN 1 END) AS q1_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position <= 15 THEN 1 END) AS q2_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position <= 10 THEN 1 END) AS q3_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 15 THEN 1 END) AS q1_exits,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS q2_exits,
+                    COUNT(CASE WHEN session_name IN ('Sprint') THEN 1 END) AS total_sprint_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint') AND dnf != 1 AND dns != 1 AND dsq != 1 THEN 1 END) AS complete_sprint_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint') AND (dnf = 1 OR dns = 1 OR dsq = 1) THEN 1 END) AS incomplete_sprint_count,
+                    SUM(CASE WHEN position = 1 AND session_name IN ('Sprint') THEN 1 ELSE 0 END) AS sprint_wins,
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position = 1 THEN 1 END) AS sprint_pole_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') THEN 1 END) AS sprint_q1_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position <= 15 THEN 1 END) AS sprint_q2_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position <= 10 THEN 1 END) AS sprint_q3_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position > 15 THEN 1 END) AS sprint_q1_exits,
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS sprint_q2_exits
                 FROM session_results
                 GROUP BY driver_number`, (err, rows) => {
                 if (err) {
@@ -309,7 +333,17 @@ async function updateDriverStats() {
                 q2_count = ?,
                 q3_count = ?,
                 q1_exits = ?,
-                q2_exits = ?
+                q2_exits = ?,
+                complete_sprint_count = ?,
+                incomplete_sprint_count = ?,
+                total_sprint_count = ?,
+                sprint_wins = ?,
+                sprint_pole_count = ?,
+                sprint_q1_count = ?,
+                sprint_q2_count = ?,
+                sprint_q3_count = ?,
+                sprint_q1_exits = ?,
+                sprint_q2_exits = ?
             WHERE driver_number = ?
           `);
 
@@ -333,12 +367,24 @@ async function updateDriverStats() {
                                 row.q3_count || 0,
                                 row.q1_exits || 0,
                                 row.q2_exits || 0,
+                                row.complete_sprint_count || 0,
+                                row.incomplete_sprint_count || 0,
+                                row.total_sprint_count || 0,
+                                row.sprint_wins || 0,
+                                row.sprint_pole_count || 0,
+                                row.sprint_q1_count || 0,
+                                row.sprint_q2_count || 0,
+                                row.sprint_q3_count || 0,
+                                row.sprint_q1_exits || 0,
+                                row.sprint_q2_exits || 0,
                                 row.driver_number
                             );
                         });
 
                         updateStmt.finalize((err) => {
                             if (err) {
+                                console.log("Failed to update driver information");
+
                                 db.run('ROLLBACK', () => reject(err));
                                 return;
                             }
@@ -359,12 +405,6 @@ async function updateDriverStats() {
         });
     });
 }
-
-await populateDrivers();
-await populateSessions();
-await populateSessionResults();
-await updateDriverStats();
-
 
 app.get("/api/drivers/", (req, res) => {
     db.all("SELECT * FROM drivers", [], (err, rows) => {
@@ -443,6 +483,79 @@ app.get("/api/qualifying_results/", (req, res) => {
         res.json(resultsMap);
     })
 });
+
+app.get("/api/sprint_race_results/", (req, res) => {
+    db.all(`
+        SELECT * FROM session_results
+        WHERE session_name = "Sprint"
+        `, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+
+        const resultsMap = {};
+
+        rows.forEach(row => {
+
+            const circuit = row.circuit_name;
+
+            if (!resultsMap[circuit]) {
+                resultsMap[circuit] = {};
+            }
+
+            resultsMap[circuit][row.driver_number] = {
+                driver_number: row.driver_number,
+                position: row.position,
+                points: row.points,
+                laps: row.laps,
+                dnf: row.dnf,
+                dns: row.dns,
+                dsq: row.dsq
+            };
+        });
+
+        res.json(resultsMap);
+    })
+});
+
+app.get("/api/sprint_qualifying_results/", (req, res) => {
+    db.all(`
+        SELECT * FROM session_results
+        WHERE session_name = "Sprint Qualifying"
+        `, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+
+        const resultsMap = {};
+
+        rows.forEach(row => {
+
+            const circuit = row.circuit_name;
+
+            if (!resultsMap[circuit]) {
+                resultsMap[circuit] = {};
+            }
+
+            resultsMap[circuit][row.driver_number] = {
+                driver_number: row.driver_number,
+                position: row.position,
+                dnf: row.dnf,
+                dns: row.dns,
+                dsq: row.dsq
+            };
+        });
+
+        res.json(resultsMap);
+    })
+});
+
+// await populateDrivers();
+// await populateSessions();
+// await populateSessionResults();
+await updateDriverStats();
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

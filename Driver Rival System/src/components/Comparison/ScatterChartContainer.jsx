@@ -90,8 +90,8 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
                             label={{ value: yAxisLabel, position: "insideLeft", angle: -90 }}
                             tick={<CustomizedYAxisTick />} />
                         <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
-                        <Scatter name="Driver 1" clip="false" data={driver1Data} fill={team1Primary} stroke={"#e0e0e0"} strokeWidth={2} shape={<Dot r={8} />} />
-                        <Scatter name="Driver 2" clip="false" data={driver2Data} fill={team2Primary} stroke={"#e0e0e0"} strokeWidth={2} shape={<Dot r={8} />} />
+                        <Scatter name="Driver 1" clip="false" data={driver1Data} fill={team1Primary} stroke={"#e0e0e0"} strokeWidth={2} line={{ strokeWidth: 5 }} shape={<Dot r={8} />} />
+                        <Scatter name="Driver 2" clip="false" data={driver2Data} fill={team2Primary} stroke={"#e0e0e0"} strokeWidth={2} line={{ strokeWidth: 5 }} shape={<Dot r={8} />} />
                     </ScatterChart>
                 </ResponsiveContainer>
             </div>

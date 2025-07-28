@@ -1,4 +1,4 @@
-import { fetchDrivers, fetchRaceResults, fetchQualifyingResults } from "../services/DriverInfo";
+import { fetchDrivers, fetchRaceResults, fetchQualifyingResults, fetchSprintRaceResults, fetchSprintQualifyingResults } from "../services/DriverInfo";
 import { createContext, useState, useContext, useEffect } from "react";
 import { useGlobalStateContext } from "./GlobalStateContext";
 const DriverContext = createContext();
@@ -7,8 +7,10 @@ export const useDriverContext = () => useContext(DriverContext);
 
 export const DriverProvider = ({ children }) => {
     const [drivers, setDrivers] = useState(new Map());
-    const [qualiResults, setQualiResults] = useState(new Map());
     const [raceResults, setRaceResults] = useState(new Map());
+    const [qualiResults, setQualiResults] = useState(new Map());
+    const [sprintRaceResults, setSprintRaceResults] = useState(new Map());
+    const [sprintQualiResults, setSprintQualiResults] = useState(new Map());
 
     const [firstDriverNumber, setFirstDriverNumber] = useState(-1);
     const [secondDriverNumber, setSecondDriverNumber] = useState(-1);
@@ -55,6 +57,12 @@ export const DriverProvider = ({ children }) => {
 
             const qualiData = await fetchQualifyingResults();
             setQualiResults(qualiData);
+
+            const sprintRaceData = await fetchSprintRaceResults();
+            setSprintRaceResults(sprintRaceData);
+
+            const sprintQualiData = await fetchSprintQualifyingResults();
+            setSprintQualiResults(sprintQualiData);
         }
         catch (error) {
             console.log("Failed to get driver info", error);
@@ -115,6 +123,8 @@ export const DriverProvider = ({ children }) => {
         setTeam2Accent,
         raceResults,
         qualiResults,
+        sprintRaceResults,
+        sprintQualiResults
     };
 
     return (
