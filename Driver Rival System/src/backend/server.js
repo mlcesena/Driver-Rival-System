@@ -11,7 +11,7 @@ const db = new sqlite3.Database('./drivers.db');
 // Setup tables
 db.serialize(() => {
     // db.run(`
-    //     CREATE TABLE IF NOT EXISTS drivers (
+    //     CREATE TABLE IF NOT EXISTS new_drivers (
     //       driver_number INTEGER PRIMARY KEY,
     //       first_name TEXT NOT NULL,
     //       last_name TEXT NOT NULL,
@@ -19,38 +19,85 @@ db.serialize(() => {
     //       team TEXT NOT NULL,
     //       acronym TEXT NOT NULL,
     //       image TEXT,
-    //       wins INTEGER DEFAULT 0,
-    //       podiums INTEGER DEFAULT 0,
-    //       top_10 INTEGER DEFAULT 0,
-    //       points INTEGER DEFAULT 0,
-    //       laps INTEGER DEFAULT 0,
     //       complete_race_count INTEGER DEFAULT 0,
     //       incomplete_race_count INTEGER DEFAULT 0,
     //       total_race_count INTEGER DEFAULT 0,
-    //       dnf INTEGER DEFAULT 0,
-    //       dns INTEGER DEFAULT 0,
-    //       dsq INTEGER DEFAULT 0,
-    //       pole_count INTEGER DEFAULT 0,
-    //       q1_count INTEGER DEFAULT 0,
-    //       q2_count INTEGER DEFAULT 0,
-    //       q3_count INTEGER DEFAULT 0,
-    //       q1_exits INTEGER DEFAULT 0,
-    //       q2_exits INTEGER DEFAULT 0,
+    //       race_wins INTEGER DEFAULT 0,
+    //       race_pole_count INTEGER DEFAULT 0,
+    //       race_podiums INTEGER DEFAULT 0,
+    //       race_top_10 INTEGER DEFAULT 0,
+    //       points INTEGER DEFAULT 0,
+    //       laps INTEGER DEFAULT 0,
+    //       race_q1_count INTEGER DEFAULT 0,
+    //       race_q2_count INTEGER DEFAULT 0,
+    //       race_q3_count INTEGER DEFAULT 0,
+    //       race_q1_exits INTEGER DEFAULT 0,
+    //       race_q2_exits INTEGER DEFAULT 0,
+    //       race_dnf INTEGER DEFAULT 0,
+    //       race_dns INTEGER DEFAULT 0,
+    //       race_dsq INTEGER DEFAULT 0,
     //       complete_sprint_count INTEGER DEFAULT 0,
     //       incomplete_sprint_count INTEGER DEFAULT 0,
     //       total_sprint_count INTEGER DEFAULT 0,
     //       sprint_wins INTEGER DEFAULT 0,
     //       sprint_pole_count INTEGER DEFAULT 0,
+    //       sprint_podium_count INTEGER DEFAULT 0,
+    //       sprint_top_10_count INTEGER DEFAULT 0,
     //       sprint_q1_count INTEGER DEFAULT 0,
     //       sprint_q2_count INTEGER DEFAULT 0,
     //       sprint_q3_count INTEGER DEFAULT 0,
     //       sprint_q1_exits INTEGER DEFAULT 0,
-    //       sprint_q2_exits INTEGER DEFAULT 0
+    //       sprint_q2_exits INTEGER DEFAULT 0,
+    //       sprint_dnf INTEGER DEFAULT 0,
+    //       sprint_dns INTEGER DEFAULT 0,
+    //       sprint_dsq INTEGER DEFAULT 0
     //     )
     //   `);
 
 
 
+    //       db.run(`
+    //         INSERT INTO new_drivers (driver_number,
+    // first_name,
+    // last_name,
+    // full_name,
+    // team,
+    // acronym,
+    // image,
+    // complete_race_count,
+    // incomplete_race_count,
+    // total_race_count,
+    // race_wins,
+    // race_pole_count,
+    // race_podiums,
+    // race_top_10,
+    // points,
+    // laps,
+    // race_q1_count,
+    // race_q2_count,
+    // race_q3_count,
+    // race_q1_exits,
+    // race_q2_exits,
+    // race_dnf,
+    // race_dns,
+    // race_dsq,
+    // complete_sprint_count,
+    // incomplete_sprint_count,
+    // total_sprint_count,
+    // sprint_wins,
+    // sprint_pole_count,
+    // sprint_podiums,
+    // sprint_top_10_count,
+    // sprint_q1_count,
+    // sprint_q2_count,
+    // sprint_q3_count,
+    // sprint_q1_exits,
+    // sprint_q2_exits,
+    // sprint_dnf,
+    // sprint_dns,
+    // sprint_dsq)
+
+    //         `);
 
 
     // db.run(`
@@ -224,7 +271,6 @@ async function populateSessionResults() {
                         const circuit = sessions[result.session_key]?.circuit_name ?? null;
                         const type = sessions[result.session_key]?.session_name ?? null;
 
-
                         insertStmt.run(
                             result.session_key,
                             id,
@@ -275,33 +321,38 @@ async function updateDriverStats() {
         db.serialize(() => {
             db.all(`
                 SELECT driver_number, 
-                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') THEN points END) AS points_total,
-                    SUM(CASE WHEN position = 1 AND session_name IN ('Race', 'Sprint') THEN 1 ELSE 0 END) AS wins,
-                    SUM(CASE WHEN position <= 3 AND session_name IN ('Race', 'Sprint') THEN 1 ELSE 0 END) AS podiums,
-                    SUM(CASE WHEN position <= 10 AND session_name IN ('Race', 'Sprint') THEN 1 ELSE 0 END) AS top_10,
-                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') THEN laps END) AS laps,
-                    COUNT(CASE WHEN session_name IN ('Race') THEN 1 END) AS total_race_count,
                     COUNT(CASE WHEN session_name IN ('Race') AND dnf != 1 AND dns != 1 AND dsq != 1 THEN 1 END) AS complete_race_count,
                     COUNT(CASE WHEN session_name IN ('Race') AND (dnf = 1 OR dns = 1 OR dsq = 1) THEN 1 END) AS incomplete_race_count,
-                    SUM(CASE WHEN session_name IN ('Race') AND dnf = 1 THEN 1 ELSE 0 END) AS dnf,
-                    SUM(CASE WHEN session_name IN ('Race') AND dns = 1 THEN 1 ELSE 0 END) AS dns,
-                    SUM(CASE WHEN session_name IN ('Race') AND dsq = 1 THEN 1 ELSE 0 END) AS dsq,
-                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position = 1 THEN 1 END) AS pole_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying') THEN 1 END) AS q1_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position <= 15 THEN 1 END) AS q2_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position <= 10 THEN 1 END) AS q3_count,
-                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 15 THEN 1 END) AS q1_exits,
-                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS q2_exits,
-                    COUNT(CASE WHEN session_name IN ('Sprint') THEN 1 END) AS total_sprint_count,
+                    COUNT(CASE WHEN session_name IN ('Race') THEN 1 END) AS total_race_count,
+                    SUM(CASE WHEN position = 1 AND session_name IN ('Race') THEN 1 ELSE 0 END) AS race_wins,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position = 1 THEN 1 END) AS race_pole_count,
+                    SUM(CASE WHEN position <= 3 AND session_name IN ('Race') THEN 1 ELSE 0 END) AS race_podiums,
+                    SUM(CASE WHEN position <= 10 AND session_name IN ('Race') THEN 1 ELSE 0 END) AS race_top_10,
+                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') THEN points END) AS points_total,
+                    SUM(CASE WHEN session_name IN ('Race', 'Sprint') THEN laps END) AS laps,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') THEN 1 END) AS race_q1_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position <= 15 THEN 1 END) AS race_q2_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position <= 10 THEN 1 END) AS race_q3_count,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 15 THEN 1 END) AS race_q1_exits,
+                    COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS race_q2_exits,
+                    SUM(CASE WHEN session_name IN ('Race') AND dnf = 1 THEN 1 ELSE 0 END) AS race_dnf,
+                    SUM(CASE WHEN session_name IN ('Race') AND dns = 1 THEN 1 ELSE 0 END) AS race_dns,
+                    SUM(CASE WHEN session_name IN ('Race') AND dsq = 1 THEN 1 ELSE 0 END) AS race_dsq,
                     COUNT(CASE WHEN session_name IN ('Sprint') AND dnf != 1 AND dns != 1 AND dsq != 1 THEN 1 END) AS complete_sprint_count,
                     COUNT(CASE WHEN session_name IN ('Sprint') AND (dnf = 1 OR dns = 1 OR dsq = 1) THEN 1 END) AS incomplete_sprint_count,
+                    COUNT(CASE WHEN session_name IN ('Sprint') THEN 1 END) AS total_sprint_count,
                     SUM(CASE WHEN position = 1 AND session_name IN ('Sprint') THEN 1 ELSE 0 END) AS sprint_wins,
                     COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position = 1 THEN 1 END) AS sprint_pole_count,
+                    SUM(CASE WHEN position <= 3 AND session_name IN ('Sprint') THEN 1 ELSE 0 END) AS sprint_podiums,
+                    SUM(CASE WHEN position <= 10 AND session_name IN ('Sprint') THEN 1 ELSE 0 END) AS sprint_top_10_count,
                     COUNT(CASE WHEN session_name IN ('Sprint Qualifying') THEN 1 END) AS sprint_q1_count,
                     COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position <= 15 THEN 1 END) AS sprint_q2_count,
                     COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position <= 10 THEN 1 END) AS sprint_q3_count,
                     COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position > 15 THEN 1 END) AS sprint_q1_exits,
-                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS sprint_q2_exits
+                    COUNT(CASE WHEN session_name IN ('Sprint Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS sprint_q2_exits,
+                    SUM(CASE WHEN session_name IN ('Sprint') AND dnf = 1 THEN 1 ELSE 0 END) AS sprint_dnf,
+                    SUM(CASE WHEN session_name IN ('Sprint') AND dns = 1 THEN 1 ELSE 0 END) AS sprint_dns,
+                    SUM(CASE WHEN session_name IN ('Sprint') AND dsq = 1 THEN 1 ELSE 0 END) AS sprint_dsq
                 FROM session_results
                 GROUP BY driver_number`, (err, rows) => {
                 if (err) {
@@ -317,66 +368,76 @@ async function updateDriverStats() {
 
                     const updateStmt = db.prepare(`
             UPDATE drivers
-            SET points = ?,
-                wins = ?,
-                podiums = ?,
-                top_10 = ?,
-                laps = ?,
-                total_race_count = ?,
-                complete_race_count = ?,
+            SET complete_race_count = ?,
                 incomplete_race_count = ?,
-                dnf = ?,
-                dns = ?,
-                dsq = ?,
-                pole_count = ?,
-                q1_count = ?,
-                q2_count = ?,
-                q3_count = ?,
-                q1_exits = ?,
-                q2_exits = ?,
+                total_race_count = ?,
+                race_wins = ?,
+                race_pole_count = ?,
+                race_podiums = ?,
+                race_top_10 = ?,
+                points = ?,
+                laps = ?,
+                race_q1_count = ?,
+                race_q2_count = ?,
+                race_q3_count = ?,
+                race_q1_exits = ?,
+                race_q2_exits = ?,
+                race_dnf = ?,
+                race_dns = ?,
+                race_dsq = ?,
                 complete_sprint_count = ?,
                 incomplete_sprint_count = ?,
                 total_sprint_count = ?,
                 sprint_wins = ?,
                 sprint_pole_count = ?,
+                sprint_podiums = ?,
+                sprint_top_10_count = ?,
                 sprint_q1_count = ?,
                 sprint_q2_count = ?,
                 sprint_q3_count = ?,
                 sprint_q1_exits = ?,
-                sprint_q2_exits = ?
+                sprint_q2_exits = ?,
+                sprint_dnf = ?,
+                sprint_dns = ?,
+                sprint_dsq = ?
             WHERE driver_number = ?
           `);
 
                     try {
                         rows.forEach(row => {
                             updateStmt.run(
-                                row.points_total || 0,
-                                row.wins || 0,
-                                row.podiums || 0,
-                                row.top_10 || 0,
-                                row.laps || 0,
-                                row.total_race_count || 0,
                                 row.complete_race_count || 0,
                                 row.incomplete_race_count || 0,
-                                row.dnf || 0,
-                                row.dns || 0,
-                                row.dsq || 0,
-                                row.pole_count || 0,
-                                row.q1_count || 0,
-                                row.q2_count || 0,
-                                row.q3_count || 0,
-                                row.q1_exits || 0,
-                                row.q2_exits || 0,
+                                row.total_race_count || 0,
+                                row.race_wins || 0,
+                                row.race_pole_count || 0,
+                                row.race_podiums || 0,
+                                row.race_top_10 || 0,
+                                row.points_total || 0,
+                                row.laps || 0,
+                                row.race_q1_count || 0,
+                                row.race_q2_count || 0,
+                                row.race_q3_count || 0,
+                                row.race_q1_exits || 0,
+                                row.race_q2_exits || 0,
+                                row.race_dnf || 0,
+                                row.race_dns || 0,
+                                row.race_dsq || 0,
                                 row.complete_sprint_count || 0,
                                 row.incomplete_sprint_count || 0,
                                 row.total_sprint_count || 0,
                                 row.sprint_wins || 0,
                                 row.sprint_pole_count || 0,
+                                row.sprint_podiums || 0,
+                                row.sprint_top_10_count || 0,
                                 row.sprint_q1_count || 0,
                                 row.sprint_q2_count || 0,
                                 row.sprint_q3_count || 0,
                                 row.sprint_q1_exits || 0,
                                 row.sprint_q2_exits || 0,
+                                row.sprint_dnf || 0,
+                                row.sprint_dns || 0,
+                                row.sprint_dsq || 0,
                                 row.driver_number
                             );
                         });
@@ -406,8 +467,91 @@ async function updateDriverStats() {
     });
 }
 
+async function updateSessionResults() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT driver_number, 
+                    position,
+                    session_key,
+                    dnf,
+                    dns,
+                    dsq
+                FROM session_results
+                GROUP BY driver_number, session_key`, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                db.run('BEGIN TRANSACTION', (err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    const updateStmt = db.prepare(`
+                        UPDATE session_results
+                        SET position = ?
+                        WHERE driver_number = ? AND session_key = ?
+                      `);
+
+                    try {
+                        rows.forEach(row => {
+                            let newPos = row.position;
+                            if (newPos == null) {
+                                if (row.dnf)
+                                    newPos = "DNF";
+                                else if (row.dns)
+                                    newPos = "DNS";
+                            }
+                            // console.log(newPos);
+
+                            updateStmt.run(
+                                newPos,
+                                row.driver_number,
+                                row.session_key
+                            );
+                        });
+
+                        updateStmt.finalize((err) => {
+                            if (err) {
+                                console.log("Failed to update driver information");
+
+                                db.run('ROLLBACK', () => reject(err));
+                                return;
+                            }
+
+                            db.run('COMMIT', (err) => {
+                                if (err) {
+                                    db.run('ROLLBACK', () => reject(err));
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    } catch (err) {
+                        db.run('ROLLBACK', () => reject(err));
+                    }
+                });
+            });
+        });
+    });
+}
+
+
 app.get("/api/drivers/", (req, res) => {
     db.all("SELECT * FROM drivers", [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    })
+});
+
+app.get("/api/driver_images/", (req, res) => {
+    db.all("SELECT image FROM drivers", [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -555,7 +699,8 @@ app.get("/api/sprint_qualifying_results/", (req, res) => {
 // await populateDrivers();
 // await populateSessions();
 // await populateSessionResults();
-await updateDriverStats();
+// await updateDriverStats();
+// await updateSessionResults();
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

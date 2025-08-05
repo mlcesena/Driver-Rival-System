@@ -93,7 +93,7 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
                     ref={optionsRef}>
                     {filterOptions.map((option, idx) => (
                         <li
-                            className={selectedIdx === idx ? "active" : ""}
+                            className={selectedIdx === idx ? "active-option" : ""}
                             key={idx}
                             onClick={() => {
                                 setSelectedIdx(option.id);

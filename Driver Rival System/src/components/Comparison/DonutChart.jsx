@@ -4,7 +4,7 @@ import "./../Cards/Card.css"
 import Donut from "./Donut";
 
 function DonutChart({ label = "Null", driverValue1 = 0, driverTotal1 = 0, driverValue2 = 0, driverTotal2 = 0 }) {
-    const { team1Primary, team2Primary } = useDriverContext();
+    const { team1Primary, team2Primary, team2Accent } = useDriverContext();
 
     return (
         <div className="dual-donut-wrapper">
@@ -16,8 +16,10 @@ function DonutChart({ label = "Null", driverValue1 = 0, driverTotal1 = 0, driver
                 </Donut>
                 <Donut
                     color={team2Primary}
+                    colorAccent={team2Accent}
                     value={driverValue2}
-                    total={driverTotal2}>
+                    total={driverTotal2}
+                    matching={team1Primary === team2Primary}>
                 </Donut>
             </div>
             <h2>{label}</h2>

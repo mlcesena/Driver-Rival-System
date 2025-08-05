@@ -16,54 +16,62 @@ function Comparison() {
     const { drivers, raceResults, qualiResults, sprintRaceResults, sprintQualiResults, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary, } = useDriverContext();
     const highlightMap = new Map([
         ["Wins", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.wins ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.wins ?? 0 : 0
+            firstDriverNumber > 0 ?
+                ((drivers.get(firstDriverNumber)?.race_wins ?? 0) + (drivers.get(firstDriverNumber)?.sprint_wins ?? 0))
+                : 0,
+            secondDriverNumber > 0 ?
+                ((drivers.get(secondDriverNumber)?.race_wins ?? 0) + (drivers.get(secondDriverNumber)?.sprint_wins ?? 0))
+                : 0
         ]],
         ["Podiums", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.podiums ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.podiums ?? 0 : 0
+            firstDriverNumber > 0 ?
+                ((drivers.get(firstDriverNumber)?.race_podiums ?? 0) + (drivers.get(firstDriverNumber)?.sprint_podiums ?? 0))
+                : 0,
+            secondDriverNumber > 0 ?
+                ((drivers.get(secondDriverNumber)?.race_podiums ?? 0) + (drivers.get(secondDriverNumber)?.sprint_podiums ?? 0))
+                : 0
         ]],
-        ["Points", [
+        ["Total Points", [
             firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.points ?? 0 : 0,
             secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.points ?? 0 : 0
         ]],
-        ["Points", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.points ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.points ?? 0 : 0
+        ["Grand Prix and Sprints", [
+            firstDriverNumber > 0 ?
+                ((drivers.get(firstDriverNumber)?.total_race_count ?? 0) + (drivers.get(firstDriverNumber)?.total_sprint_count ?? 0))
+                : 0,
+            secondDriverNumber > 0 ?
+                ((drivers.get(secondDriverNumber)?.total_race_count ?? 0) + (drivers.get(secondDriverNumber)?.total_sprint_count ?? 0))
+                : 0
         ]],
-        ["Grand Prix", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.total_race_count ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.total_race_count ?? 0 : 0
-        ]],
-        ["Compelted Laps", [
+        ["Completed Laps", [
             firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.laps ?? 0 : 0,
             secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.laps ?? 0 : 0
         ]]
     ])
     const qualiMap = new Map([
         ["Pole Positions", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.pole_count ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.pole_count ?? 0 : 0
+            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.race_pole_count ?? 0 : 0,
+            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.race_pole_count ?? 0 : 0
         ]],
         ["Q3 Appearances (Top 10)", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.q3_count ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.q3_count ?? 0 : 0
+            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.race_q3_count ?? 0 : 0,
+            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.race_q3_count ?? 0 : 0
         ]],
         ["Q2 Appearances (Top 15)", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.q2_count ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.q2_count ?? 0 : 0
+            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.race_q2_count ?? 0 : 0,
+            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.race_q2_count ?? 0 : 0
         ]],
         ["Q1 Appearances", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.q1_count ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.q1_count ?? 0 : 0
+            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.race_q1_count ?? 0 : 0,
+            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.race_q1_count ?? 0 : 0
         ]],
         ["Q2 Exits*", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.q2_exits ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.q2_exits ?? 0 : 0
+            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.race_q2_exits ?? 0 : 0,
+            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.race_q2_exits ?? 0 : 0
         ]],
         ["Q1 Exits*", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.q1_exits ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.q1_exits ?? 0 : 0
+            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.race_q1_exits ?? 0 : 0,
+            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.race_q1_exits ?? 0 : 0
         ]],
     ])
     const sprintQualiMap = new Map([
@@ -103,13 +111,14 @@ function Comparison() {
 
     for (const [key, value] of raceResults) {
         let d1Points = "None";
-        let d1Pos = "None";
+        let d1Pos = "Did Not Race";
         let d2Points = "None";
-        let d2Pos = "None";
+        let d2Pos = "Did Not Race";
 
         if (firstDriverNumber > 0 && value.has(firstDriverNumber)) {
             d1Points = value.get(firstDriverNumber).points;
             d1Pos = value.get(firstDriverNumber).position;
+
         }
 
         if (secondDriverNumber > 0 && value.has(secondDriverNumber)) {
@@ -134,9 +143,9 @@ function Comparison() {
     i = 1;
     for (const [key, value] of sprintRaceResults) {
         let d1Points = "None";
-        let d1Pos = "None";
+        let d1Pos = "Did Not Race";
         let d2Points = "None";
-        let d2Pos = "None";
+        let d2Pos = "Did Not Race";
 
         if (firstDriverNumber > 0 && value.has(firstDriverNumber)) {
             d1Points = value.get(firstDriverNumber).points;
@@ -167,7 +176,8 @@ function Comparison() {
             <ComparisonContainer
                 title="Highlights"
                 controlType="combobox"
-                childComponent={<ComparisonBarChart data={highlightMap}></ComparisonBarChart>}>
+                childComponent={<ComparisonBarChart data={highlightMap}></ComparisonBarChart>}
+                description="Highlights include both race and sprint results">
             </ComparisonContainer>
             <ComparisonContainer
                 title="Race Overview"

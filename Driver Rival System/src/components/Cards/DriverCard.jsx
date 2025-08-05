@@ -47,7 +47,7 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                 setAlpha3("MCO");
                 break;
             case "Lance Stroll":
-                setAlpha3("CAD");
+                setAlpha3("CAN");
                 break;
             case "Yuki Tsunoda":
                 setAlpha3("JPN");

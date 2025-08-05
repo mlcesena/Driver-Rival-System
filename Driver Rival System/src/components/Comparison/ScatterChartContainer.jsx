@@ -5,7 +5,7 @@ import "./Comparison.css"
 import { act, useEffect } from "react";
 
 function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLabel = "Y Axis", driver1Data = [], driver2Data = [], yAxisMin = 0, yAxisMax = 100, reversed = false, tooltipLabel = "Value" }) {
-    const { drivers, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary } = useDriverContext();
+    const { drivers, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary, team2Accent } = useDriverContext();
     const trackMap = new Map(driver1Data.map(d => [d.x, d.track]));
     const CustomizedXAxisTick = (props) => {
         const { x, y, payload } = props;
@@ -14,7 +14,7 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
 
         return (
             <g transform={`translate(${x},${y})`}>
-                <text x={0} y={0} textAnchor="end" fill="#aaaaaa" transform="rotate(-90)">
+                <text x={0} y={0} textAnchor="end" fill="#aaaaaa" transform="rotate(-55)">
                     {trackName}
                 </text>
             </g>
@@ -55,7 +55,7 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
         <>
             <DriverLegend></DriverLegend>
             <div className="scatter-chart-container">
-                <ResponsiveContainer width="100%" height={600} minWidth={500} style={{ marginBottom: "2rem" }}>
+                <ResponsiveContainer width="100%" height={600} minWidth={450} style={{ marginBottom: "2rem" }}>
                     <ScatterChart
                         margin={{
                             top: 15,
@@ -90,8 +90,30 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
                             label={{ value: yAxisLabel, position: "insideLeft", angle: -90 }}
                             tick={<CustomizedYAxisTick />} />
                         <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
-                        <Scatter name="Driver 1" clip="false" data={driver1Data} fill={team1Primary} stroke={"#e0e0e0"} strokeWidth={2} line={{ strokeWidth: 5 }} shape={<Dot r={8} />} />
-                        <Scatter name="Driver 2" clip="false" data={driver2Data} fill={team2Primary} stroke={"#e0e0e0"} strokeWidth={2} line={{ strokeWidth: 5 }} shape={<Dot r={8} />} />
+                        <defs>
+                            <linearGradient id="scatterGradient" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="50%" stopColor={team2Primary} stopOpacity={1} />
+                                <stop offset="50%" stopColor={team1Primary === team2Primary ? team2Accent : team2Primary} stopOpacity={1} />
+                            </linearGradient>
+                        </defs>
+                        <Scatter
+                            name="Driver 1"
+                            clip="false"
+                            data={driver1Data}
+                            fill={team1Primary}
+                            stroke={"#e0e0e0"}
+                            strokeWidth={2}
+                            line={{ strokeWidth: 5 }}
+                            shape={<Dot r={8} />} />
+                        <Scatter
+                            name="Driver 2"
+                            clip="false"
+                            data={driver2Data}
+                            fill={team2Primary}
+                            stroke={"#e0e0e0"}
+                            strokeWidth={2}
+                            line={{ strokeWidth: 5 }}
+                            shape={<Dot fill="url(#scatterGradient)" r={8} />} />
                     </ScatterChart>
                 </ResponsiveContainer>
             </div>

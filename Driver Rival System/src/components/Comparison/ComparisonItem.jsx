@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useDriverContext } from "../../contexts/DriverContext";
 
-function DriverCompItem({ title = "Null", team1 = "", team2 = "", stat1 = 0, stat2 = 0, inverse = false }) {
+function DriverCompItem({ title = "Null", team1Color = "#FFFFFF", team2Color = "#FFFFFF", team2Accent = "#FFFFFF", stat1 = 0, stat2 = 0, inverse = false }) {
+    // const {team1Primary, team2Primary, }
     const [statWidth1, setStatWidth1] = useState(0);
     const [statWidth2, setStatWidth2] = useState(0);
 
@@ -28,8 +30,18 @@ function DriverCompItem({ title = "Null", team1 = "", team2 = "", stat1 = 0, sta
         <li className="driver-stat-item">
             <h2>{title}</h2>
             <div className="comparison-stat">
-                <span className={`comparison-bar ${(!inverse ? (stat1 > stat2) : (stat1 < stat2)) ? " winner" : ""}`} style={{ backgroundColor: `${team1}`, width: `${statWidth1}%`, display: `${!statWidth1 && statWidth2 ? "none" : ""}` }}>{stat1}</span>
-                <span className={`comparison-bar ${(!inverse ? (stat2 > stat1) : (stat2 < stat1)) ? " winner" : ""}`} style={{ backgroundColor: `${team2}`, width: `${statWidth2}%`, display: `${statWidth1 && !statWidth2 ? "none" : ""}` }}> {stat2}</span>
+                <span className={`comparison-bar ${(!inverse ? (stat1 > stat2) : (stat1 < stat2)) ? " winner" : ""}`}
+                    style={{ backgroundColor: `${team1Color}`, width: `${statWidth1}%`, display: `${!statWidth1 && statWidth2 ? "none" : ""}` }}>{stat1}</span>
+                <span className={`comparison-bar ${(!inverse ? (stat2 > stat1) : (stat2 < stat1)) ? " winner" : ""} ${team1Color === team2Color ? "divided" : ""}`}
+                    style={{
+                        backgroundColor: `${team2Color}`,
+                        "--mark-clr-1": team2Color,
+                        "--mark-clr-2": team2Accent,
+                        width: `${statWidth2}%`,
+                        display: `${statWidth1 && !statWidth2 ? "none" : ""}`,
+                        border: team1Color === team2Color ? `${team1Color} solid 2px` : "none"
+                    }}
+                >{stat2}</span>
             </div>
         </li >
     )

@@ -1,96 +1,52 @@
 import { useGlobalStateContext } from "../contexts/GlobalStateContext";
 import { useDriverContext } from "../contexts/DriverContext";
 import { useState, useEffect } from "react";
-import DriverCard from '../components/Cards/DriverCard'
-import Comparison from '../components/Comparison/Comparison'
 import "../css/main.css"
 import '../App.css'
-import ComboxBox from "../components/ComboBox/ComboBox";
-import EmptyCard from "../components/Cards/EmptyCard";
-import Header from "../components/Header";
+import "../css/PageCard.css"
 import LoadScreen from "../components/LoadScreen/LoadScreen";
+import PageCard from "../components/PageCard";
 
 function Home() {
     const { loading } = useGlobalStateContext();
-    const { drivers,
-        firstDriverNumber,
-        setFirstDriverNumber,
-        secondDriverNumber,
-        setSecondDriverNumber,
-        team1Primary,
-        team1Accent,
-        team2Primary,
-        team2Accent } = useDriverContext();
-
-    const handleUpdatedDriver1 = (idx) => {
-        // FIX ME: find better solution for getting driver number
-        setFirstDriverNumber(drivers.keys().toArray()[idx]);
-    };
-
-    const handleUpdatedDriver2 = (idx) => {
-        setSecondDriverNumber(drivers.keys().toArray()[idx]);
-    };
+    const { drivers } = useDriverContext();
+    const [driverImages, setDriverImages] = useState([]);
+    const [driverNumbers, setDriverNumbers] = useState([]);
 
     useEffect(() => {
+        if (drivers.size > 0) {
+            let imgList = [];
+            let numList = [];
 
-    }, [drivers])
+            for (const value of drivers.values()) {
+                imgList.push(value.image);
+                numList.push(value.driver_number);
+            }
+
+            setDriverImages(imgList);
+            setDriverNumbers(numList);
+        }
+    }, [drivers]);
 
     return (
         loading ? <LoadScreen></LoadScreen> :
-            <>
-                <Header></Header>
-                <div className="driver-container">
-                    {drivers.size > 0 ? <>
-                        <div className="driver-wrapper">
-                            <ComboxBox
-                                title="Driver Selection"
-                                options={Array.from(drivers.keys()).map((number, idx) => (
-                                    {
-                                        id: idx,
-                                        value: `${drivers.get(number).full_name}`,
-                                    }))}
-                                updaterFunction={handleUpdatedDriver1}
-                                searchable={true}>
-                            </ComboxBox>
-                            {firstDriverNumber > -1 ? <DriverCard
-                                firstName={drivers.get(firstDriverNumber).first_name}
-                                lastName={drivers.get(firstDriverNumber).last_name}
-                                team={drivers.get(firstDriverNumber).team}
-                                number={drivers.get(firstDriverNumber).driver_number}
-                                acronym={drivers.get(firstDriverNumber).acronym}
-                                image={drivers.get(firstDriverNumber).image}
-                                primaryColor={team1Primary}
-                                accentColor={team1Accent}
-                            ></DriverCard> : <EmptyCard></EmptyCard>}
-                        </div>
-
-                        <div className="driver-wrapper align-right">
-                            <ComboxBox
-                                title="Driver Selection"
-                                options={Array.from(drivers.keys()).map((number, idx) => (
-                                    {
-                                        id: idx,
-                                        value: `${drivers.get(number).full_name}`
-                                    }))}
-                                updaterFunction={handleUpdatedDriver2}
-                                searchable={true}>
-                            </ComboxBox>
-                            {secondDriverNumber > -1 ? <DriverCard
-                                firstName={drivers.get(secondDriverNumber).first_name}
-                                lastName={drivers.get(secondDriverNumber).last_name}
-                                team={drivers.get(secondDriverNumber).team}
-                                number={drivers.get(secondDriverNumber).driver_number}
-                                acronym={drivers.get(secondDriverNumber).acronym}
-                                image={drivers.get(secondDriverNumber).image}
-                                primaryColor={team2Primary}
-                                accentColor={team2Accent}
-                            ></DriverCard> : <EmptyCard></EmptyCard>}
-                        </div>
-                    </>
-                        : <></>}
-                </div>
-                <Comparison></Comparison>
-            </>
+            <div className="page-card-container">
+                <PageCard
+                    title="Drivers"
+                    description="Compare active Formula 1 drivers in a head-to-head matchup. View their performance across each race weekend, current standings, and an in-depth analysis about the entire season as it unfolds."
+                    imageList={driverImages}
+                    elementList={driverNumbers}
+                    loop={true} />
+                <PageCard
+                    title="Teams"
+                    description="View all of the active Formula 1 constructors. Look into the history behind the distinct teams and at the personnel that makes them up. Compare key metrics from the current season and see where they stack up." />
+                <PageCard
+                    title="Tracks"
+                    description="Explore each of the unique circuits on the Formula 1 calendar. All of the tracks offer a variety of challenges for drivers and require a tailored approach." />
+                <PageCard
+                    title="Information"
+                    description="Learn the basics of Formula 1 and dive deep into the technical terminology. Get up to date on the rules, tire information, tracks details, and more." />
+            </div>
     );
 }
 

@@ -73,7 +73,8 @@ export const DriverProvider = ({ children }) => {
         switch (teamName) {
             case "Red Bull Racing":
                 // return ["#171A60", "#FA142A"];
-                return ["#1B1F4F", "#C12B30"]
+                // return ["#1B1F4F", "#C12B30"]
+                return ["#213369", "#C12B30"]
             case "McLaren":
                 // return ["#FD8003", "#141520"];
                 return ["#B5631F", "#1E1E1E"];
@@ -88,7 +89,8 @@ export const DriverProvider = ({ children }) => {
                 return ["#1B4F72", "#99627A"];
             case "Mercedes":
                 // return ["#09F5D2", "#000000"];
-                return ["#2BADA0", "#121212"];
+                // return ["#2BADA0", "#121212"];
+                return ["#4B958D", "#121212"];
             case "Aston Martin":
                 // return ["#015A50", "#E1FF39"];
                 return ["#004225", "#D1B66A"];

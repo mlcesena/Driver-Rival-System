@@ -1,4 +1,4 @@
-import CheckeredFlag from "../assets/CheckeredFlag.svg"
+// import CheckeredFlag from "../assets/CheckeredFlag.svg"
 import "./Disclaimer.css"
 
 function Disclaimer({ title = "None", description = "" }) {

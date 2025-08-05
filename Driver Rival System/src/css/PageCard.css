@@ -1,0 +1,112 @@
+.page-card-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.page-card-wrapper {
+  border: var(--clr-neutral-100) solid 8px;
+  border-radius: 3rem;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 525px;
+  /* height: fit-content; */
+  min-height: 630px !important;
+}
+
+.page-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  border: var(--clr-neutral-100) solid 4px;
+  border-radius: 2rem;
+  background-color: var(--clr-neutral-800);
+}
+
+.page-card h1 {
+  width: fit-content;
+  height: fit-content;
+  font-size: var(--fs-secondary-heading);
+  font-family: var(--ff-primary);
+}
+
+.page-card h1::after {
+  content: "";
+  width: 100%;
+  height: 1.25rem;
+  border-top: var(--racing-stripe-clr) solid 6px;
+  border-bottom: var(--racing-stripe-clr) solid 6px;
+  border-left: none;
+  border-right: none;
+  margin-block: auto;
+}
+
+.page-card-image {
+  --active-content: "0";
+  display: flex;
+  height: 250px;
+  width: 250px;
+  margin-block: 3rem;
+  margin-inline: auto;
+  position: relative;
+}
+
+.page-card-image img {
+  height: 100%;
+  aspect-ratio: 1/1;
+  z-index: 5;
+  filter: saturate(0.7);
+}
+
+.page-card-image::after {
+  display: inline-block;
+  content: var(--active-content);
+  font-family: var(--ff-primary);
+  font-size: 20rem;
+  color: var(--clr-neutral-100);
+  text-align: center;
+  opacity: 0.2;
+  position: absolute;
+  width: 100%;
+  left: -25%;
+  top: -50%;
+  z-index: 1;
+}
+
+.page-card-placeholder {
+  display: flex;
+  height: 250px;
+  width: 250px;
+  border: var(--clr-neutral-100) solid 1rem;
+  border-radius: 100vh;
+  margin-block: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+}
+
+.page-card-placeholder h1 {
+  font-size: calc(250px * 0.75);
+}
+
+.page-card-columns {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 3rem;
+  margin-top: auto;
+  align-items: center;
+}
+
+@media (max-width: 30em) {
+  .page-card-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: end;
+  }
+}
