@@ -5,9 +5,38 @@
   height: fit-content;
   /* align-items: center; */
   /* justify-content: center; */
-  z-index: 10;
+  z-index: 100;
   gap: 1rem;
   margin-bottom: 5rem;
+  filter: none !important;
+}
+
+.nav-header-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-btn {
+  border: none;
+  background-color: transparent;
+  color: var(--clr-neutral-100) !important;
+  /* padding: 1rem; */
+  height: 50px;
+  width: 50px;
+  border-radius: 100vh;
+  /* margin-left: auto; */
+  transition: all 0.25s ease-in-out;
+}
+
+.nav-btn span {
+  color: var(--clr-neutral-100);
+}
+
+.nav-btn:hover {
+  cursor: pointer;
+  background-color: var(--clr-neutral-700);
+  transition: all 0.25s ease-in-out;
 }
 
 .nav-list {
@@ -21,6 +50,7 @@
   gap: 2rem;
   font-family: var(--ff-body);
   font-size: var(--fs-body);
+  overflow: hidden;
 }
 
 .navbar-brand {
@@ -42,9 +72,52 @@
 
 .active-page {
   /* font-weight: var(--fw-bold); */
-  color: var(--clr-accent-400);
+  color: var(--clr-accent-400) !important;
 }
 
 .active-page:hover {
-  color: var(--clr-accent-300);
+  color: var(--clr-accent-300) !important;
+}
+
+@media (max-width: 50em) {
+  .primary-navigation {
+    position: relative;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 7rem; /* Adjust this value to be just below your divider */
+    left: 0;
+    width: 100%;
+    z-index: 101;
+    padding: 1.5rem 2rem;
+    flex-direction: column;
+    border-radius: 3rem;
+
+    background: var(--clr-neutral-800);
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    border-radius: 100vh;
+    background-color: transparent;
+    color: var(--clr-neutral-300);
+    transition: background-color, color 0.25s ease-in-out;
+  }
+
+  .nav-link:hover {
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-700);
+    transition: background-color, color 0.25s ease-in-out;
+  }
+
+  .navbar-brand {
+    font-size: var(--fs-secondary-heading);
+  }
+}
+
+@media (max-width: 35em) {
+  .navbar-brand {
+    font-size: var(--fs-sub-heading);
+  }
 }

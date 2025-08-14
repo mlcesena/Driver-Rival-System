@@ -6,7 +6,7 @@ footer {
 }
 
 .link-container h2 {
-  color: var(--clr-primary-400);
+  color: var(--clr-secondary-400);
   font-family: var(--ff-primary);
   font-size: var(--fs-sub-heading);
   margin-bottom: 0.5rem;

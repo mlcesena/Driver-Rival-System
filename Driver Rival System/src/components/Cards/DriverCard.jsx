@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { convertCountryCode } from "../../services/GlobalServices";
 import "./Card.css"
 
 function DriverCard({ firstName = "", lastName = "", team = "", number = "", acronym = "", image = "", primaryColor = "", accentColor = "", country = "" }) {
     const [alpha2, setAlpha2] = useState("xx");
     const [alpha3, setAlpha3] = useState("");
-    const firstRef = useRef(firstName);
-    const lastRef = useRef(lastName);
 
     useEffect(() => {
         getDriverNationality();
     }, [firstName, lastName, country])
 
     useEffect(() => {
-        convertCountryCode();
+        setAlpha2(convertCountryCode(alpha3));
     }, [alpha3])
 
     function getDriverNationality() {
@@ -73,70 +72,6 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
         }
     }
 
-    function convertCountryCode() {
-        switch (alpha3) {
-            case "ARG":
-                setAlpha2("ar")
-                break;
-            case "AUS":
-                setAlpha2("au")
-                break;
-            case "BRA":
-                setAlpha2("br")
-                break;
-            case "CAN":
-                setAlpha2("ca")
-                break;
-            case "CHN":
-                setAlpha2("cn")
-                break;
-            case "EGY":
-                setAlpha2("eg")
-                break;
-            case "FRA":
-                setAlpha2("fr")
-                break;
-            case "DEU":
-                setAlpha2("de")
-                break;
-            case "ITA":
-                setAlpha2("it")
-                break;
-            case "JPN":
-                setAlpha2("jp")
-                break;
-            case "MEX":
-                setAlpha2("mx")
-                break;
-            case "MCO":
-                setAlpha2("mc")
-                break;
-            case "NLD":
-                setAlpha2("nl")
-                break;
-            case "NZL":
-                setAlpha2("nz")
-                break;
-            case "ESP":
-                setAlpha2("es")
-                break;
-            case "SWE":
-                setAlpha2("ch")
-                break;
-            case "THA":
-                setAlpha2("th")
-                break;
-            case "GBR":
-                setAlpha2("gb")
-                break;
-            case "USA":
-                setAlpha2("us")
-                break;
-            default:
-                break;
-        }
-    }
-
     return (
         <div className="card-wrapper" style={{ backgroundColor: `${primaryColor}` }}>
             <div className="card driver-card" style={{ backgroundColor: `${primaryColor}` }}>
@@ -147,8 +82,8 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                     </div>
                     <label className="driver-number" style={{ backgroundColor: `${accentColor}` }}>{number}</label>
                 </div>
-                <div className="driver-img-container" style={{ "--racing-stripe-clr": accentColor }}>
-                    <img className="driver-img" src={image}></img>
+                <div className="card-img-container" style={{ "--racing-stripe-clr": accentColor }}>
+                    <img className="card-img" data-type="driver" src={image}></img>
                 </div>
                 <div className="driver-card-footer">
                     <h1 className="driver-acronym">{acronym}</h1>

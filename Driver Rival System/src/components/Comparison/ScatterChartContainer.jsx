@@ -1,8 +1,6 @@
 import { useDriverContext } from "../../contexts/DriverContext";
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Dot, ResponsiveContainer, ZAxis } from 'recharts';
-import DriverLegend from "../DriverLegend";
 import "./Comparison.css"
-import { act, useEffect } from "react";
 
 function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLabel = "Y Axis", driver1Data = [], driver2Data = [], yAxisMin = 0, yAxisMax = 100, reversed = false, tooltipLabel = "Value" }) {
     const { drivers, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary, team2Accent } = useDriverContext();
@@ -53,7 +51,6 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
 
     return (
         <>
-            <DriverLegend></DriverLegend>
             <div className="scatter-chart-container">
                 <ResponsiveContainer width="100%" height={600} minWidth={450} style={{ marginBottom: "2rem" }}>
                     <ScatterChart
@@ -63,7 +60,7 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
                             bottom: 100,
                             left: 20,
                         }}>
-                        <CartesianGrid stroke="#3e3e3e" />
+                        <CartesianGrid stroke="#3e3e3e" strokeDasharray={"3 3"} />
                         <XAxis
                             type="number"
                             dataKey="x"

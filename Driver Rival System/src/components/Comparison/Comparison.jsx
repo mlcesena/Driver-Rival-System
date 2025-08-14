@@ -13,7 +13,24 @@ function Comparison() {
     const [qualiOption, setQualiOption] = useState(1);
     const [sprintRaceOption, setSprintRaceOption] = useState(1);
     const [sprintQualiOption, setSprintQualiOption] = useState(1);
-    const { drivers, raceResults, qualiResults, sprintRaceResults, sprintQualiResults, firstDriverNumber, secondDriverNumber, team1Primary, team2Primary, } = useDriverContext();
+    const { drivers,
+        raceResults,
+        qualiResults,
+        sprintRaceResults,
+        sprintQualiResults,
+        firstDriverNumber,
+        secondDriverNumber,
+        team1Primary,
+        team2Primary,
+        team1Accent,
+        team2Accent } = useDriverContext();
+    const racePointData = [[], []];
+    const racePositionData = [[], []];
+    const qualiPositionData = [[], []];
+    const sprintRacePointData = [[], []];
+    const sprintRacePositionData = [[], []];
+    const sprintQualiPositionData = [[], []];
+    let i = 1;
     const highlightMap = new Map([
         ["Wins", [
             firstDriverNumber > 0 ?
@@ -32,8 +49,12 @@ function Comparison() {
                 : 0
         ]],
         ["Total Points", [
-            firstDriverNumber > 0 ? drivers.get(firstDriverNumber)?.points ?? 0 : 0,
-            secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.points ?? 0 : 0
+            firstDriverNumber > 0 ?
+                ((drivers.get(firstDriverNumber)?.race_points ?? 0) + (drivers.get(firstDriverNumber)?.sprint_points ?? 0))
+                : 0,
+            secondDriverNumber > 0 ?
+                ((drivers.get(secondDriverNumber)?.race_points ?? 0) + (drivers.get(secondDriverNumber)?.sprint_points ?? 0))
+                : 0
         ]],
         ["Grand Prix and Sprints", [
             firstDriverNumber > 0 ?
@@ -100,14 +121,6 @@ function Comparison() {
             secondDriverNumber > 0 ? drivers.get(secondDriverNumber)?.sprint_q1_exits ?? 0 : 0
         ]],
     ])
-
-    const racePointData = [[], []];
-    const racePositionData = [[], []];
-    const qualiPositionData = [[], []];
-    const sprintRacePointData = [[], []];
-    const sprintRacePositionData = [[], []];
-    const sprintQualiPositionData = [[], []];
-    let i = 1;
 
     for (const [key, value] of raceResults) {
         let d1Points = "None";
@@ -176,15 +189,24 @@ function Comparison() {
             <ComparisonContainer
                 title="Highlights"
                 controlType="combobox"
-                childComponent={<ComparisonBarChart data={highlightMap}></ComparisonBarChart>}
-                description="Highlights include both race and sprint results">
-            </ComparisonContainer>
+                containerType="driver"
+                childComponent={
+                    <ComparisonBarChart
+                        data={highlightMap}
+                        team1Primary={team1Primary}
+                        team2Primary={team2Primary}
+                        team1Accent={team1Accent}
+                        team2Accent={team2Accent} />}
+                description="Highlights include both race and sprint results" >
+            </ComparisonContainer >
             <ComparisonContainer
                 title="Race Overview"
+                containerType="driver"
                 childComponent={<DonutChartContainer></DonutChartContainer>}>
             </ComparisonContainer>
             <ComparisonContainer
                 title="Race Results"
+                containerType="driver"
                 controlType="toggle"
                 controlProps={{ label1: "Points", label2: "Position", updaterFunction: (option) => { setRaceOption(option) } }}
                 childComponent={<ScatterChartContainer
@@ -195,18 +217,24 @@ function Comparison() {
                     yAxisMin={0}
                     yAxisMax={raceOption === 1 ? 25 : 20}
                     reversed={raceOption === 1 ? false : true}
-                    tooltipLabel={raceOption === 1 ? "Points" : "Position"}></ScatterChartContainer>}
+                    tooltipLabel={raceOption === 1 ? "Points" : "Position"} />}
                 description={raceOption === 1 ?
                     "After each race concludes, drivers score points based on their final position. Drivers in the top 10 positions are awarded points in decreasing amounts from 25 to 1. Outside of those positions 0 points are received."
                     : "At the end of each race, final driver positions are based on where the driver finished and any time penalties. First being indicated by 1 (best) and last indicated by 20 (worst)."}>
             </ComparisonContainer>
             <ComparisonContainer
                 title="Qualifying"
+                containerType="driver"
                 controlType="toggle"
                 controlProps={{ label1: "Summary", label2: "Results", updaterFunction: (option) => { setQualiOption(option) } }}
                 description={`Q1-Q3 represent the 3 different qualifying stages for each race weekend.\n*Each round, the slowest 5 drivers exit qualifying and do not move on to the next round.`}
                 childComponent={qualiOption === 1 ?
-                    <ComparisonBarChart data={qualiMap}></ComparisonBarChart>
+                    <ComparisonBarChart
+                        data={qualiMap}
+                        team1Primary={team1Primary}
+                        team2Primary={team2Primary}
+                        team1Accent={team1Accent}
+                        team2Accent={team2Accent} />
                     : <ScatterChartContainer
                         xAxisLabel="Circuit"
                         yAxisLabel={"Position"}
@@ -220,6 +248,7 @@ function Comparison() {
             </ComparisonContainer>
             <ComparisonContainer
                 title="Sprint Race Results"
+                containerType="driver"
                 controlType="toggle"
                 controlProps={{ label1: "Points", label2: "Position", updaterFunction: (option) => { setSprintRaceOption(option) } }}
                 childComponent={
@@ -233,7 +262,7 @@ function Comparison() {
                             yAxisMin={0}
                             yAxisMax={sprintRaceOption === 1 ? 10 : 20}
                             reversed={sprintRaceOption === 1 ? false : true}
-                            tooltipLabel={sprintRaceOption === 1 ? "Points" : "Position"}></ScatterChartContainer>
+                            tooltipLabel={sprintRaceOption === 1 ? "Points" : "Position"} />
                     </>}
                 description={sprintRaceOption === 1 ?
                     "After each race concludes, drivers score points based on their final position. Drivers in the top 8 positions are awarded points in decreasing amounts from 10 to 1. Outside of those positions 0 points are received."
@@ -241,6 +270,7 @@ function Comparison() {
             </ComparisonContainer>
             <ComparisonContainer
                 title="Sprint Qualifying"
+                containerType="driver"
                 controlType="toggle"
                 controlProps={{ label1: "Summary", label2: "Results", updaterFunction: (option) => { setSprintQualiOption(option) } }}
                 description={`Similar to standard race qualifying, Q1-Q3 also represent the 3 different qualifying stages for each the sprint race.\n*Each round, the slowest 5 drivers exit sprint qualifying and do not move on to the next round.`}
@@ -248,7 +278,12 @@ function Comparison() {
                     <>
                         <Disclaimer title="Sprint Races and Qualifying" description="F1 sprint races are shorter, standalone races, about one-third the distance of a Grand Prix. While Sprint results contribute to driver and constructor (team) standings, they are separate from the main Grand Prix qualifying and race."></Disclaimer>
                         {sprintQualiOption === 1 ?
-                            <ComparisonBarChart data={sprintQualiMap}></ComparisonBarChart>
+                            <ComparisonBarChart
+                                data={sprintQualiMap}
+                                team1Primary={team1Primary}
+                                team2Primary={team2Primary}
+                                team1Accent={team1Accent}
+                                team2Accent={team2Accent} />
                             : <ScatterChartContainer
                                 xAxisLabel="Circuit"
                                 yAxisLabel={"Position"}
@@ -258,10 +293,9 @@ function Comparison() {
                                 yAxisMax={20}
                                 reversed={true}
                                 tooltipLabel="Position"
-                            ></ScatterChartContainer>}
+                            />}
                     </>}>
             </ComparisonContainer>
-
         </>
     )
 }

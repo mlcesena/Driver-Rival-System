@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import "../css/main.css"
 import "../css/PageCard.css"
-function PageCard({ title = "Null", description = "", imageList = [""], elementList = [""], loop = false }) {
+import { NavLink } from "react-router-dom";
+function PageCard({ title = "Null", description = "", imageList = [""], elementList = [""], loop = false, page = "" }) {
     const [activeImage, setActiveImage] = useState("");
     const [activeElement, setActiveElement] = useState("");
     const [activeIdx, setActiveIdx] = useState(0);
@@ -63,11 +64,14 @@ function PageCard({ title = "Null", description = "", imageList = [""], elementL
         }
     }
 
-    return (<div className="page-card-wrapper">
+    return (<div className="page-card-wrapper"
+    // onMouseEnter={() => (!running ? setRunning(true) : null)}
+    // onMouseLeave={() => (running ? setRunning(false) : null)}
+    >
         <div className="page-card">
             <h1>{title}</h1>
             {loop && activeImage !== "" ?
-                <div className="page-card-image" ref={imageRef} style={{ "--active-content": `"${activeElement}"` }}>
+                <div className="page-card-image" ref={imageRef} style={{ "--active-content": `"${activeElement ?? ""}"` }}>
                     <img src={activeImage}></img>
                 </div>
                 :
@@ -77,12 +81,15 @@ function PageCard({ title = "Null", description = "", imageList = [""], elementL
             }
             <div className="page-card-columns">
                 <p>{description}</p>
-                <button className="button">
-                    <svg width="32" height="16" viewBox="0 0 48 25">
-                        <path d="M32 4 L44 13 L32 22" stroke="white" strokeWidth="5px" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-                        <line x1={2} x2={40} y1={13} y2={13} stroke="white" strokeWidth="5px" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-                    </svg>
-                </button>
+                <NavLink to={`/${page}`}>
+                    <button className="button">
+                        <svg width="32" height="16" viewBox="0 0 48 25">
+                            <path d="M32 4 L44 13 L32 22" stroke="white" strokeWidth="5px" fill="none" strokeLinejoin="round" strokeLinecap="round" />
+                            <line x1={2} x2={40} y1={13} y2={13} stroke="white" strokeWidth="5px" fill="none" strokeLinejoin="round" strokeLinecap="round" />
+                        </svg>
+                    </button>
+                </NavLink>
+
             </div>
 
         </div>

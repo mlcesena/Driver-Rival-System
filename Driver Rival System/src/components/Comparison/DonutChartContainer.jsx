@@ -9,7 +9,6 @@ function DonutChartContainer({ title = "Null" }) {
 
     return (
         <>
-            <DriverLegend></DriverLegend>
             <div className="donut-chart-container">
                 <DonutChart
                     label="Race Completions"

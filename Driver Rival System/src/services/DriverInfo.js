@@ -146,7 +146,7 @@ export async function fetchQualifyingResults() {
 export async function fetchSprintRaceResults() {
     try {
         const response = await fetch("http://localhost:3001/api/sprint_race_results/");
-        if (!response.ok) throw new Error("Failed to fetch drivers");
+        if (!response.ok) throw new Error("Failed to fetch driver sprint race results");
         const data = await response.json();
 
         const resultsMap = new Map();
@@ -171,7 +171,7 @@ export async function fetchSprintRaceResults() {
 export async function fetchSprintQualifyingResults() {
     try {
         const response = await fetch("http://localhost:3001/api/sprint_qualifying_results/");
-        if (!response.ok) throw new Error("Failed to fetch drivers");
+        if (!response.ok) throw new Error("Failed to fetch driver sprint quali results");
         const data = await response.json();
 
         const resultsMap = new Map();

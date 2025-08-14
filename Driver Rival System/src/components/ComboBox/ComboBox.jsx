@@ -5,7 +5,7 @@ function defaultUpdater() {
 
 };
 
-function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater, searchable = false }) {
+function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater, searchable = false, activeIdx = 0 }) {
     const [selectedIdx, setSelectedIdx] = useState(searchable ? -1 : 0);
     const [expanded, setExpanded] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -48,6 +48,12 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
         }
     }, [showOptions])
 
+    useEffect(() => {
+        if (options.length && activeIdx > 0 && activeIdx < options.length) {
+            setSelectedIdx(activeIdx)
+        }
+    }, [activeIdx])
+
     function handleClick() {
         if (!expanded) {
             inputRef.current.focus()
@@ -73,7 +79,7 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
                     <input
                         className="combo-input"
                         ref={inputRef}
-                        value={searchable ? searchQuery : options[selectedIdx].value}
+                        value={searchable ? searchQuery : options[selectedIdx]?.value}
                         onChange={(event) => (setSearchQuery(event.target.value))}
                         disabled={!searchable}
                         autoCapitalize="off"

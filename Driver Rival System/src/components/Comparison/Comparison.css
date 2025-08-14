@@ -202,6 +202,12 @@ p {
   font-family: var(--ff-body);
 }
 
+.dual-bar-char-container {
+  font-family: var(--ff-body);
+  padding-block: 1rem;
+  overflow-x: scroll;
+}
+
 @media (max-width: 32em) {
   .comparison-header {
     flex-direction: column;

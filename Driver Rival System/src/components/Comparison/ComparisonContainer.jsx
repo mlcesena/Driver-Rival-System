@@ -1,8 +1,10 @@
 import ComboBox from "../ComboBox/ComboBox"
 import ToggleButton from "../Controls/Toggle/ToggleButton";
+import DriverLegend from "../DriverLegend";
+import TeamLegend from "../TeamLegend";
 import "./Comparison.css"
 
-function ComparisonContainer({ title = "null", controlType = "", controlProps = {}, description = "", childComponent = null }) {
+function ComparisonContainer({ title = "null", controlType = "", controlProps = {}, description = "", childComponent = null, containerType = null, forceSplit = false }) {
     return (
         <div className="comparison-container">
             <div className="comparison-header">
@@ -11,6 +13,7 @@ function ComparisonContainer({ title = "null", controlType = "", controlProps = 
                 {controlType === "toggle" && <ToggleButton {...controlProps}></ToggleButton>}
             </div>
             <span className="divider"></span>
+            {containerType === "driver" ? <DriverLegend /> : containerType === "team" ? <TeamLegend forceSplit={forceSplit} /> : null}
             {childComponent ? childComponent : <></>}
             <div className="comparison-desc">
                 <p style={{ whiteSpace: 'pre-wrap' }}>{description}</p>

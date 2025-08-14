@@ -101,19 +101,21 @@
   /* box-shadow: 0.25em 0.25em 0 0 rgba(0, 0, 0, 0.25); */
 }
 
-.driver-img-container {
+.card-img-container {
   --racing-stripe-clr: var(--clr-neutral-100);
   display: flex;
   height: 100%;
-  width: 100%;
+  width: calc(100% + 2rem);
   margin-block: 1rem;
-  padding-inline: -1.5rem;
+  /* padding-inline: -1.5rem; */
   overflow: hidden;
-  justify-content: center;
+  /* justify-content: center; */
+  margin-left: -1rem;
+  margin-right: -1rem;
 }
 
-.driver-img-container::before,
-.driver-img-container::after {
+.card-img-container::before,
+.card-img-container::after {
   content: "";
   width: 100%;
   height: 1.25rem;
@@ -124,26 +126,46 @@
   margin-block: auto;
 }
 
-.driver-img-container::before {
+.card-img-container::before {
   width: 100%;
   margin-right: 0.5rem;
-  margin-left: -2rem;
+  /* margin-left: -2rem; */
 }
-.driver-img-container::after {
+.card-img-container::after {
   width: 100%;
   margin-left: 0.5rem;
-  margin-right: -2rem;
+  /* margin-right: -2rem; */
 }
 
-.driver-img {
+.card-img {
+  aspect-ratio: 1/1;
+  /* background-color: var(--clr-neutral-100); */
+  /* border: var(--clr-neutral-200) solid 8px; */
+  border-radius: 100vh;
+  /* max-height: 300px; */
+  margin: 0.25rem;
+}
+
+.card-img[data-type="driver"] {
   aspect-ratio: 1/1;
   background-color: var(--clr-neutral-100);
   border: var(--clr-neutral-200) solid 8px;
   border-radius: 100vh;
   padding: 1rem;
   max-height: 300px;
-  margin: 0.25rem;
+  /* margin: 0.25rem; */
   filter: saturate(0.7);
+}
+
+.card-img[data-type="team"] {
+  /* aspect-ratio: 1/1; */
+  background-color: var(--clr-neutral-300);
+  border: var(--clr-neutral-200) solid 8px;
+  border-radius: 100vh;
+  /* padding: 1rem; */
+  max-height: 400px;
+  /* max-width: 300px; */
+  /* margin: 0.25rem; */
 }
 
 .driver-card-footer {
