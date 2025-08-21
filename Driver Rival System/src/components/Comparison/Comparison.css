@@ -202,7 +202,7 @@ p {
   font-family: var(--ff-body);
 }
 
-.dual-bar-char-container {
+.bar-chart-container {
   font-family: var(--ff-body);
   padding-block: 1rem;
   overflow-x: scroll;

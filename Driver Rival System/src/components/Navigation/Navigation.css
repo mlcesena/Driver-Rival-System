@@ -3,18 +3,32 @@
   flex-direction: column;
   width: 100%;
   height: fit-content;
-  /* align-items: center; */
-  /* justify-content: center; */
   z-index: 100;
   gap: 1rem;
   margin-bottom: 5rem;
+  margin-top: 1rem;
   filter: none !important;
 }
 
+.nav-row {
+  /* display: flex; */
+  /* flex-direction: column; */
+  display: grid;
+  /* grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr) minmax(
+      300px,
+      1fr
+    ); */
+  grid-template-columns: 1fr 1fr 1fr;
+
+  align-items: center;
+  gap: 1rem;
+}
+
 .nav-header-container {
+  width: 100%;
   display: flex;
   gap: 1rem;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .nav-btn {
@@ -47,7 +61,7 @@
 
 .navbar-links {
   display: flex;
-  gap: 2rem;
+  gap: clamp(1.25rem, 15%, 8rem);
   font-family: var(--ff-body);
   font-size: var(--fs-body);
   overflow: hidden;
@@ -58,16 +72,24 @@
   line-height: 1.1;
   text-decoration: none;
   color: var(--clr-neutral-100);
-  font-size: var(--fs-primary-heading);
+  font-size: var(--fs-sub-heading);
+  margin-inline: auto;
 }
 
 .nav-link {
   color: var(--clr-neutral-100);
   text-decoration: none;
+  transition: color 0.25s ease-in-out;
 }
 
 .nav-link:hover {
   color: var(--clr-accent-400);
+  transition: color 0.25s ease-in-out;
+}
+
+.nav-link:active {
+  /* font-weight: var(--fw-bold); */
+  color: var(--clr-accent-500) !important;
 }
 
 .active-page {
@@ -79,20 +101,31 @@
   color: var(--clr-accent-300) !important;
 }
 
-@media (max-width: 50em) {
+@media (max-width: 59em) {
   .primary-navigation {
     position: relative;
   }
 
+  /* .primary-navigation div {
+    display: flex;
+
+    align-items: start;
+  } */
+
+  .navbar-brand {
+    margin: 0;
+  }
+
   .navbar-links {
     position: absolute;
-    top: 7rem; /* Adjust this value to be just below your divider */
+    top: 7rem;
     left: 0;
     width: 100%;
     z-index: 101;
     padding: 1.5rem 2rem;
     flex-direction: column;
     border-radius: 3rem;
+    gap: 1.5rem;
 
     background: var(--clr-neutral-800);
   }
@@ -102,13 +135,18 @@
     border-radius: 100vh;
     background-color: transparent;
     color: var(--clr-neutral-300);
-    transition: background-color, color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
 
   .nav-link:hover {
     color: var(--clr-neutral-100);
     background-color: var(--clr-neutral-700);
-    transition: background-color, color 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+  }
+
+  .nav-link:active {
+    background-color: var(--clr-neutral-600);
+    transition: all 0.25s ease-in-out;
   }
 
   .navbar-brand {

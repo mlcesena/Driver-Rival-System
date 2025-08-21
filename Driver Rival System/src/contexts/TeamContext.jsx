@@ -1,4 +1,4 @@
-import { fetchTeamInfo, fetchTeamRaceResults, fetchTeamSprintResults } from "../services/TeamInfo";
+import { fetchTeamInfo, fetchTeamRaceResults, fetchTeamSeasonResults, fetchTeamSprintResults } from "../services/TeamInfo";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useGlobalStateContext } from "./GlobalStateContext";
 import { convertTeamColors } from "../services/GlobalServices";
@@ -10,6 +10,7 @@ export const TeamProvider = ({ children }) => {
     const [teams, setTeams] = useState(new Map());
     const [raceResults, setRaceResults] = useState(new Map());
     const [sprintResults, setSprintResults] = useState(new Map());
+    const [seasonResults, setSeasonResults] = useState(new Map());
     const [firstTeamName, setFirstTeamName] = useState("");
     const [secondTeamName, setSecondTeamName] = useState("");
     const [team1Primary, setTeam1Primary] = useState("#808080");
@@ -48,6 +49,9 @@ export const TeamProvider = ({ children }) => {
             const sprintData = await fetchTeamSprintResults();
             setSprintResults(sprintData);
 
+            const seasonData = await fetchTeamSeasonResults();
+            setSeasonResults(seasonData);
+
         } catch (error) {
             console.log("Failed to get team info", error);
         }
@@ -64,7 +68,8 @@ export const TeamProvider = ({ children }) => {
         team2Primary,
         team2Accent,
         raceResults,
-        sprintResults
+        sprintResults,
+        seasonResults
     };
 
     return (

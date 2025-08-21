@@ -21,11 +21,23 @@ function StackedBarChartContainer({ xAxisLabel = "X Axis", yAxisLabel = "Y Axis"
         );
     };
 
+    const CustomizedYAxisTick = (props) => {
+        const { x, y, payload } = props;
+
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text x={0} y={0} textAnchor="end" fill="#aaaaaa">
+                    {payload.value}
+                </text>
+            </g>
+        );
+    };
+
     function CustomTooltip({ payload, active }) {
         if (active) {
             return (
                 <div className="scatter-tooltip">
-                    <h1>{trackMap.get(payload[0].value)}</h1>
+                    <h1>{trackMap.get(payload[0]?.value)}</h1>
                     <div className="divider"></div>
                     <h2>{firstTeamName !== "" ? teams.get(firstTeamName).name : "No Team"}</h2>
                     <p>{`${tooltipLabel}: ${payload[0]?.value ?? "None"}`}</p>
@@ -41,7 +53,7 @@ function StackedBarChartContainer({ xAxisLabel = "X Axis", yAxisLabel = "Y Axis"
 
     return (
         <>
-            <div className="dual-bar-char-container">
+            <div className="bar-chart-container">
                 <ResponsiveContainer width="100%" height={600} minWidth={450} style={{ marginBottom: "2rem" }}>
                     <BarChart
                         data={teamData}
@@ -75,6 +87,7 @@ function StackedBarChartContainer({ xAxisLabel = "X Axis", yAxisLabel = "Y Axis"
                             tickMargin={10}
                             tickCount={yAxisMax}
                             label={{ value: yAxisLabel, position: "insideLeft", angle: -90 }}
+                            tick={<CustomizedYAxisTick />}
                         />
                         <Tooltip cursor={{ strokeDasharray: '3 3', fill: "rgba(100, 100, 100, 0.15)" }} content={<CustomTooltip />} />
                         <Bar dataKey="ps1" fill={team1Primary} />

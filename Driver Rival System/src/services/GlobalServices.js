@@ -42,16 +42,20 @@ export function convertCountryCode(alpha3) {
             return "nz";
         case "ESP":
             return "es";
+        case "QAT":
+            return "qa";
         case "SWE":
             return "ch";
         case "SGP":
-            return "SG";
+            return "sg";
         case "THA":
             return "th";
         case "GBR":
             return "gb";
         case "USA":
             return "us";
+        case "ARE":
+            return "ae";
         default:
             return "";
     }
@@ -94,4 +98,16 @@ export function convertTeamColors(teamName) {
         default:
             return ["#FFFFFF", "#FFFFFF"];
     }
+}
+
+export function isDark(color) {
+    let c = color.substring(1);      // strip #
+    let rgb = parseInt(c, 16);   // convert rrggbb to decimal
+    let r = (rgb >> 16) & 0xff;  // extract red
+    let g = (rgb >> 8) & 0xff;  // extract green
+    let b = (rgb >> 0) & 0xff;  // extract blue
+
+    let luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+    return (luma < 50);
 }

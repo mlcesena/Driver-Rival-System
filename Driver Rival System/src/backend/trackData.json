@@ -1,0 +1,458 @@
+[
+  {
+    "circuit": "Albert Park Circuit",
+    "name": "Melbourne",
+    "location": "Melbourne, Australia",
+    "firstHeld": 1996,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.278, "mi": 3.279 },
+    "lapCount": 58,
+    "totalDistance": { "km": 306.124, "mi": 190.217 },
+    "corners": 16,
+    "fastestLap": {
+      "time": "1:19.813",
+      "driver": "Charles Leclerc",
+      "year": 2024
+    },
+    "trackType": "Street Circuit",
+    "image": "melbourne.svg",
+    "countryCode": "AUS"
+  },
+  {
+    "circuit": "Shanghai International Circuit",
+    "name": "Shanghai",
+    "location": "Shanghai, China",
+    "firstHeld": 2004,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.451, "mi": 3.387 },
+    "lapCount": 56,
+    "totalDistance": { "km": 305.066, "mi": 189.7 },
+    "corners": 16,
+    "fastestLap": {
+      "time": "1:32.238",
+      "driver": "Michael Schumacher",
+      "year": 2004
+    },
+    "trackType": "Permanent Circuit",
+    "image": "shanghai.svg",
+    "countryCode": "CHN"
+  },
+  {
+    "circuit": "Suzuka Circuit",
+    "name": "Suzuka",
+    "location": "Suzuka, Japan",
+    "firstHeld": 1987,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.807, "mi": 3.608 },
+    "lapCount": 53,
+    "totalDistance": { "km": 307.471, "mi": 191.054 },
+    "corners": 18,
+    "fastestLap": {
+      "time": "1:30.965",
+      "driver": "Andrea Kimi Antonelli",
+      "year": 2025
+    },
+    "trackType": "Permanent Circuit",
+    "image": "suzuka.svg",
+    "countryCode": "JPN"
+  },
+  {
+    "circuit": "Bahrain International Circuit",
+    "name": "Bahrain",
+    "location": "Sakhir, Bahrain",
+    "firstHeld": 2004,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.412, "mi": 3.363 },
+    "lapCount": 57,
+    "totalDistance": { "km": 308.238, "mi": 191.531 },
+    "corners": 15,
+    "fastestLap": {
+      "time": "1:31.447",
+      "driver": "Pedro de la Rosa",
+      "year": 2005
+    },
+    "trackType": "Permanent Circuit",
+    "image": "sakhir.svg",
+    "countryCode": "BHR"
+  },
+  {
+    "circuit": "Jeddah Corniche Circuit",
+    "name": "Jeddah",
+    "location": "Jeddah, Saudi Arabia",
+    "firstHeld": 2021,
+    "latestYear": 2025,
+    "lapDistance": { "km": 6.174, "mi": 3.836 },
+    "lapCount": 50,
+    "totalDistance": { "km": 308.7, "mi": 191.805 },
+    "corners": 27,
+    "fastestLap": {
+      "time": "1:30.734",
+      "driver": "Lewis Hamilton",
+      "year": 2021
+    },
+    "trackType": "Street Circuit",
+    "image": "jeddah.svg",
+    "countryCode": "KSA"
+  },
+  {
+    "circuit": "Miami International Autodrome",
+    "name": "Miami",
+    "location": "Miami, USA",
+    "firstHeld": 2022,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.412, "mi": 3.363 },
+    "lapCount": 57,
+    "totalDistance": { "km": 308.326, "mi": 191.584 },
+    "corners": 19,
+    "fastestLap": {
+      "time": "1:29.708",
+      "driver": "Max Verstappen",
+      "year": 2023
+    },
+    "trackType": "Street Circuit",
+    "image": "miami.svg",
+    "countryCode": "USA"
+  },
+  {
+    "circuit": "Imola (Autodromo Enzo e Dino Ferrari)",
+    "name": "Imola",
+    "location": "Imola, Italy",
+    "firstHeld": 1980,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.909, "mi": 3.05 },
+    "lapCount": 63,
+    "totalDistance": { "km": 309.949, "mi": 192.034 },
+    "corners": 18,
+    "fastestLap": {
+      "time": "1:15.484",
+      "driver": "Lewis Hamilton",
+      "year": 2020
+    },
+    "trackType": "Permanent Circuit",
+    "image": "imola.svg",
+    "countryCode": "ITA"
+  },
+  {
+    "circuit": "Circuit de Monaco",
+    "name": "Monaco",
+    "location": "Monte Carlo, Monaco",
+    "firstHeld": 1950,
+    "latestYear": 2025,
+    "lapDistance": { "km": 3.337, "mi": 2.073 },
+    "lapCount": 78,
+    "totalDistance": { "km": 260.286, "mi": 161.772 },
+    "corners": 19,
+    "fastestLap": {
+      "time": "1:12.909",
+      "driver": "Lewis Hamilton",
+      "year": 2021
+    },
+    "trackType": "Street Circuit",
+    "image": "monaco.svg",
+    "countryCode": "MCO"
+  },
+  {
+    "circuit": "Circuit de Barcelona-Catalunya",
+    "name": "Barcelona",
+    "location": "Barcelona, Spain",
+    "firstHeld": 1991,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.657, "mi": 2.905 },
+    "lapCount": 66,
+    "totalDistance": { "km": 307.236, "mi": 191.646 },
+    "corners": 16,
+    "fastestLap": {
+      "time": "1:15.743",
+      "driver": "Oscar Piastri",
+      "year": 2025
+    },
+    "trackType": "Permanent Circuit",
+    "image": "barcelona.svg",
+    "countryCode": "ESP"
+  },
+  {
+    "circuit": "Circuit Gilles Villeneuve",
+    "name": "Montreal",
+    "location": "Montreal, Canada",
+    "firstHeld": 1978,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.361, "mi": 2.709 },
+    "lapCount": 70,
+    "totalDistance": { "km": 305.27, "mi": 189.694 },
+    "corners": 15,
+    "fastestLap": {
+      "time": "1:13.078",
+      "driver": "Valtteri Bottas",
+      "year": 2019
+    },
+    "trackType": "Semi-Street Circuit",
+    "image": "montreal.svg",
+    "countryCode": "CAN"
+  },
+  {
+    "circuit": "Red Bull Ring",
+    "name": "Spielberg",
+    "location": "Spielberg, Austria",
+    "firstHeld": 1970,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.318, "mi": 2.683 },
+    "lapCount": 71,
+    "totalDistance": { "km": 306.452, "mi": 190.42 },
+    "corners": 8,
+    "fastestLap": {
+      "time": "1:05.609",
+      "driver": "Carlos Sainz Jr.",
+      "year": 2020
+    },
+    "trackType": "Permanent Circuit",
+    "image": "spielberg.svg",
+    "countryCode": "AUT"
+  },
+  {
+    "circuit": "Silverstone Circuit",
+    "name": "Silverstone",
+    "location": "Towcester, UK",
+    "firstHeld": 1950,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.891, "mi": 3.66 },
+    "lapCount": 52,
+    "totalDistance": { "km": 306.198, "mi": 190.263 },
+    "corners": 18,
+    "fastestLap": {
+      "time": "1:27.097",
+      "driver": "Max Verstappen",
+      "year": 2020
+    },
+    "trackType": "Permanent Circuit",
+    "image": "silverstone.svg",
+    "countryCode": "GBR"
+  },
+  {
+    "circuit": "Circuit de Spa-Francorchamps",
+    "name": "Spa-Francorchamps",
+    "location": "Stavelot, Belgium",
+    "firstHeld": 1950,
+    "latestYear": 2025,
+    "lapDistance": { "km": 7.004, "mi": 4.352 },
+    "lapCount": 44,
+    "totalDistance": { "km": 308.052, "mi": 191.415 },
+    "corners": 21,
+    "fastestLap": {
+      "time": "1:44.861",
+      "driver": "Kimi Antonelli",
+      "year": 2025
+    },
+    "trackType": "Permanent Circuit",
+    "image": "spa.svg",
+    "countryCode": "BEL"
+  },
+  {
+    "circuit": "Hungaroring",
+    "name": "Hungaroring",
+    "location": "Budapest, Hungary",
+    "firstHeld": 1986,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.381, "mi": 2.722 },
+    "lapCount": 70,
+    "totalDistance": { "km": 306.63, "mi": 190.531 },
+    "corners": 16,
+    "fastestLap": {
+      "time": "1:16.627",
+      "driver": "Lewis Hamilton",
+      "year": 2020
+    },
+    "trackType": "Permanent Circuit",
+    "image": "hungary.svg",
+    "countryCode": "HUN"
+  },
+  {
+    "circuit": "Circuit Zandvoort",
+    "name": "Zandvoort",
+    "location": "Zandvoort, Netherlands",
+    "firstHeld": 1952,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.259, "mi": 2.646 },
+    "lapCount": 72,
+    "totalDistance": { "km": 306.648, "mi": 190.504 },
+    "corners": 14,
+    "fastestLap": {
+      "time": "1:11.097",
+      "driver": "Lewis Hamilton",
+      "year": 2021
+    },
+    "trackType": "Permanent Circuit",
+    "image": "zandvoort.svg",
+    "countryCode": "NLD"
+  },
+  {
+    "circuit": "Autodromo Nazionale Monza",
+    "name": "Monza",
+    "location": "Monza, Italy",
+    "firstHeld": 1950,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.793, "mi": 3.6 },
+    "lapCount": 53,
+    "totalDistance": { "km": 306.72, "mi": 190.586 },
+    "corners": 10,
+    "fastestLap": {
+      "time": "1:21.046",
+      "driver": "Rubens Barrichello",
+      "year": 2004
+    },
+    "trackType": "Permanent Circuit",
+    "image": "monza.svg",
+    "countryCode": "ITA"
+  },
+  {
+    "circuit": "Baku City Circuit",
+    "name": "Baku",
+    "location": "Baku, Azerbaijan",
+    "firstHeld": 2016,
+    "latestYear": 2025,
+    "lapDistance": { "km": 6.003, "mi": 3.73 },
+    "lapCount": 51,
+    "totalDistance": { "km": 306.049, "mi": 190.17 },
+    "corners": 20,
+    "fastestLap": {
+      "time": "1:43.009",
+      "driver": "Charles Leclerc",
+      "year": 2019
+    },
+    "trackType": "Street Circuit",
+    "image": "baku.svg",
+    "countryCode": "AZE"
+  },
+  {
+    "circuit": "Marina Bay Street Circuit",
+    "name": "Singapore",
+    "location": "Singapore",
+    "firstHeld": 2008,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.063, "mi": 3.146 },
+    "lapCount": 61,
+    "totalDistance": { "km": 308.706, "mi": 191.805 },
+    "corners": 19,
+    "fastestLap": {
+      "time": "1:34.486",
+      "driver": "Daniel Ricciardo",
+      "year": 2024
+    },
+    "trackType": "Street Circuit",
+    "image": "singapore.svg",
+    "countryCode": "SGP"
+  },
+  {
+    "circuit": "Circuit of the Americas",
+    "name": "Austin",
+    "location": "Austin, USA",
+    "firstHeld": 2012,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.513, "mi": 3.426 },
+    "lapCount": 56,
+    "totalDistance": { "km": 308.405, "mi": 191.646 },
+    "corners": 20,
+    "fastestLap": {
+      "time": "1:36.169",
+      "driver": "Charles Leclerc",
+      "year": 2019
+    },
+    "trackType": "Permanent Circuit",
+    "image": "austin.svg",
+    "countryCode": "USA"
+  },
+  {
+    "circuit": "Autódromo Hermanos Rodríguez",
+    "name": "Mexico City",
+    "location": "Mexico City, Mexico",
+    "firstHeld": 1963,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.304, "mi": 2.674 },
+    "lapCount": 71,
+    "totalDistance": { "km": 305.354, "mi": 189.738 },
+    "corners": 17,
+    "fastestLap": {
+      "time": "1:18.336",
+      "driver": "Charles Leclerc",
+      "year": null
+    },
+    "trackType": "Permanent Circuit",
+    "image": "mexico.svg",
+    "countryCode": "MEX"
+  },
+  {
+    "circuit": "Autódromo José Carlos Pace",
+    "name": "São Paulo",
+    "location": "São Paulo, Brazil",
+    "firstHeld": 1973,
+    "latestYear": 2025,
+    "lapDistance": { "km": 4.309, "mi": 2.677 },
+    "lapCount": 71,
+    "totalDistance": { "km": 305.879, "mi": 190.064 },
+    "corners": 15,
+    "fastestLap": {
+      "time": "1:10.540",
+      "driver": "Lewis Hamilton",
+      "year": 2018
+    },
+    "trackType": "Permanent Circuit",
+    "image": "brazil.svg",
+    "countryCode": "BRA"
+  },
+  {
+    "circuit": "Las Vegas Street Circuit",
+    "name": "Las Vegas",
+    "location": "Las Vegas, USA",
+    "firstHeld": 2023,
+    "latestYear": 2025,
+    "lapDistance": { "km": 6.201, "mi": 3.853 },
+    "lapCount": 50,
+    "totalDistance": { "km": 310.05, "mi": 192.656 },
+    "corners": 17,
+    "fastestLap": {
+      "time": "1:35.490",
+      "driver": "George Russell",
+      "year": 2023
+    },
+    "trackType": "Street Circuit",
+    "image": "lasvegas.svg",
+    "countryCode": "USA"
+  },
+  {
+    "circuit": "Lusail International Circuit",
+    "name": "Qatar",
+    "location": "Doha, Qatar",
+    "firstHeld": 2021,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.38, "mi": 3.343 },
+    "lapCount": 57,
+    "totalDistance": { "km": 308.611, "mi": 191.762 },
+    "corners": 22,
+    "fastestLap": {
+      "time": "1:24.319",
+      "driver": "Max Verstappen",
+      "year": 2023
+    },
+    "trackType": "Permanent Circuit",
+    "image": "qatar.svg",
+    "countryCode": "QAT"
+  },
+  {
+    "circuit": "Yas Marina Circuit",
+    "name": "Abu Dhabi",
+    "location": "Abu Dhabi, UAE",
+    "firstHeld": 2009,
+    "latestYear": 2025,
+    "lapDistance": { "km": 5.281, "mi": 3.281 },
+    "lapCount": 58,
+    "totalDistance": { "km": 306.183, "mi": 190.253 },
+    "corners": 21,
+    "fastestLap": {
+      "time": "1:26.103",
+      "driver": "Max Verstappen",
+      "year": 2021
+    },
+    "trackType": "Permanent Circuit",
+    "image": "abudhabi.svg",
+    "countryCode": "ARE"
+  }
+]

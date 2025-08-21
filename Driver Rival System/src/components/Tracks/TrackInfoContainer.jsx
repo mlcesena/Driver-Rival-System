@@ -9,11 +9,11 @@ function TrackInfoContainer({ data = [] }) {
     const itemRef = useRef();
     const infoLabels = ["Location:",
         "First Held:",
-        "Appearances:",
+        "Last Appearance:",
         "Lap Distance:",
         "Lap Count:",
         "Total Distance:",
-        "Elevation:",
+        // "Elevation:",
         "Corners:",
         "Fastest Lap:",
         "Track Type"]
@@ -23,7 +23,7 @@ function TrackInfoContainer({ data = [] }) {
         "timer",
         "laps",
         "route",
-        "elevation",
+        // "elevation",
         "turn_sharp_right",
         "bolt",
         "stadium"]

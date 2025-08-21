@@ -61,31 +61,41 @@ function Home() {
 
     return (
         loading ? <LoadScreen></LoadScreen> :
-            <div className="page-card-container">
-                <PageCard
-                    title="Drivers"
-                    description="Compare active Formula 1 drivers in a head-to-head matchup. View their performance across each race weekend, current standings, and an in-depth analysis about the entire season as it unfolds."
-                    imageList={driverImages}
-                    elementList={driverNumbers}
-                    loop={true}
-                    page="drivers" />
-                <PageCard
-                    title="Teams"
-                    description="View all of the active Formula 1 constructors. Look into the history behind the distinct teams and at the personnel that makes them up. Compare key metrics from the current season and see where they stack up."
-                    imageList={teamImages}
-                    loop={true}
-                    page="teams" />
-                <PageCard
-                    title="Tracks"
-                    description="Explore each of the unique circuits on the Formula 1 calendar. All of the tracks offer a variety of challenges for drivers and require a tailored approach."
-                    imageList={trackImages}
-                    loop={true}
-                    page="tracks" />
-                <PageCard
+            <>
+                <div style={{ textAlign: "center", marginBottom: "4rem", maxWidth: "800px", marginInline: "auto" }}>
+                    <h1 className="fs-secondary-heading" style={{ marginBottom: "1rem" }}>
+                        Experience Formula 1 Beyond the Track
+                    </h1>
+                    <p>
+                        Compare drivers and teams, explore detailed circuit profiles, and dive into interactive stats and visualizations. From lap records to championship overviews, discover the data and stories that drive Formula 1
+                    </p>
+                </div>
+                <div className="page-card-container">
+                    <PageCard
+                        title="Drivers"
+                        description="Compare active Formula 1 drivers in a head-to-head matchup. View their performance across each race weekend, current standings, and an in-depth analysis about the entire season as it unfolds."
+                        imageList={driverImages}
+                        elementList={driverNumbers}
+                        loop={true}
+                        page="drivers" />
+                    <PageCard
+                        title="Teams"
+                        description="View all of the active Formula 1 constructors. Look into the history behind the distinct teams and at the personnel that makes them up. Compare key metrics from the current season and see where they stack up."
+                        imageList={teamImages}
+                        loop={true}
+                        page="teams" />
+                    <PageCard
+                        title="Tracks"
+                        description="Explore each of the unique circuits on the Formula 1 calendar. All of the tracks offer a variety of challenges for drivers and require a tailored approach."
+                        imageList={trackImages}
+                        loop={true}
+                        page="tracks" />
+                    {/* <PageCard
                     title="Information"
                     description="Learn the basics of Formula 1 and dive deep into the technical terminology. Get up to date on the rules, tire information, tracks details, and more."
-                    page="info" />
-            </div>
+                    page="info" /> */}
+                </div>
+            </>
     );
 }
 

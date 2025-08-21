@@ -40,19 +40,28 @@ const data = [
         ps2: 4300,
     },
 ];
-function LineChartContainer({ team1Data = [], team2Data = [], tooltipLabel = "Value" }) {
+function LineChartContainer({ xAxisLabel = "X Axis", yAxisLabel = "Y Axis", teamData = [], yAxisMin = 0, yAxisMax = 100, tooltipLabel = "Value", reversed = false, dataOption }) {
     const { teams, firstTeamName, secondTeamName, team1Primary, team2Primary } = useTeamContext();
-    const trackMap = new Map(team1Data.map(d => [d.x, d.track]));
 
     const CustomizedXAxisTick = (props) => {
         const { x, y, payload } = props;
 
-        const trackName = trackMap.get(payload.value) || "";
-
         return (
             <g transform={`translate(${x},${y})`}>
                 <text x={0} y={0} textAnchor="end" fill="#aaaaaa" transform="rotate(-55)">
-                    {trackName}
+                    {payload.value}
+                </text>
+            </g>
+        );
+    };
+
+    const CustomizedYAxisTick = (props) => {
+        const { x, y, payload } = props;
+
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text x={0} y={0} textAnchor="end" fill="#aaaaaa">
+                    {payload.value}
                 </text>
             </g>
         );
@@ -62,13 +71,13 @@ function LineChartContainer({ team1Data = [], team2Data = [], tooltipLabel = "Va
         if (active) {
             return (
                 <div className="scatter-tooltip">
-                    <h1>{trackMap.get(payload[0].value)}</h1>
+                    <h1>{payload[0].payload.track}</h1>
                     <div className="divider"></div>
                     <h2>{firstTeamName !== "" ? teams.get(firstTeamName).name : "No Team"}</h2>
-                    <p>{`${tooltipLabel}: ${payload[1]?.value ?? "None"}`}</p>
+                    <p>{`${tooltipLabel}: ${payload[0]?.value ?? "None"}`}</p>
 
                     <h2>{secondTeamName !== "" ? teams.get(secondTeamName).name : "No Team"}</h2>
-                    <p>{`${tooltipLabel}: ${payload[3]?.value ?? "None"}`}</p>
+                    <p>{`${tooltipLabel}: ${payload[1]?.value ?? "None"}`}</p>
                 </div>
             );
         }
@@ -78,27 +87,46 @@ function LineChartContainer({ team1Data = [], team2Data = [], tooltipLabel = "Va
 
     return (
         <>
-            <div className="stacked-bar-char-container">
+            <div className="bar-chart-container">
                 <ResponsiveContainer width="100%" height={600} minWidth={450} style={{ marginBottom: "2rem" }}>
                     <LineChart
-                        width={500}
-                        height={300}
-                        data={data}
+                        data={teamData}
                         margin={{
-                            top: 20,
-                            right: 30,
+                            top: 15,
+                            right: 20,
+                            bottom: 100,
                             left: 20,
-                            bottom: 5,
                         }}
                     >
                         <CartesianGrid stroke="#3e3e3e" strokeDasharray={"3 3"} />
                         <XAxis
+                            type="category"
                             dataKey="track"
-                            tick={CustomizedXAxisTick} />
-                        <YAxis />
+                            ticks={teamData.map(d => d.track)}
+                            name={xAxisLabel}
+                            unit=""
+                            minTickGap={100}
+                            tickMargin={15}
+                            interval={0}
+                            domain={[0, teamData.length - 1]}
+                            label={{ value: xAxisLabel, position: "insideBottom", dy: 100 }}
+                            tick={<CustomizedXAxisTick />}
+                        />
+                        <YAxis
+                            type='number'
+                            domain={[yAxisMin, yAxisMax]}
+                            allowDataOverflow={false}
+                            name={yAxisLabel}
+                            unit=""
+                            reversed={reversed}
+                            tickMargin={10}
+                            tickCount={yAxisMax}
+                            label={{ value: yAxisLabel, position: "insideLeft", angle: -90 }}
+                            tick={<CustomizedYAxisTick />}
+                        />
                         <Tooltip cursor={{ strokeDasharray: '3 3', fill: "rgba(100, 100, 100, 0.15)" }} content={<CustomTooltip />} />
-                        <Line dataKey="ps1" stroke={team1Primary} strokeWidth={4} type='monotone' />
-                        <Line dataKey="ps2" stroke={team2Primary} strokeWidth={4} type='monotone' />
+                        <Line dataKey={`t1v${dataOption}`} stroke={team1Primary} strokeWidth={4} type='monotone' />
+                        <Line dataKey={`t2v${dataOption}`} stroke={team2Primary} strokeWidth={4} type='monotone' />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

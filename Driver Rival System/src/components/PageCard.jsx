@@ -34,13 +34,15 @@ function PageCard({ title = "Null", description = "", imageList = [""], elementL
                             { duration: 750, easing: "ease-in-out" }
                         );
                         setTimeout(() => {
-                            imageRef.current.animate(
-                                [
-                                    { opacity: "1", },
-                                    { opacity: "0", }
-                                ],
-                                { duration: 750, easing: "ease-in-out" }
-                            );
+                            if (imageRef.current) {
+                                imageRef.current.animate(
+                                    [
+                                        { opacity: "1", },
+                                        { opacity: "0", }
+                                    ],
+                                    { duration: 750, easing: "ease-in-out" }
+                                );
+                            }
                         }, 3250)
                     }
                     incrementActive();

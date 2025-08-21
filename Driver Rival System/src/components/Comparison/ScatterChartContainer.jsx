@@ -101,7 +101,7 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
                             stroke={"#e0e0e0"}
                             strokeWidth={2}
                             line={{ strokeWidth: 5 }}
-                            shape={<Dot r={8} />} />
+                            shape={<Dot fill={team1Primary} r={8} />} />
                         <Scatter
                             name="Driver 2"
                             clip="false"
@@ -110,7 +110,7 @@ function ScatterChartContainer({ title = "Null", xAxisLabel = "X Axis", yAxisLab
                             stroke={"#e0e0e0"}
                             strokeWidth={2}
                             line={{ strokeWidth: 5 }}
-                            shape={<Dot fill="url(#scatterGradient)" r={8} />} />
+                            shape={<Dot fill={team1Primary === team2Primary ? "url(#scatterGradient)" : team2Primary} r={8} />} />
                     </ScatterChart>
                 </ResponsiveContainer>
             </div>

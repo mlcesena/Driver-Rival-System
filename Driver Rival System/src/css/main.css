@@ -19,6 +19,7 @@
 
   --clr-accent-300: #e2c77d;
   --clr-accent-400: #d1b66a;
+  --clr-accent-500: #c5ac65;
 
   --ff-primary: "Racing Sans One", sans-serif;
   --ff-body: "Urbanist", sans-serif;
@@ -388,6 +389,11 @@ h1 {
 
 .button:hover {
   background-color: var(--clr-accent-300);
+  transition: background-color 0.25s ease-in-out;
+}
+
+.button:active {
+  background-color: var(--clr-accent-500);
   transition: background-color 0.25s ease-in-out;
 }
 

@@ -123,6 +123,10 @@ p {
   list-style: none;
 }
 
+.track-nav-options li {
+  margin-block: 0.5rem;
+}
+
 .track-nav-options input[type="radio"] {
   display: none;
 }
@@ -147,8 +151,9 @@ p {
 
 .track-nav-container {
   display: flex;
-  height: 600px;
-  align-items: center;
+  /* height: 600px; */
+  /* align-items: center; */
+  /* overflow-y: hidden; */
   gap: 2rem;
 }
 

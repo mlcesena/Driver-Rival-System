@@ -66,6 +66,31 @@ export async function fetchTeamSprintResults() {
     }
 }
 
+export async function fetchTeamSeasonResults() {
+    try {
+        const response = await fetch("http://localhost:3001/api/team_season_results/");
+        if (!response.ok) throw new Error("Failed to fetch team season results");
+        const data = await response.json();
+
+        const resultsMap = new Map();
+
+        for (const [circuit, team] of Object.entries(data)) {
+            const teamMap = new Map();
+
+            for (const [teamName, data] of Object.entries(team)) {
+                teamMap.set(teamName, data);
+            }
+
+            resultsMap.set(circuit, teamMap);
+        }
+
+        return resultsMap;
+
+    } catch (error) {
+        console.error("Error fetching team sprint results:", error);
+    }
+}
+
 function setTeamImage(name) {
     switch (name) {
         case "Alpine":

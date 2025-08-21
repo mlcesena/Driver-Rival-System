@@ -34,10 +34,7 @@ function TrackNav({ options = [], updaterFunction }) {
     }, [activeIdx])
     return (
         <>
-
             <div className="track-nav-container">
-
-
                 {windowWidth <= breakpoint ?
                     <ComboxBox
                         title="Track Name"

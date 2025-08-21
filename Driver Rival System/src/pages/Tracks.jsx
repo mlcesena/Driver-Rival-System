@@ -32,7 +32,7 @@ function Tracks() {
         `${trackData.get(activeTrack).lap_distance_mi} mi / ${trackData.get(activeTrack).lap_distance_km} km`,
         trackData.get(activeTrack).lap_count,
         `${trackData.get(activeTrack).race_distance_mi} mi / ${trackData.get(activeTrack).race_distance_km} km`,
-        `${trackData.get(activeTrack).elevation_imperial} ft / ${trackData.get(activeTrack).elevation_meteric} m`,
+        // `${trackData.get(activeTrack).elevation_imperial} ft / ${trackData.get(activeTrack).elevation_meteric} m`,
         trackData.get(activeTrack).corners,
         `${trackData.get(activeTrack).fastest_lap_time} s (${trackData.get(activeTrack).fastest_lap_year}) ${trackData.get(activeTrack).fastest_lap_holder}`,
         trackData.get(activeTrack).track_type,
@@ -54,5 +54,3 @@ function Tracks() {
 }
 
 export default Tracks;
-
-// url("https://media.formula1.com/image/upload/c_lfill,w_3392/v1740000000/common/f1/2025/track/2025trackmonzablackoutline.svg");
