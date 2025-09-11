@@ -8,10 +8,14 @@ import '../App.css'
 import ComboxBox from "../components/ComboBox/ComboBox";
 import EmptyCard from "../components/Cards/EmptyCard";
 import LoadScreen from "../components/LoadScreen/LoadScreen";
+import LoadingError from "./LoadingError";
 
 function Drivers() {
-    const { loading } = useGlobalStateContext();
-    const { drivers,
+    // const { loading } = useGlobalStateContext();
+    const {
+        loading,
+        error,
+        drivers,
         firstDriverNumber,
         setFirstDriverNumber,
         secondDriverNumber,
@@ -23,11 +27,13 @@ function Drivers() {
 
     const handleUpdatedDriver1 = (idx) => {
         // FIX ME: find better solution for getting driver number
-        setFirstDriverNumber(drivers.keys().toArray()[idx]);
+        // setFirstDriverNumber(drivers.keys().toArray()[idx]);
+        setFirstDriverNumber(idx);
     };
 
     const handleUpdatedDriver2 = (idx) => {
-        setSecondDriverNumber(drivers.keys().toArray()[idx]);
+        // setSecondDriverNumber(drivers.keys().toArray()[idx]);
+        setSecondDriverNumber(idx);
     };
 
     useEffect(() => {
@@ -35,60 +41,65 @@ function Drivers() {
     }, [drivers])
 
     return (
-        loading ? <LoadScreen></LoadScreen> :
-            <>
-                <div className="driver-container">
-                    {drivers.size > 0 ? <>
-                        <div className="driver-wrapper">
-                            <ComboxBox
-                                title="Driver Selection"
-                                options={Array.from(drivers.keys()).map((number, idx) => (
-                                    {
-                                        id: idx,
-                                        value: `${drivers.get(number).full_name}`,
-                                    }))}
-                                updaterFunction={handleUpdatedDriver1}
-                                searchable={true}>
-                            </ComboxBox>
-                            {firstDriverNumber > -1 ? <DriverCard
-                                firstName={drivers.get(firstDriverNumber).first_name}
-                                lastName={drivers.get(firstDriverNumber).last_name}
-                                team={drivers.get(firstDriverNumber).team}
-                                number={drivers.get(firstDriverNumber).driver_number}
-                                acronym={drivers.get(firstDriverNumber).acronym}
-                                image={drivers.get(firstDriverNumber).image}
-                                primaryColor={team1Primary}
-                                accentColor={team1Accent}
-                            ></DriverCard> : <EmptyCard></EmptyCard>}
-                        </div>
+        loading ? <LoadScreen /> :
 
-                        <div className="driver-wrapper align-right">
-                            <ComboxBox
-                                title="Driver Selection"
-                                options={Array.from(drivers.keys()).map((number, idx) => (
-                                    {
-                                        id: idx,
-                                        value: `${drivers.get(number).full_name}`
-                                    }))}
-                                updaterFunction={handleUpdatedDriver2}
-                                searchable={true}>
-                            </ComboxBox>
-                            {secondDriverNumber > -1 ? <DriverCard
-                                firstName={drivers.get(secondDriverNumber).first_name}
-                                lastName={drivers.get(secondDriverNumber).last_name}
-                                team={drivers.get(secondDriverNumber).team}
-                                number={drivers.get(secondDriverNumber).driver_number}
-                                acronym={drivers.get(secondDriverNumber).acronym}
-                                image={drivers.get(secondDriverNumber).image}
-                                primaryColor={team2Primary}
-                                accentColor={team2Accent}
-                            ></DriverCard> : <EmptyCard></EmptyCard>}
-                        </div>
-                    </>
-                        : <></>}
-                </div>
-                <Comparison></Comparison>
-            </>
+            error ? <LoadingError message={error} />
+                :
+                <>
+                    <div className="driver-container">
+                        {drivers.size > 0 ? <>
+                            <div className="driver-wrapper">
+                                <ComboxBox
+                                    title="Driver Selection"
+                                    options={Array.from(drivers.keys()).filter(number => number !== secondDriverNumber).map((number, idx) => (
+                                        {
+                                            id: idx,
+                                            item: number,
+                                            value: `${drivers.get(number).full_name}`,
+                                        }))}
+                                    updaterFunction={handleUpdatedDriver1}
+                                    searchable={true}>
+                                </ComboxBox>
+                                {firstDriverNumber > -1 ? <DriverCard
+                                    firstName={drivers.get(firstDriverNumber).first_name}
+                                    lastName={drivers.get(firstDriverNumber).last_name}
+                                    team={drivers.get(firstDriverNumber).team}
+                                    number={drivers.get(firstDriverNumber).driver_number}
+                                    acronym={drivers.get(firstDriverNumber).acronym}
+                                    image={drivers.get(firstDriverNumber).image}
+                                    primaryColor={team1Primary}
+                                    accentColor={team1Accent}
+                                ></DriverCard> : <EmptyCard></EmptyCard>}
+                            </div>
+
+                            <div className="driver-wrapper align-right">
+                                <ComboxBox
+                                    title="Driver Selection"
+                                    options={Array.from(drivers.keys()).filter(number => number !== firstDriverNumber).map((number, idx) => (
+                                        {
+                                            id: idx,
+                                            item: number,
+                                            value: `${drivers.get(number).full_name}`
+                                        }))}
+                                    updaterFunction={handleUpdatedDriver2}
+                                    searchable={true}>
+                                </ComboxBox>
+                                {secondDriverNumber > -1 ? <DriverCard
+                                    firstName={drivers.get(secondDriverNumber).first_name}
+                                    lastName={drivers.get(secondDriverNumber).last_name}
+                                    team={drivers.get(secondDriverNumber).team}
+                                    number={drivers.get(secondDriverNumber).driver_number}
+                                    acronym={drivers.get(secondDriverNumber).acronym}
+                                    image={drivers.get(secondDriverNumber).image}
+                                    primaryColor={team2Primary}
+                                    accentColor={team2Accent}
+                                ></DriverCard> : <EmptyCard></EmptyCard>}
+                            </div>
+                        </>
+                            : <></>}
+                    </div>
+                    <Comparison></Comparison>
+                </>
     );
 }
 

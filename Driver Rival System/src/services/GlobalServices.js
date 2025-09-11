@@ -75,7 +75,8 @@ export function convertTeamColors(teamName) {
             return ["#3A6B36", "#121212"];
         case "Racing Bulls":
             // return ["#1534CB", "#F23821"];
-            return ["#1B4F72", "#C12B30"];
+            // return ["#1B4F72", "#C12B30"];
+            return ["#2d79abff", "#d73e43ff"];
         case "Alpine":
             // return ["#0577C8", "#EC8BC6"];
             return ["#1B4F72", "#99627A"];

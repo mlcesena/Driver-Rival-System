@@ -42,7 +42,7 @@ function App() {
           <Route element={<TeamProvider><Outlet /></TeamProvider>}>
             <Route path="/teams" element={<Teams />} />
           </Route>
-          {/* <Route path="/info" element={<Info />} /> */}
+          <Route path="/info" element={<Info />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

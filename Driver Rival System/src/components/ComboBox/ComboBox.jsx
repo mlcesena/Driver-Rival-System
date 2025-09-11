@@ -104,7 +104,7 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
                             onClick={() => {
                                 setSelectedIdx(option.id);
                                 setExpanded(false);
-                                updaterFunction(option.id);
+                                updaterFunction(option.item);
                                 setSearchQuery(option.value)
                             }}>{option.value}</li>
                     ))}

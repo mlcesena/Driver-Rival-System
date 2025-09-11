@@ -38,7 +38,7 @@ function TrackNav({ options = [], updaterFunction }) {
                 {windowWidth <= breakpoint ?
                     <ComboxBox
                         title="Track Name"
-                        options={options.map((option, idx) => ({ id: idx, value: option }))}
+                        options={options.map((option, idx) => ({ id: idx, item: idx, value: option }))}
                         updaterFunction={updateIdx}
                         activeIdx={activeIdx}>
                     </ComboxBox> :

@@ -11,7 +11,8 @@ export async function fetchDrivers() {
 
         return driversMap;
     } catch (error) {
-        console.error("Error fetching drivers:", error);
+        // console.error("Error fetching drivers:", error);
+        throw error;
     }
 }
 
@@ -36,7 +37,8 @@ export async function fetchRaceResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching drivers:", error);
+        // console.error("Error fetching drivers:", error);
+        throw error;
     }
 }
 
@@ -61,7 +63,8 @@ export async function fetchQualifyingResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching drivers:", error);
+        // console.error("Error fetching drivers:", error);
+        throw error;
     }
 }
 
@@ -87,6 +90,7 @@ export async function fetchSprintRaceResults() {
 
     } catch (error) {
         console.error("Error fetching drivers:", error);
+        throw error;
     }
 }
 
@@ -111,6 +115,7 @@ export async function fetchSprintQualifyingResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching drivers:", error);
+        // console.error("Error fetching drivers:", error);
+        throw error;
     }
 }

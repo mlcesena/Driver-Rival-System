@@ -8,12 +8,13 @@ import "../css/PageCard.css"
 import LoadScreen from "../components/LoadScreen/LoadScreen";
 import PageCard from "../components/PageCard";
 import { useTeamContext } from "../contexts/TeamContext";
+import LoadingError from "./LoadingError";
 
 function Home() {
-    const { loading } = useGlobalStateContext();
-    const { drivers } = useDriverContext();
-    const { teams } = useTeamContext();
-    const { trackData } = useTrackContext();
+    // const { loading } = useGlobalStateContext();
+    const { drivers, error: driverError } = useDriverContext();
+    const { teams, error: teamError } = useTeamContext();
+    const { trackData, error: trackError } = useTrackContext();
     const [driverImages, setDriverImages] = useState([]);
     const [driverNumbers, setDriverNumbers] = useState([]);
     const [teamImages, setTeamImages] = useState([]);
@@ -59,8 +60,10 @@ function Home() {
         }
     }, [trackData]);
 
+
+
     return (
-        loading ? <LoadScreen></LoadScreen> :
+        (driverError || teamError || trackError) ? <LoadingError message={"Failed to connect to server and fetch data"} /> :
             <>
                 <div style={{ textAlign: "center", marginBottom: "4rem", maxWidth: "800px", marginInline: "auto" }}>
                     <h1 className="fs-secondary-heading" style={{ marginBottom: "1rem" }}>

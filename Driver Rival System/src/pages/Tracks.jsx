@@ -4,9 +4,11 @@ import TrackInfoContainer from "../components/Tracks/TrackInfoContainer";
 import TrackNav from "../components/Tracks/TrackNav";
 import TrackTires from "../components/Tracks/TrackTires";
 import { useTrackContext } from "../contexts/TrackContext";
+import LoadScreen from "../components/LoadScreen/LoadScreen";
+import LoadingError from "./LoadingError";
 
 function Tracks() {
-    const { trackData } = useTrackContext();
+    const { loading, error, trackData } = useTrackContext();
     const [activeTrack, setActiveTrack] = useState("");
 
     useEffect(() => {
@@ -39,17 +41,23 @@ function Tracks() {
     ] : [];
 
     return (
-        <div className="content-columns">
-            <div>
-                <TrackNav options={Array.from(trackData.keys())} updaterFunction={handleTrackChange}></TrackNav>
-            </div>
-            <div style={{ position: "relative", width: "fit-content" }}>
-                <span className={`fi fis fi-${trackData.has(activeTrack) ? convertCountryCode(trackData.get(activeTrack).country_code) : ""} track-flag`} style={{ zIndex: 50 }}></span>
-                <img src={`${trackData.has(activeTrack) ? ("/tracks/" + trackData.get(activeTrack).image) : ""} `} className="track-img"></img>
-                <TrackTires></TrackTires>
-                <TrackInfoContainer data={data}></TrackInfoContainer>
-            </div>
-        </div>
+        loading ? <LoadScreen /> :
+            error ? <LoadingError message={error} />
+                :
+                <div className="content-columns">
+                    <div>
+                        <TrackNav options={Array.from(trackData.keys())} updaterFunction={handleTrackChange}></TrackNav>
+                    </div>
+                    <div style={{ position: "relative", width: "fit-content" }}>
+                        <span className={`fi fis fi-${trackData.has(activeTrack) ? convertCountryCode(trackData.get(activeTrack).country_code) : ""} track-flag`} style={{ zIndex: 50 }}></span>
+                        <img
+                            src={`${trackData.has(activeTrack) ? ("/tracks/" + trackData.get(activeTrack).image) : ""} `}
+                            className="track-img"
+                            alt={trackData.has(activeTrack) ? `Track outline of ${trackData.get(activeTrack).circuit_name}` : ""}></img>
+                        <TrackTires></TrackTires>
+                        <TrackInfoContainer data={data}></TrackInfoContainer>
+                    </div>
+                </div>
     );
 }
 

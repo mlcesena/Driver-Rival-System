@@ -12,7 +12,8 @@ export async function fetchTeamInfo() {
 
         return teamMap;
     } catch (error) {
-        console.error("Error fetching tracks:", error);
+        // console.error("Error fetching tracks:", error);
+        throw error;
     }
 }
 
@@ -37,7 +38,8 @@ export async function fetchTeamRaceResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching team race results:", error);
+        // console.error("Error fetching team race results:", error);
+        throw error;
     }
 }
 
@@ -62,7 +64,8 @@ export async function fetchTeamSprintResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching team sprint results:", error);
+        // console.error("Error fetching team sprint results:", error);
+        throw error;
     }
 }
 
@@ -87,7 +90,8 @@ export async function fetchTeamSeasonResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching team sprint results:", error);
+        // console.error("Error fetching team sprint results:", error);
+        throw error;
     }
 }
 

@@ -7,6 +7,8 @@ const TeamContext = createContext();
 export const useTeamContext = () => useContext(TeamContext);
 
 export const TeamProvider = ({ children }) => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [teams, setTeams] = useState(new Map());
     const [raceResults, setRaceResults] = useState(new Map());
     const [sprintResults, setSprintResults] = useState(new Map());
@@ -38,8 +40,17 @@ export const TeamProvider = ({ children }) => {
         }
     }, [secondTeamName]);
 
+    useEffect(() => {
+        if (loading && teams.size > 0 && raceResults.size > 0 && sprintResults.size > 0 && seasonResults.size > 0) {
+            setLoading(false);
+            // setError(null);
+        }
+    }, [teams, raceResults, sprintResults, seasonResults])
+
     const getTeamInfo = async () => {
         try {
+            setLoading(true);
+
             const data = await fetchTeamInfo();
             setTeams(data);
 
@@ -53,11 +64,15 @@ export const TeamProvider = ({ children }) => {
             setSeasonResults(seasonData);
 
         } catch (error) {
-            console.log("Failed to get team info", error);
+            // console.log("Failed to get team info", error);
+            setError("Failed to load team info.");
+            setLoading(false);
         }
     }
 
     const value = {
+        loading,
+        error,
         teams,
         firstTeamName,
         setFirstTeamName,

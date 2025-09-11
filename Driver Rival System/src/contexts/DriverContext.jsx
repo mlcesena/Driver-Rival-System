@@ -7,6 +7,8 @@ const DriverContext = createContext();
 export const useDriverContext = () => useContext(DriverContext);
 
 export const DriverProvider = ({ children }) => {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const [drivers, setDrivers] = useState(new Map());
     const [raceResults, setRaceResults] = useState(new Map());
     const [qualiResults, setQualiResults] = useState(new Map());
@@ -20,7 +22,7 @@ export const DriverProvider = ({ children }) => {
     const [team1Accent, setTeam1Accent] = useState("#808080");
     const [team2Accent, setTeam2Accent] = useState("#808080");
 
-    const { loading, setLoading } = useGlobalStateContext();
+    // const { loading, setLoading } = useGlobalStateContext();
 
     useEffect(() => {
         getDriverInfo();
@@ -43,13 +45,16 @@ export const DriverProvider = ({ children }) => {
     }, [secondDriverNumber]);
 
     useEffect(() => {
-        if (loading && drivers.size > 0 && raceResults.size > 0 && qualiResults.size > 0) {
+        if (loading && drivers.size > 0 && raceResults.size > 0 && qualiResults.size > 0 && sprintRaceResults.size > 0 && sprintQualiResults.size > 0) {
             setLoading(false);
+            // setError(null);
         }
-    }, [drivers, raceResults, qualiResults]);
+    }, [drivers, raceResults, qualiResults, sprintRaceResults, sprintQualiResults]);
 
     const getDriverInfo = async () => {
         try {
+            setLoading(true);
+
             const data = await fetchDrivers();
             setDrivers(data);
 
@@ -66,11 +71,15 @@ export const DriverProvider = ({ children }) => {
             setSprintQualiResults(sprintQualiData);
         }
         catch (error) {
-            console.log("Failed to get driver info", error);
+            // console.log("Failed to get driver info", error);
+            setError("Failed to load driver info.");
+            setLoading(false);
         }
     }
 
     const value = {
+        loading,
+        error,
         drivers,
         setDrivers,
         firstDriverNumber,

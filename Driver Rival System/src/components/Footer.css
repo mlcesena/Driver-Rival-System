@@ -36,8 +36,8 @@ footer {
 }
 
 .creation-tag {
-  font-size: var(--fs-body);
-  font-family: var(--ff-primary);
+  font-size: var(--fs-detail);
+  font-family: var(--ff-body);
   text-align: center;
 }
 

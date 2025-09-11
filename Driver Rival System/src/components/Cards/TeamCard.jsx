@@ -24,10 +24,14 @@ function TeamCard({ name = "", location = "", country = "", image = "", primaryC
                     </div>
                     {/* <label className="driver-number" style={{ backgroundColor: `${accentColor}` }}>{number}</label> */}
                 </div>
-                <div className="card-img-container" style={{ "--racing-stripe-clr": accentColor }}>
-                    {/* <span> */}
-                    <img className="card-img" data-type="team" src={image}></img>
-                    {/* </span> */}
+                <div className="card-body" style={{ "--racing-stripe-clr": accentColor }}>
+                    <div className="card-img-container" >
+                        <img
+                            className="card-img"
+                            data-type="team"
+                            src={image}
+                            alt={`${name} team logo`}></img>
+                    </div>
                 </div>
                 <div className="driver-card-footer">
                     {/* <h1 className="driver-acronym">{acronym}</h1> */}

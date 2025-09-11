@@ -51,7 +51,9 @@
 .driver-card-header {
   display: flex;
   gap: 1rem;
-  height: 150px;
+  /* min-height: 125px; */
+
+  height: fit-content;
 }
 
 .driver-card-title {
@@ -101,12 +103,14 @@
   /* box-shadow: 0.25em 0.25em 0 0 rgba(0, 0, 0, 0.25); */
 }
 
-.card-img-container {
+.card-body {
   --racing-stripe-clr: var(--clr-neutral-100);
   display: flex;
-  height: 100%;
+  height: 50%;
+  /* max-height: ; */
   width: calc(100% + 2rem);
-  margin-block: 1rem;
+  /* margin-block: 1rem; */
+  margin-block: auto;
   /* padding-inline: -1.5rem; */
   overflow: hidden;
   /* justify-content: center; */
@@ -114,10 +118,10 @@
   margin-right: -1rem;
 }
 
-.card-img-container::before,
-.card-img-container::after {
+.card-body::before,
+.card-body::after {
   content: "";
-  width: 100%;
+  width: 15%;
   height: 1.25rem;
   border-top: var(--racing-stripe-clr) solid 6px;
   border-bottom: var(--racing-stripe-clr) solid 6px;
@@ -126,37 +130,59 @@
   margin-block: auto;
 }
 
-.card-img-container::before {
-  width: 100%;
+.card-body::before {
+  /* width: 50%; */
   margin-right: 0.5rem;
   /* margin-left: -2rem; */
 }
-.card-img-container::after {
-  width: 100%;
+.card-body::after {
+  /* width: 50%; */
   margin-left: 0.5rem;
   /* margin-right: -2rem; */
 }
 
-.card-img {
-  aspect-ratio: 1/1;
+.card-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--clr-neutral-300);
   border: var(--clr-neutral-200) solid 8px;
   border-radius: 100vh;
-  /* max-height: 300px; */
+  padding: 1rem;
+  aspect-ratio: 1/1;
+  /* width: 280px; */
+  /* width: 90%; */
+  /* height: auto; */
+
+  height: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.card-img {
+  /* height: 100%; */
+  object-fit: cover;
 }
 
 .card-img[data-type="driver"] {
-  border-radius: 100vh;
+  /* border-radius: 100vh;
   padding: 1rem;
   max-height: 300px;
-  margin: 0.25rem;
+  margin: 0.25rem; */
   filter: saturate(0.7);
 }
 
 .card-img[data-type="team"] {
-  border-radius: 100vh;
-  padding: 1rem;
-  max-height: 300px;
+  width: 85%;
+  /* object-fit: contain; */
+  /* border-radius: 100vh; */
+  /* padding: 1rem; */
+  /* width: 100%; */
+  /* height: auto; */
+  /* max-height: 300px; */
+  /* max-width: 300px; */
+  /* margin: 0.25rem; */
   /* min-width: 75%; */
 }
 
@@ -167,7 +193,7 @@
   /* grid-template-columns: 1fr 1fr; */
   height: fit-content;
   align-items: center;
-  margin: auto -1.5rem -1.5rem;
+  margin: 0 -1.5rem -1.5rem;
 }
 
 .driver-acronym {

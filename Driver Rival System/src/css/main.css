@@ -7,7 +7,7 @@
   --clr-tertiary-400: #1f5c84;
 
   /* --clr-neutral-100: #FFFFFF; */
-  --clr-neutral-100: #e0e0e0;
+  /* --clr-neutral-100: #e0e0e0;
   --clr-neutral-200: #cccccc;
   --clr-neutral-300: #aaaaaa;
   --clr-neutral-400: #808080;
@@ -15,7 +15,19 @@
   --clr-neutral-600: #545454;
   --clr-neutral-700: #3e3e3e;
   --clr-neutral-800: #1e1e1e;
-  --clr-neutral-900: #121212;
+  --clr-neutral-900: #121212; */
+
+  /* --clr-neutral-400: #808080; */
+
+  --clr-neutral-100: hsl(47, 10%, 90%);
+  --clr-neutral-200: #dedcd4;
+  --clr-neutral-300: #bebcb4;
+  --clr-neutral-400: #9a9891;
+  --clr-neutral-500: #75736d;
+  --clr-neutral-600: #585753;
+  --clr-neutral-700: #3f3e3b;
+  --clr-neutral-800: #262524;
+  --clr-neutral-900: #141413;
 
   --clr-accent-300: #e2c77d;
   --clr-accent-400: #d1b66a;
@@ -30,6 +42,7 @@
   --fw-bold: 700;
 
   --fs-300: 1rem;
+  --fs-350: 1.125rem;
   --fs-400: 1.25rem;
   --fs-450: 2rem;
   --fs-500: 2.75rem;
@@ -294,6 +307,11 @@ h1 {
   padding: 2rem;
 }
 
+.info-card {
+  display: flex;
+  gap: 2rem;
+}
+
 .content-header {
   display: flex;
   height: fit-content;
@@ -372,14 +390,14 @@ h1 {
   justify-content: center;
   gap: 1rem;
   width: 7rem;
-  height: 2.75rem;
+  height: 2.65rem;
   cursor: pointer;
   text-decoration: none;
   border: 0;
   border-radius: 100vmax;
   padding: 0.25em 1em;
   font-family: var(--ff-body);
-  font-size: var(--fs-400);
+  font-size: var(--fs-350);
   font-weight: var(--fw-semi-bold);
   color: var(--clr-neutral-100);
   background-color: var(--clr-accent-400);
@@ -413,6 +431,23 @@ h1 {
   color: var(--clr-neutral-900) !important;
 }
 
+.button[data-type="inverse"] {
+  border: var(--clr-neutral-100) solid 3px;
+  background-color: transparent;
+  /* color: var(--clr-neutral-900); */
+}
+
+.button[data-type="inverse"]:hover {
+  background-color: var(--clr-neutral-100);
+  color: var(--clr-neutral-900);
+}
+
+.button[data-type="inverse"]:active {
+  border-color: var(--clr-neutral-200);
+  background-color: var(--clr-neutral-200);
+  transition: border-color 0.25s ease-in-out;
+}
+
 .divider {
   width: 100%;
   height: 6px;
@@ -421,6 +456,16 @@ h1 {
   border-left: none;
   border-right: none;
   margin: 0.25rem 0;
+}
+
+.vert-divider {
+  height: auto;
+  width: 6px;
+  border-left: var(--clr-neutral-100) solid 2px;
+  border-right: var(--clr-neutral-100) solid 2px;
+  border-top: none;
+  border-bottom: none;
+  margin: 0 0.25rem;
 }
 
 .error-flag-container {

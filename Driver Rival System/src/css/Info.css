@@ -1,0 +1,11 @@
+.info-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* max-width: 60%; */
+}
+
+.info-wrapper {
+  display: flex;
+  gap: 1.5rem;
+}

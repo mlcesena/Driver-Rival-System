@@ -82,8 +82,14 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                     </div>
                     <label className="driver-number" style={{ backgroundColor: `${accentColor}` }}>{number}</label>
                 </div>
-                <div className="card-img-container" style={{ "--racing-stripe-clr": accentColor }}>
-                    <img className="card-img" data-type="driver" src={image}></img>
+                <div className="card-body" style={{ "--racing-stripe-clr": accentColor }}>
+                    <div className="card-img-container" >
+                        <img
+                            className="card-img"
+                            data-type="driver"
+                            src={image}
+                            alt={`Photo of ${firstName} ${lastName}`}></img>
+                    </div>
                 </div>
                 <div className="driver-card-footer">
                     <h1 className="driver-acronym">{acronym}</h1>
