@@ -33,6 +33,13 @@
   --clr-accent-400: #d1b66a;
   --clr-accent-500: #c5ac65;
 
+  --clr-hard-low: #ffffff;
+  --clr-hard-high: #fffbe3;
+  --clr-medium-low: #eed16a;
+  --clr-medium-high: #eabe66;
+  --clr-soft-low: #c24237;
+  --clr-soft-high: #a4181d;
+
   --ff-primary: "Racing Sans One", sans-serif;
   --ff-body: "Urbanist", sans-serif;
 
@@ -287,6 +294,14 @@ h1 {
   z-index: 99;
   /* pointer-events: none; */
   /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+.bg-svg-element {
+  position: fixed;
+  opacity: 0.3;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
 
 .material-symbols-outlined {

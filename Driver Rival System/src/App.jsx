@@ -9,11 +9,12 @@ import Info from './pages/Info.jsx'
 import Contact from './pages/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import { GlobalStateProvider } from './contexts/GlobalStateContext.jsx'
-import LoadingError from './pages/LoadingError.jsx'
 import NavBar from "./components/Navigation/NavBar.jsx"
 import Drivers from './pages/Drivers.jsx';
 import Tracks from './pages/Tracks.jsx';
 import { TrackProvider } from './contexts/TrackContext.jsx';
+import Curve from "./components/BackgroundElements/Curve.jsx";
+import Shape from './components/BackgroundElements/Shape.jsx';
 function App() {
 
   return (
@@ -45,6 +46,12 @@ function App() {
           <Route path="/info" element={<Info />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+
+        <Curve option={0} className="bg-svg-element" style={{ top: "22%", left: "0%", rotate: "90deg" }} />
+        <Curve option={1} className="bg-svg-element" style={{ top: "30%", left: "80%", rotate: "-90deg" }} />
+        <Curve option={2} className="bg-svg-element" style={{ top: "70%", left: "2%", rotate: "0deg" }} />
+        <Curve option={0} className="bg-svg-element" style={{ top: "88%", left: "88%", rotate: "-90deg" }} />
+        <Shape option={0} className="bg-svg-element" style={{ top: "67%", left: "88%", rotate: "8deg" }} />
       </main>
       <footer>
         <Footer></Footer>

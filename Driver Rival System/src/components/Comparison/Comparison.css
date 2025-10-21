@@ -175,6 +175,7 @@
   font-family: var(--ff-body);
   padding-block: 1rem;
   overflow-x: scroll;
+  user-select: none;
 }
 
 .scatter-tooltip {

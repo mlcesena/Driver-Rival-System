@@ -1,3 +1,13 @@
+section {
+  margin-bottom: 2rem;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .info-text-container {
   display: flex;
   flex-direction: column;
@@ -8,4 +18,18 @@
 .info-wrapper {
   display: flex;
   gap: 1.5rem;
+}
+
+.point-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* gap: 2rem; */
+}
+
+.point-container div {
+  margin-inline: auto;
+}
+
+.point-container h2 {
+  margin-bottom: 0.75rem;
 }

@@ -78,12 +78,18 @@ p {
   font-size: var(--fs-body);
 }
 
+.compound-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .compound-bar {
   height: 1rem;
   width: 100%;
   border: var(--clr-neutral-100) solid 2px;
   border-radius: 100vh;
-  background: linear-gradient(
+  background-color: var(--clr-hard-low);
+  /* background: linear-gradient(
     0.33turn,
     white,
     white,
@@ -91,7 +97,7 @@ p {
     #eee16a,
     var(--clr-primary-400),
     var(--clr-primary-400)
-  );
+  ); */
 }
 
 .track-img {

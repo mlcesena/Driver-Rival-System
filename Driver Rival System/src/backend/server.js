@@ -387,14 +387,18 @@ async function populateTeams() {
 
                     const updateStmt = db.prepare(`
                         INSERT OR REPLACE INTO teams
-                        (name, location, race_wins, race_podiums, race_points, race_top_10, race_pole, sprint_wins, sprint_podiums, sprint_points, sprint_top_8, sprint_pole, country_code)
-                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+                        (name, location, image, founding_year, team_principal, ceo, race_wins, race_podiums, race_points, race_top_10, race_pole, sprint_wins, sprint_podiums, sprint_points, sprint_top_8, sprint_pole, country_code)
+                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                       `);
 
                     try {
                         rows.forEach(row => {
                             let location = null;
                             let country_code = null;
+                            let ceo = "N/A";
+                            let team_principal = null;
+                            let founding_year = null;
+                            let image = null;
 
                             switch (row.name) {
                                 case "Alpine":
@@ -426,9 +430,74 @@ async function populateTeams() {
                                     break;
                             }
 
+                            switch (row.name) {
+                                case "Alpine":
+                                    ceo = "Luca de Meo";
+                                    team_principal = "Flavio Briatore";
+                                    founding_year = 1981;
+                                    image = "alpine.svg";
+                                    break;
+                                case "Aston Martin":
+                                    ceo = "Andy Cowell";
+                                    team_principal = "Andy Cowell";
+                                    founding_year = 1991;
+                                    image = "aston-martin.svg";
+                                    break;
+                                case "McLaren":
+                                    ceo = "Zak Brown";
+                                    team_principal = "Andrea Stella";
+                                    founding_year = 1966;
+                                    image = "mclaren.svg";
+                                    break;
+                                case "Red Bull Racing":
+                                    ceo = "Laurent Mekies";
+                                    team_principal = "Laurent Mekies";
+                                    founding_year = 2005;
+                                    image = "redbull.svg";
+                                    break;
+                                case "Williams":
+                                    team_principal = "James Vowles";
+                                    founding_year = 1978;
+                                    image = "williams.svg";
+                                    break;
+                                case "Ferrari":
+                                    ceo = "Frederic Vasseur";
+                                    team_principal = "Frederic Vasseur";
+                                    founding_year = 1950;
+                                    image = "ferrari.svg";
+                                    break;
+                                case "Racing Bulls":
+                                    team_principal = "Alan Permane";
+                                    founding_year = 2006;
+                                    image = "racing-bulls.svg";
+                                    break;
+                                case "Mercedes":
+                                    ceo = "Toto Wolff";
+                                    team_principal = "Toto Wolff";
+                                    founding_year = 1954;
+                                    image = "mercedes.svg";
+                                    break;
+                                case "Kick Sauber":
+                                    team_principal = "Jonathan Wheatley";
+                                    founding_year = 1993;
+                                    image = "sauber.svg";
+                                    break;
+                                case "Haas F1 Team":
+                                    team_principal = "Ayao Komatsu";
+                                    founding_year = 2016;
+                                    image = "haas.svg";
+                                    break;
+                                default:
+                                    break;
+                            }
+
                             updateStmt.run(
                                 row.name || "",
                                 location,
+                                image,
+                                founding_year,
+                                team_principal,
+                                ceo,
                                 row.race_wins || 0,
                                 row.race_podiums || 0,
                                 row.race_points || 0,

@@ -6,7 +6,7 @@ export async function fetchTeamInfo() {
 
         const teamMap = new Map();
         data.forEach(team => {
-            team.image = setTeamImage(team.name);
+            // team.image = setTeamImage(team.name);
             teamMap.set(team.name, team);
         });
 
@@ -95,29 +95,29 @@ export async function fetchTeamSeasonResults() {
     }
 }
 
-function setTeamImage(name) {
-    switch (name) {
-        case "Alpine":
-            return "alpine.svg"
-        case "Aston Martin":
-            return "aston-martin.svg"
-        case "Ferrari":
-            return "ferrari.svg"
-        case "Haas F1 Team":
-            return "haas.svg"
-        case "McLaren":
-            return "mclaren.svg"
-        case "Mercedes":
-            return "mercedes.svg"
-        case "Racing Bulls":
-            return "racing-bulls.svg"
-        case "Red Bull Racing":
-            return "redbull.svg"
-        case "Kick Sauber":
-            return "sauber.svg"
-        case "Williams":
-            return "williams.svg"
-        default:
-            break;
-    }
-}
+// function setTeamImage(name) {
+//     switch (name) {
+//         case "Alpine":
+//             return "alpine.svg"
+//         case "Aston Martin":
+//             return "aston-martin.svg"
+//         case "Ferrari":
+//             return "ferrari.svg"
+//         case "Haas F1 Team":
+//             return "haas.svg"
+//         case "McLaren":
+//             return "mclaren.svg"
+//         case "Mercedes":
+//             return "mercedes.svg"
+//         case "Racing Bulls":
+//             return "racing-bulls.svg"
+//         case "Red Bull Racing":
+//             return "redbull.svg"
+//         case "Kick Sauber":
+//             return "sauber.svg"
+//         case "Williams":
+//             return "williams.svg"
+//         default:
+//             break;
+//     }
+// }
