@@ -1,35 +1,35 @@
-function curve90(className, style) {
+function curve90(className, style, stroke) {
     return <>
         <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
             <path d="M33 200 L33 133 
            A100 100 0 0 1 133 33 
            L200 33"
-                stroke="#262524" strokeWidth="13" fill="none" />
+                stroke={stroke} strokeWidth="13" fill="none" />
 
             <path d="M47 200 L47 133 
            A87 87 0 0 1 133 47
            L200 47"
-                stroke="#141413" strokeWidth="13" fill="none" />
+                stroke="" strokeWidth="13" fill="none" />
 
             <path d="M60 200 L60 133 
            A73 73 0 0 1 133 60
            L200 60"
-                stroke="#262524" strokeWidth="13" fill="none" />
+                stroke={stroke} strokeWidth="13" fill="none" />
 
             <path d="M73 200 L73 133 
            A60 60 0 0 1 133 73
            L200 73"
-                stroke="#141413" strokeWidth="13" fill="none" />
+                stroke="" strokeWidth="13" fill="none" />
 
             <path d="M87 200 L87 133 
            A47 47 0 0 1 133 87
            L200 87"
-                stroke="#262524" strokeWidth="13" fill="none" />
+                stroke={stroke} strokeWidth="13" fill="none" />
         </svg>
     </>
 }
 
-function curveU(className, style) {
+function curveU(className, style, stroke) {
     return <>
         <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
             <path d="
@@ -39,7 +39,7 @@ function curveU(className, style) {
            L250 13
            A100 100 0 0 1 350 113
            L350 300"
-                stroke="#262524" strokeWidth="13" fill="none" />
+                stroke={stroke} strokeWidth="13" fill="none" />
 
             <path d="
                     M47 300 
@@ -48,7 +48,7 @@ function curveU(className, style) {
            L250 26
            A87 87 0 0 1 337 113
            L337 300"
-                stroke="#141413" strokeWidth="13" fill="none" />
+                stroke="" strokeWidth="13" fill="none" />
 
             <path d="
                     M60 300 
@@ -57,7 +57,7 @@ function curveU(className, style) {
            L250 39
            A73 73 0 0 1 324 113
            L324 300"
-                stroke="#262524" strokeWidth="13" fill="none" />
+                stroke={stroke} strokeWidth="13" fill="none" />
 
             <path d="
                     M73 300 
@@ -66,7 +66,7 @@ function curveU(className, style) {
            L250 52
            A60 60 0 0 1 311 113
            L311 300"
-                stroke="#141413" strokeWidth="13" fill="none" />
+                stroke="" strokeWidth="13" fill="none" />
 
             <path d="
                     M87 300 
@@ -75,12 +75,12 @@ function curveU(className, style) {
            L250 65
            A47 47 0 0 1 298 113
            L298 300"
-                stroke="#262524" strokeWidth="13" fill="none" />
+                stroke={stroke} strokeWidth="13" fill="none" />
         </svg>
     </>
 }
 
-function curveSnake(className, style) {
+function curveSnake(className, style, stroke) {
     return (<>
         <svg width="310" height="400" xmlns="http://www.w3.org/2000/svg" className={className} style={style}>
             <path d="
@@ -90,7 +90,7 @@ function curveSnake(className, style) {
     L200 150
     A40 35 0 0 0 200 75
     L13 75
-  " stroke="#262524" strokeWidth="13" fill="none" />
+  " stroke={stroke} strokeWidth="13" fill="none" />
 
             <path d="
     M26 400
@@ -99,7 +99,7 @@ function curveSnake(className, style) {
     L200 163
     A53 48 0 0 0 200 62
     L13 62
-  " stroke="#141413" strokeWidth="13" fill="none" />
+  " stroke="" strokeWidth="13" fill="none" />
 
             <path d="
     M39 400
@@ -108,7 +108,7 @@ function curveSnake(className, style) {
     L200 176
     A66 61 0 0 0 200 49
     L13 49
-  " stroke="#262524" strokeWidth="13" fill="none" />
+  " stroke={stroke} strokeWidth="13" fill="none" />
 
             <path d="
     M52 400
@@ -117,7 +117,7 @@ function curveSnake(className, style) {
     L200 189
     A79 74 0 0 0 200 36
     L13 36
-  " stroke="#141413" strokeWidth="13" fill="none" />
+  " stroke="" strokeWidth="13" fill="none" />
 
             <path d="
     M65 400
@@ -126,24 +126,24 @@ function curveSnake(className, style) {
     L200 202
     A92 87 0 0 0 200 23
     L13 23
-  " stroke="#262524" strokeWidth="13" fill="none" />
+  " stroke={stroke} strokeWidth="13" fill="none" />
         </svg>
     </>);
 }
 
-function Curve({ option = 0, className = "", style = {} }) {
+function Curve({ option = 0, className = "", style = {}, stroke = "#262524" }) {
     let element;
 
     switch (option) {
         case 0:
-            return curve90(className, style);
+            return curve90(className, style, stroke);
         case 1:
-            return curveU(className, style);
+            return curveU(className, style, stroke);
         case 2:
-            return curveSnake(className, style);
+            return curveSnake(className, style, stroke);
 
         default:
-            return curve90(className, style);
+            return curve90(className, style, stroke);
     }
 }
 

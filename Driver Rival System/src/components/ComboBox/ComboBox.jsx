@@ -74,7 +74,7 @@ function ComboxBox({ title = "", options = [], updaterFunction = defaultUpdater,
     return (
         <div className="combobox">
             <p className="combo-title">{title}</p>
-            <div className="combo-container" onClick={handleClick}>
+            <div className={`combo-container ${expanded ? "combo-expanded" : ""}`} onClick={handleClick}>
                 <div className="combo-controls">
                     <input
                         className="combo-input"

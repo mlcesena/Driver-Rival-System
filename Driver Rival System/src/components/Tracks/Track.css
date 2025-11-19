@@ -1,3 +1,26 @@
+.track-body-wrapper {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.track-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 500px;
+  gap: 1rem;
+}
+
+.track-visuals {
+  width: fit-content;
+  margin-inline: auto 1rem;
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+}
+
 .track-item-container {
   display: flex;
   flex-wrap: wrap;
@@ -31,27 +54,30 @@ p {
 }
 
 .tire-container {
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
-  justify-content: center;
-}
-
-.tire-container img {
-  height: 3rem;
 }
 
 .tire-item {
-  width: fit-content;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  max-width: 3rem;
   gap: 0.5rem;
+  margin-inline: auto;
 }
 
 .tire-item label {
   font-family: var(--ff-body);
   font-size: var(--fs-body);
   text-align: center;
+}
+
+.tire-item svg {
+  /* width: clamp(1.75rem, 6vw, 3rem); */
+  width: 100%;
 }
 
 .tire-wrapper {
@@ -89,28 +115,18 @@ p {
   border: var(--clr-neutral-100) solid 2px;
   border-radius: 100vh;
   background-color: var(--clr-hard-low);
-  /* background: linear-gradient(
-    0.33turn,
-    white,
-    white,
-    #eee16a,
-    #eee16a,
-    var(--clr-primary-400),
-    var(--clr-primary-400)
-  ); */
 }
 
 .track-img {
   width: 100%;
   max-width: 500px;
+  /* margin-top: 2rem; */
   margin-inline: auto;
   filter: brightness(11) saturate(0);
 }
 
 .track-flag {
-  position: absolute;
-  left: 85%;
-  top: -2rem;
+  margin-left: auto;
   border-radius: 100vh;
   height: 50px !important;
   width: 50px !important;
@@ -123,10 +139,13 @@ p {
   flex-direction: column;
   gap: 1.5rem;
   margin-block: auto;
+  margin-right: 3rem;
 }
 
 .track-nav-options {
   list-style: none;
+  margin-top: 1.5rem;
+  width: 325px;
 }
 
 .track-nav-options li {
@@ -157,16 +176,32 @@ p {
 
 .track-nav-container {
   display: flex;
-  /* height: 600px; */
+  height: 500px;
   /* align-items: center; */
   /* overflow-y: hidden; */
+  overflow: hidden;
   gap: 2rem;
 }
 
+.soft-overlay {
+  filter: sepia(100%) saturate(500%) brightness(100%) hue-rotate(300deg);
+}
+
 @media (max-width: 50em) {
+  .track-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 600px !important;
+    gap: 1rem;
+  }
+
   .track-nav-container {
     display: flex;
     height: fit-content;
+  }
+
+  .track-visuals {
+    margin-inline: auto;
   }
 }
 

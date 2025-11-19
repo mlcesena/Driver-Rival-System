@@ -131,8 +131,8 @@ db.serialize(() => {
     //   `);
 
     // db.run(`
-    //     ALTER TABLE team_race_results
-    //     ADD COLUMN session_num INTEGER
+    //     ALTER TABLE tracks
+    //     ADD COLUMN c1_compound INTEGER DEFAULT 0
     //   `);
     // db.run(`
     //     ALTER TABLE team_sprint_race_results
@@ -146,6 +146,10 @@ db.serialize(() => {
     // db.run(`
     //     ALTER TABLE team_sprint_race_results
     //     DROP COLUMN session_num
+    //   `);
+
+    // db.run(`
+    //     DROP TABLE tracks
     //   `);
 
 
@@ -169,7 +173,13 @@ db.serialize(() => {
     //       fastest_lap_year INTEGER,
     //       track_type TEXT,
     //       image TEXT,
-    //       country_code TEXT
+    //       country_code TEXT,
+    //       c1_compound INTEGER DEFAULT 0,
+    //       c2_compound INTEGER DEFAULT 0,
+    //       c3_compound INTEGER DEFAULT 0,
+    //       c4_compound INTEGER DEFAULT 0,
+    //       c5_compound INTEGER DEFAULT 0,
+    //       c6_compound INTEGER DEFAULT 0
     //     )
     //   `);
 
@@ -699,14 +709,13 @@ async function populateTracks() {
 
         const stmt = db.prepare(`
         INSERT OR REPLACE INTO tracks
-        (circuit_name, location, init_year, latest_year, lap_distance_mi, lap_distance_km, lap_count, race_distance_mi, race_distance_km, corners, fastest_lap_time, fastest_lap_holder, fastest_lap_year, track_type, image, country_code)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        (circuit_name, location, init_year, latest_year, lap_distance_mi, lap_distance_km, lap_count, race_distance_mi, race_distance_km, corners, fastest_lap_time, fastest_lap_holder, fastest_lap_year, track_type, image, country_code, c1_compound, c2_compound, c3_compound, c4_compound, c5_compound, c6_compound)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       `);
 
 
         jsonData.forEach(item => {
             // console.log(item);
-
             stmt.run(
                 item.name,
                 item.location,
@@ -723,39 +732,45 @@ async function populateTracks() {
                 item.fastestLap.year,
                 item.trackType,
                 item.image,
-                item.countryCode
+                item.countryCode,
+                item.c1Compound,
+                item.c2Compound,
+                item.c3Compound,
+                item.c4Compound,
+                item.c5Compound,
+                item.c6Compound
             )
         });
 
 
-        const statement = db.prepare(`
-                INSERT OR REPLACE INTO tracks
-                (circuit_name, location, latest_year, country_code)
-                VALUES (?,?,?,?)
-            `);
+        // const statement = db.prepare(`
+        //         INSERT OR REPLACE INTO tracks
+        //         (circuit_name, location, latest_year, country_code)
+        //         VALUES (?,?,?,?)
+        //     `);
 
-        await Promise.all(sessions.map(session => {
-            const country = session?.country_name ?? null;
-            let code = session?.country_code ?? null;
+        // await Promise.all(sessions.map(session => {
+        //     const country = session?.country_name ?? null;
+        //     let code = session?.country_code ?? null;
 
-            if (country.toLowerCase() === "monaco")
-                code = "MCO";
-            else if (country.toLowerCase() === "bahrain")
-                code = "BHR";
+        //     if (country.toLowerCase() === "monaco")
+        //         code = "MCO";
+        //     else if (country.toLowerCase() === "bahrain")
+        //         code = "BHR";
 
-            if (session.session_type === "Race") {
-                statement.run(
-                    session.circuit_short_name,
-                    session.country_name,
-                    session.year,
-                    code
-                );
-            }
+        //     if (session.session_type === "Race") {
+        //         statement.run(
+        //             session.circuit_short_name,
+        //             session.country_name,
+        //             session.year,
+        //             code
+        //         );
+        //     }
 
-        }));
-        await new Promise((resolve, reject) => {
-            statement.finalize(err => err ? reject(err) : resolve());
-        });
+        // }));
+        // await new Promise((resolve, reject) => {
+        //     statement.finalize(err => err ? reject(err) : resolve());
+        // });
         console.log("Tracks populated");
     }
     catch (error) {

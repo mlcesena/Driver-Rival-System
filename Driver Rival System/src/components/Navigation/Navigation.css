@@ -53,6 +53,11 @@
   transition: all 0.25s ease-in-out;
 }
 
+.nav-btn:active {
+  background-color: var(--clr-neutral-750);
+  transition: all 0.125s ease-in-out;
+}
+
 .nav-list {
   display: flex;
   width: 100%;

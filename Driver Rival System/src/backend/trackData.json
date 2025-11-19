@@ -16,7 +16,13 @@
     },
     "trackType": "Street Circuit",
     "image": "melbourne.svg",
-    "countryCode": "AUS"
+    "countryCode": "AUS",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Shanghai International Circuit",
@@ -35,7 +41,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "shanghai.svg",
-    "countryCode": "CHN"
+    "countryCode": "CHN",
+    "c1Compound": 0,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Suzuka Circuit",
@@ -54,7 +66,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "suzuka.svg",
-    "countryCode": "JPN"
+    "countryCode": "JPN",
+    "c1Compound": 1,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 0,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Bahrain International Circuit",
@@ -73,7 +91,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "sakhir.svg",
-    "countryCode": "BHR"
+    "countryCode": "BHR",
+    "c1Compound": 1,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 0,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Jeddah Corniche Circuit",
@@ -92,7 +116,13 @@
     },
     "trackType": "Street Circuit",
     "image": "jeddah.svg",
-    "countryCode": "KSA"
+    "countryCode": "KSA",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Miami International Autodrome",
@@ -111,7 +141,13 @@
     },
     "trackType": "Street Circuit",
     "image": "miami.svg",
-    "countryCode": "USA"
+    "countryCode": "USA",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Imola (Autodromo Enzo e Dino Ferrari)",
@@ -130,7 +166,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "imola.svg",
-    "countryCode": "ITA"
+    "countryCode": "ITA",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 0,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 1
   },
   {
     "circuit": "Circuit de Monaco",
@@ -149,7 +191,13 @@
     },
     "trackType": "Street Circuit",
     "image": "monaco.svg",
-    "countryCode": "MCO"
+    "countryCode": "MCO",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 0,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 1
   },
   {
     "circuit": "Circuit de Barcelona-Catalunya",
@@ -168,7 +216,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "barcelona.svg",
-    "countryCode": "ESP"
+    "countryCode": "ESP",
+    "c1Compound": 1,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 0,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Circuit Gilles Villeneuve",
@@ -187,7 +241,13 @@
     },
     "trackType": "Semi-Street Circuit",
     "image": "montreal.svg",
-    "countryCode": "CAN"
+    "countryCode": "CAN",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 0,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 1
   },
   {
     "circuit": "Red Bull Ring",
@@ -206,7 +266,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "spielberg.svg",
-    "countryCode": "AUT"
+    "countryCode": "AUT",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Silverstone Circuit",
@@ -225,7 +291,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "silverstone.svg",
-    "countryCode": "GBR"
+    "countryCode": "GBR",
+    "c1Compound": 0,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Circuit de Spa-Francorchamps",
@@ -244,7 +316,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "spa.svg",
-    "countryCode": "BEL"
+    "countryCode": "BEL",
+    "c1Compound": 1,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Hungaroring",
@@ -263,7 +341,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "hungary.svg",
-    "countryCode": "HUN"
+    "countryCode": "HUN",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Circuit Zandvoort",
@@ -282,7 +366,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "zandvoort.svg",
-    "countryCode": "NLD"
+    "countryCode": "NLD",
+    "c1Compound": 0,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Autodromo Nazionale Monza",
@@ -301,7 +391,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "monza.svg",
-    "countryCode": "ITA"
+    "countryCode": "ITA",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Baku City Circuit",
@@ -320,7 +416,13 @@
     },
     "trackType": "Street Circuit",
     "image": "baku.svg",
-    "countryCode": "AZE"
+    "countryCode": "AZE",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 0,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 1
   },
   {
     "circuit": "Marina Bay Street Circuit",
@@ -339,7 +441,13 @@
     },
     "trackType": "Street Circuit",
     "image": "singapore.svg",
-    "countryCode": "SGP"
+    "countryCode": "SGP",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Circuit of the Americas",
@@ -358,7 +466,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "austin.svg",
-    "countryCode": "USA"
+    "countryCode": "USA",
+    "c1Compound": 1,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Autódromo Hermanos Rodríguez",
@@ -377,7 +491,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "mexico.svg",
-    "countryCode": "MEX"
+    "countryCode": "MEX",
+    "c1Compound": 0,
+    "c2Compound": 1,
+    "c3Compound": 0,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Autódromo José Carlos Pace",
@@ -396,7 +516,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "brazil.svg",
-    "countryCode": "BRA"
+    "countryCode": "BRA",
+    "c1Compound": 0,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Las Vegas Street Circuit",
@@ -415,7 +541,13 @@
     },
     "trackType": "Street Circuit",
     "image": "lasvegas.svg",
-    "countryCode": "USA"
+    "countryCode": "USA",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   },
   {
     "circuit": "Lusail International Circuit",
@@ -434,7 +566,13 @@
     },
     "trackType": "Permanent Circuit",
     "image": "qatar.svg",
-    "countryCode": "QAT"
+    "countryCode": "QAT",
+    "c1Compound": 1,
+    "c2Compound": 1,
+    "c3Compound": 1,
+    "c4Compound": 0,
+    "c5Compound": 0,
+    "c6Compound": 0
   },
   {
     "circuit": "Yas Marina Circuit",
@@ -453,6 +591,12 @@
     },
     "trackType": "Permanent Circuit",
     "image": "abudhabi.svg",
-    "countryCode": "ARE"
+    "countryCode": "ARE",
+    "c1Compound": 0,
+    "c2Compound": 0,
+    "c3Compound": 1,
+    "c4Compound": 1,
+    "c5Compound": 1,
+    "c6Compound": 0
   }
 ]

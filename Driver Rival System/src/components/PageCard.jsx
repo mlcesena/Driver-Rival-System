@@ -85,10 +85,9 @@ function PageCard({ title = "Null", description = "", imageList = [""], elementL
                 <p>{description}</p>
                 <NavLink to={`/${page}`}>
                     <button className="button">
-                        <svg width="32" height="16" viewBox="0 0 48 25">
-                            <path d="M32 4 L44 13 L32 22" stroke="white" strokeWidth="5px" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-                            <line x1={2} x2={40} y1={13} y2={13} stroke="white" strokeWidth="5px" fill="none" strokeLinejoin="round" strokeLinecap="round" />
-                        </svg>
+                        <span className="material-symbols-outlined" style={{ color: "white" }}>
+                            arrow_right_alt
+                        </span>
                     </button>
                 </NavLink>
 

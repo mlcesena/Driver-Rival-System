@@ -7,17 +7,23 @@
   font-family: var(--ff-body);
 }
 
-.disclaimer-container h1 {
-  font-size: var(--fs-body);
-  margin-left: 1rem;
-}
-
-.disclaimer-container div {
+.disclaimer-heading {
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
 }
 
-.disclaimer-container p {
+.disclaimer-heading h1 {
+  font-size: var(--fs-body);
+  margin-left: 1rem;
+}
+
+.disclaimer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.disclaimer-body p {
   font-size: var(--fs-detail);
 }

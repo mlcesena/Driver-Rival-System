@@ -10,9 +10,9 @@ import LoadingError from "./LoadingError";
 function Tracks() {
     const { loading, error, trackData } = useTrackContext();
     const [activeTrack, setActiveTrack] = useState("");
+    const [trackIdx, setTrackIdx] = useState(1);
 
     useEffect(() => {
-
         if (trackData.keys().next().value != undefined) {
             const track = trackData.get(trackData.keys().next().value);
             setActiveTrack(track.circuit_name);
@@ -20,10 +20,10 @@ function Tracks() {
 
     }, [trackData]);
 
-    function handleTrackChange(track) {
-
+    function handleTrackChange(track, idx) {
         if (track !== "" && track != undefined) {
             setActiveTrack(track);
+            setTrackIdx(idx + 1);
         }
     }
 
@@ -40,23 +40,40 @@ function Tracks() {
         trackData.get(activeTrack).track_type,
     ] : [];
 
+    const compounds = trackData.has(activeTrack) ? [
+        trackData.get(activeTrack)?.c1_compound,
+        trackData.get(activeTrack)?.c2_compound,
+        trackData.get(activeTrack)?.c3_compound,
+        trackData.get(activeTrack)?.c4_compound,
+        trackData.get(activeTrack)?.c5_compound,
+        trackData.get(activeTrack)?.c6_compound,
+    ] : [0, 0, 0, 0, 0, 0]
+
     return (
         loading ? <LoadScreen /> :
             error ? <LoadingError message={error} />
                 :
-                <div className="content-columns">
-                    <div>
-                        <TrackNav options={Array.from(trackData.keys())} updaterFunction={handleTrackChange}></TrackNav>
+                <div className="track-body-wrapper">
+                    <div className="track-content-wrapper" style={{ height: "500px" }}>
+                        <div>
+                            <TrackNav options={Array.from(trackData.keys())} updaterFunction={handleTrackChange}></TrackNav>
+                        </div>
+                        <div className="track-visuals">
+                            <div className="map-header">
+                                <h1 className="fs-body text-neutral-500 ff-body fw-medium">{`Round ${trackIdx}/${trackData.size}`}</h1>
+                                <span
+                                    className={`fi fis fi-${trackData.has(activeTrack) ? convertCountryCode(trackData.get(activeTrack).country_code) : ""} track-flag`}
+                                    style={{ zIndex: 50 }}>
+                                </span>
+                            </div>
+                            <img
+                                src={`${trackData.has(activeTrack) ? ("/tracks/" + trackData.get(activeTrack).image) : ""} `}
+                                className="track-img"
+                                alt={trackData.has(activeTrack) ? `Track outline of ${trackData.get(activeTrack).circuit_name}` : ""}></img>
+                            <TrackTires activeCompounds={compounds} />
+                        </div>
                     </div>
-                    <div style={{ position: "relative", width: "fit-content" }}>
-                        <span className={`fi fis fi-${trackData.has(activeTrack) ? convertCountryCode(trackData.get(activeTrack).country_code) : ""} track-flag`} style={{ zIndex: 50 }}></span>
-                        <img
-                            src={`${trackData.has(activeTrack) ? ("/tracks/" + trackData.get(activeTrack).image) : ""} `}
-                            className="track-img"
-                            alt={trackData.has(activeTrack) ? `Track outline of ${trackData.get(activeTrack).circuit_name}` : ""}></img>
-                        <TrackTires></TrackTires>
-                        <TrackInfoContainer data={data}></TrackInfoContainer>
-                    </div>
+                    <TrackInfoContainer data={data}></TrackInfoContainer>
                 </div>
     );
 }

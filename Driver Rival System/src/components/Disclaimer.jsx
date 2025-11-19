@@ -1,11 +1,11 @@
 // import CheckeredFlag from "../assets/CheckeredFlag.svg"
 import "./Disclaimer.css"
 
-function Disclaimer({ title = "None", description = "" }) {
+function Disclaimer({ title = "None", description = "", children }) {
     return (
         <div className="disclaimer-container">
             {/* <CheckeredFlag></CheckeredFlag> */}
-            <div>
+            <div className="disclaimer-heading">
                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" style={{ borderRadius: "0.25rem" }}>
                     <rect width="8" height="8" x="0" y="0" fill="black" />
                     <rect width="8" height="8" x="8" y="0" fill="white" />
@@ -19,7 +19,10 @@ function Disclaimer({ title = "None", description = "" }) {
                 </svg>
                 <h1>{title}</h1>
             </div>
-            <p>{description}</p>
+            <div className="disclaimer-body">
+                <p>{description}</p>
+                {children}
+            </div>
         </div>
     );
 }

@@ -29,7 +29,7 @@ function TrackInfoContainer({ data = [] }) {
         "stadium"]
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const breakpoint = 64 * 16;
+    const breakpoint = 50 * 16;
 
     useEffect(() => {
         const handleResize = () => {
@@ -43,15 +43,14 @@ function TrackInfoContainer({ data = [] }) {
         };
     }, []);
 
-    useEffect(() => {
-
-        if (windowWidth <= breakpoint && expanded) {
-            setExpanded(false);
-        }
-        else if (windowWidth > breakpoint && !expanded) {
-            setExpanded(true)
-        }
-    }, [windowWidth]);
+    // useEffect(() => {
+    //     if (windowWidth <= breakpoint && expanded) {
+    //         setExpanded(false);
+    //     }
+    //     else if (windowWidth > breakpoint && !expanded) {
+    //         setExpanded(true)
+    //     }
+    // }, [windowWidth]);
 
     useEffect(() => {
         if (expanded) {
@@ -64,7 +63,7 @@ function TrackInfoContainer({ data = [] }) {
     }, [expanded]);
 
     return (
-        <div className="content-container-large">
+        <div className="content-container-large content-spacer-top">
             <div className="content-header">
                 <h1>About</h1>
             </div>
