@@ -15,28 +15,36 @@ export const TeamProvider = ({ children }) => {
     const [seasonResults, setSeasonResults] = useState(new Map());
     const [firstTeamName, setFirstTeamName] = useState("");
     const [secondTeamName, setSecondTeamName] = useState("");
-    const [team1Primary, setTeam1Primary] = useState("#808080");
-    const [team1Accent, setTeam1Accent] = useState("#808080");
-    const [team2Primary, setTeam2Primary] = useState("#808080");
-    const [team2Accent, setTeam2Accent] = useState("#808080");
+    const [team1Primary, setTeam1Primary] = useState("var(--clr-neutral-400)");
+    const [team1Accent, setTeam1Accent] = useState("var(--clr-neutral-400)");
+    const [team2Primary, setTeam2Primary] = useState("var(--clr-neutral-400)");
+    const [team2Accent, setTeam2Accent] = useState("var(--clr-neutral-400)");
 
     useEffect(() => {
         getTeamInfo();
     }, []);
 
     useEffect(() => {
-        if (teams.size > 0) {
-            const colors = convertTeamColors(teams.get(firstTeamName).name);
+        if (teams.size > 0 && firstTeamName !== "" && firstTeamName !== undefined) {
+            const colors = convertTeamColors(teams.get(firstTeamName).team_name);
             setTeam1Primary(colors[0]);
             setTeam1Accent(colors[1]);
+        }
+        else {
+            setTeam1Primary("var(--clr-neutral-400)");
+            setTeam1Accent("var(--clr-neutral-400)");
         }
     }, [firstTeamName]);
 
     useEffect(() => {
-        if (teams.size > 0) {
-            const colors = convertTeamColors(teams.get(secondTeamName).name);
+        if (teams.size > 0 && secondTeamName !== "" && secondTeamName !== undefined) {
+            const colors = convertTeamColors(teams.get(secondTeamName).team_name);
             setTeam2Primary(colors[0]);
             setTeam2Accent(colors[1]);
+        }
+        else {
+            setTeam2Primary("var(--clr-neutral-400)");
+            setTeam2Accent("var(--clr-neutral-400)");
         }
     }, [secondTeamName]);
 

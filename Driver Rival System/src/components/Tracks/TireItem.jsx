@@ -1,7 +1,7 @@
 import TireSVG from "../../assets/tire.svg"
 import Tire from "../BackgroundElements/Tire";
 import "./Track.css"
-function TireItem({ title = "", active = false, fill = "#FFFFFF" }) {
+function TireItem({ title = "", active = false, fill = "var(--clr-neutral-100)" }) {
     return (
         <div className="tire-item">
             <label>{title}</label>

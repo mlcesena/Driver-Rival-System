@@ -6,10 +6,10 @@ import "./Comparison.css"
 
 function ComparisonContainer({ title = "null", controlType = "", controlProps = {}, description = "", childComponent = null, containerType = null, forceSplit = false }) {
     return (
-        <div className="comparison-container">
+        <div className="content-container-large comparison-container justify-flex-center">
             <div className="comparison-header">
                 <h1>{title}</h1>
-                {controlType === "combobox" && <ComboBox title="Calendar Year" options={[{ id: 0, value: "2025" }]}></ComboBox>}
+                {controlType === "combobox" && <ComboBox title="Calendar Year" options={[{ id: 0, value: 0, text: "2025" }]}></ComboBox>}
                 {controlType === "toggle" && <ToggleButton {...controlProps}></ToggleButton>}
             </div>
             <span className="divider"></span>

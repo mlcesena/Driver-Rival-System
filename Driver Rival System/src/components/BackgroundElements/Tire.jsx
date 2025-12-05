@@ -1,4 +1,4 @@
-function Tire({ className, style, ref, fill = "#ffffff" }) {
+function Tire({ className, style, ref, fill = "var(--clr-neutral-100)" }) {
     return (
         <svg className={className} style={style} ref={ref} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
             <g>
@@ -15,8 +15,8 @@ function Tire({ className, style, ref, fill = "#ffffff" }) {
                 <path fill={fill} d="M74.31,85.13l-8.43-7.19c-2.84-2.42-7.23-1.18-8.39,2.37l-2.87,8.84c-1.15,3.55,1.67,7.14,5.39,6.85l11.05-.86c5.06-.39,7.11-6.71,3.25-10Z" />
                 <path fill={fill} d="M87.37,72.68l-2.6-10.78c-.87-3.63-5.16-5.21-8.18-3.01l-7.52,5.46c-3.02,2.2-2.84,6.76.34,8.71l9.45,5.8c4.32,2.65,9.69-1.25,8.51-6.18Z" />
                 <path fill={fill} d="M105.26,70.28l4.23-10.25c1.43-3.45-1.11-7.25-4.85-7.25h-9.29c-3.74,0-6.27,3.79-4.85,7.25l4.23,10.25c1.94,4.69,8.58,4.69,10.51,0Z" />
-                <path stroke={fill} stroke-miterlimit={10} stroke-width={"2px"} d="M121.57,21.42c28.6,8.69,50.55,32.68,56.3,62.44" />
-                <path stroke={fill} stroke-miterlimit={10} stroke-width={"2px"} d="M77.49,178.15c-28.6-8.69-50.55-32.68-56.3-62.44" />
+                <path stroke={fill} strokeMiterlimit={10} strokeWidth={"2px"} d="M121.57,21.42c28.6,8.69,50.55,32.68,56.3,62.44" />
+                <path stroke={fill} strokeMiterlimit={10} strokeWidth={"2px"} d="M77.49,178.15c-28.6-8.69-50.55-32.68-56.3-62.44" />
             </g>
         </svg>
     )

@@ -11,21 +11,25 @@
 }
 
 .combo-container {
-  height: 35px;
+  height: 37px;
   width: 200px;
   border: var(--clr-neutral-100) solid 3px;
   background-color: var(--clr-neutral-850);
   border-radius: 100vh;
   overflow: hidden;
+  outline: var(--clr-accent-400) solid 0px;
+  transition: all 0.125s ease-in-out;
 }
 
 .combo-container:hover {
   border-color: var(--clr-accent-400);
-  transition: border-color 0.125s ease-in-out;
+  outline: var(--clr-accent-400) solid 1px;
+  transition: all 0.125s ease-in-out;
 }
 
 .combo-container:active {
   border-color: var(--clr-accent-300);
+  outline: var(--clr-accent-400) solid 0px;
   transition: border-color 0.125s ease-in-out;
 }
 

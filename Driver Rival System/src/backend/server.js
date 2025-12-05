@@ -2,342 +2,48 @@ import express from "express";
 import sqlite3 from "sqlite3";
 import cors from "cors";
 import fs from "fs"
+import createTables from "./tables.js";
 
 const app = express();
 app.use(cors());
 const PORT = 3001;
 
-const db = new sqlite3.Database('./drivers.db');
+const db = new sqlite3.Database('./2025_drs_data.db');
 
 // const fs = require('fs'); // For reading files
-const jsonData = JSON.parse(fs.readFileSync('trackData.json', 'utf8'));
+const trackData = JSON.parse(fs.readFileSync('trackData.json', 'utf8'));
+const teamData = JSON.parse(fs.readFileSync('teamData.json', 'utf8'));
 
 // Setup tables
 db.serialize(() => {
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS new_drivers (
-    //       driver_number INTEGER PRIMARY KEY,
-    //       first_name TEXT NOT NULL,
-    //       last_name TEXT NOT NULL,
-    //       full_name TEXT NOT NULL,
-    //       team TEXT NOT NULL,
-    //       acronym TEXT NOT NULL,
-    //       image TEXT,
-    //       complete_race_count INTEGER DEFAULT 0,
-    //       incomplete_race_count INTEGER DEFAULT 0,
-    //       total_race_count INTEGER DEFAULT 0,
-    //       race_wins INTEGER DEFAULT 0,
-    //       race_pole_count INTEGER DEFAULT 0,
-    //       race_podiums INTEGER DEFAULT 0,
-    //       race_top_10 INTEGER DEFAULT 0,
-    //       points INTEGER DEFAULT 0,
-    //       laps INTEGER DEFAULT 0,
-    //       race_q1_count INTEGER DEFAULT 0,
-    //       race_q2_count INTEGER DEFAULT 0,
-    //       race_q3_count INTEGER DEFAULT 0,
-    //       race_q1_exits INTEGER DEFAULT 0,
-    //       race_q2_exits INTEGER DEFAULT 0,
-    //       race_dnf INTEGER DEFAULT 0,
-    //       race_dns INTEGER DEFAULT 0,
-    //       race_dsq INTEGER DEFAULT 0,
-    //       complete_sprint_count INTEGER DEFAULT 0,
-    //       incomplete_sprint_count INTEGER DEFAULT 0,
-    //       total_sprint_count INTEGER DEFAULT 0,
-    //       sprint_wins INTEGER DEFAULT 0,
-    //       sprint_pole_count INTEGER DEFAULT 0,
-    //       sprint_podium_count INTEGER DEFAULT 0,
-    //       sprint_top_8_count INTEGER DEFAULT 0,
-    //       sprint_q1_count INTEGER DEFAULT 0,
-    //       sprint_q2_count INTEGER DEFAULT 0,
-    //       sprint_q3_count INTEGER DEFAULT 0,
-    //       sprint_q1_exits INTEGER DEFAULT 0,
-    //       sprint_q2_exits INTEGER DEFAULT 0,
-    //       sprint_dnf INTEGER DEFAULT 0,
-    //       sprint_dns INTEGER DEFAULT 0,
-    //       sprint_dsq INTEGER DEFAULT 0
-    //     )
-    //   `);
-
-
-
-
-    //       db.run(`
-    //         INSERT INTO new_drivers (driver_number,
-    // first_name,
-    // last_name,
-    // full_name,
-    // team,
-    // acronym,
-    // image,
-    // complete_race_count,
-    // incomplete_race_count,
-    // total_race_count,
-    // race_wins,
-    // race_pole_count,
-    // race_podiums,
-    // race_top_10,
-    // points,
-    // laps,
-    // race_q1_count,
-    // race_q2_count,
-    // race_q3_count,
-    // race_q1_exits,
-    // race_q2_exits,
-    // race_dnf,
-    // race_dns,
-    // race_dsq,
-    // complete_sprint_count,
-    // incomplete_sprint_count,
-    // total_sprint_count,
-    // sprint_wins,
-    // sprint_pole_count,
-    // sprint_podiums,
-    // sprint_top_8_count,
-    // sprint_q1_count,
-    // sprint_q2_count,
-    // sprint_q3_count,
-    // sprint_q1_exits,
-    // sprint_q2_exits,
-    // sprint_dnf,
-    // sprint_dns,
-    // sprint_dsq)
-
-    //         `);
-
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS sessions (
-    //       session_key INTEGER PRIMARY KEY,
-    //       meeting_key INTEGER NOT NULL,
-    //       race_id INTEGER,
-    //       circuit_name TEXT,
-    //       session_name TEXT,
-    //       session_type TEXT,
-    //       year INTEGER,
-    //       session_num INTEGER
-    //     )
-    //   `);
-
-    // db.run(`
-    //     DROP TABLE tracks
-    //   `);
-    // db.run(`
-    //     ALTER TABLE new_session_results
-    //     RENAME TO session_results
-    //   `);
-
-    // db.run(`
-    //     DELETE FROM tracks
-    //   `);
-
-    // db.run(`
-    //     ALTER TABLE tracks
-    //     ADD COLUMN c1_compound INTEGER DEFAULT 0
-    //   `);
-    // db.run(`
-    //     ALTER TABLE team_sprint_race_results
-    //     ADD COLUMN session_num INTEGER
-    //   `);
-
-    // db.run(`
-    //     ALTER TABLE team_race_results
-    //     DROP COLUMN session_num
-    //   `);
-    // db.run(`
-    //     ALTER TABLE team_sprint_race_results
-    //     DROP COLUMN session_num
-    //   `);
-
-    // db.run(`
-    //     DROP TABLE tracks
-    //   `);
-
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS tracks (
-    //       circuit_name TEXT PRIMARY KEY,
-    //       location TEXT NOT NULL,
-    //       init_year INTEGER,
-    //       latest_year INTEGER,
-    //       appearances INTEGER DEFAULT 0,
-    //       lap_distance_mi FLOAT DEFAULT 0.0,
-    //       lap_distance_km FLOAT DEFAULT 0.0,
-    //       lap_count INTEGER DEFAULT 0,
-    //       race_distance_mi FLOAT DEFAULT 0.0,
-    //       race_distance_km FLOAT DEFAULT 0.0,
-    //       elevation_imperial FLOAT DEFAULT 0.0,
-    //       elevation_meteric FLOAT DEFAULT 0.0,
-    //       corners INTEGER DEFAULT 0,
-    //       fastest_lap_time TEXT, 
-    //       fastest_lap_holder TEXT,
-    //       fastest_lap_year INTEGER,
-    //       track_type TEXT,
-    //       image TEXT,
-    //       country_code TEXT,
-    //       c1_compound INTEGER DEFAULT 0,
-    //       c2_compound INTEGER DEFAULT 0,
-    //       c3_compound INTEGER DEFAULT 0,
-    //       c4_compound INTEGER DEFAULT 0,
-    //       c5_compound INTEGER DEFAULT 0,
-    //       c6_compound INTEGER DEFAULT 0
-    //     )
-    //   `);
-
-
-
-    // db.run(`
-    //     INSERT INTO new_tracks
-    //     SELECT *
-    //     FROM tracks
-    //   `);
-
-
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS teams (
-    //       name TEXT PRIMARY KEY,
-    //       location TEXT,
-    //       image TEXT,
-    //       founding_year INTEGER,
-    //       latest_year INTEGER,
-    //       active_year_count INTEGER DEFAULT 0, 
-    //       team_principal TEXT,
-    //       ceo TEXT,
-    //       min_pit_stop FLOAT DEFAULT 0.0,
-    //       max_pit_stop FLOAT DEFAULT 0.0,
-    //       avg_pit_stop FLOAT DEFAULT 0.0,
-    //       constructors_count INTEGER DEFAULT 0,
-    //       race_wins INTEGER DEFAULT 0,
-    //       race_podiums INTEGER DEFAULT 0,
-    //       race_points INTEGER DEFAULT 0,
-    //       race_top_10 INTEGER DEFAULT 0,
-    //       race_pole INTEGER DEFAULT 0,
-    //       race_dnf INTEGER DEFAULT 0,
-    //       race_dns INTEGER DEFAULT 0,
-    //       race_dsq INTEGER DEFAULT 0,
-    //       sprint_wins INTEGER DEFAULT 0,
-    //       sprint_podiums INTEGER DEFAULT 0,
-    //       sprint_points INTEGER DEFAULT 0,
-    //       sprint_top_10 INTEGER DEFAULT 0,
-    //       sprint_pole INTEGER DEFAULT 0,
-    //       sprint_dnf INTEGER DEFAULT 0,
-    //       sprint_dns INTEGER DEFAULT 0,
-    //       sprint_dsq INTEGER DEFAULT 0,
-    //       country_code TEXT
-    //     )
-    //   `);
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS session_results (
-    //         session_key INTEGER,
-    //         race_id INTEGER,
-    //         circuit_name TEXT,
-    //         driver_number INTEGER NOT NULL,
-    //         position INTEGER,
-    //         points INTEGER,
-    //         laps INTEGER,
-    //         dnf INTEGER,
-    //         dns INTEGER,
-    //         dsq INTEGER,
-    //         session_name TEXT,
-    //         team_name TEXT,
-    //         driver_name TEXT,
-    //         session_num INTEGER,
-
-    //         FOREIGN KEY (race_id) REFERENCES sessions (race_id),
-    //         FOREIGN KEY (circuit_name) REFERENCES sessions (circuit_name),
-    //         FOREIGN KEY (session_num) REFERENCES sessions (session_num),
-    //         FOREIGN KEY (driver_number) REFERENCES drivers (driver_number),
-
-    //         PRIMARY KEY (session_key, driver_number)
-    //     )
-    //     `);
-
-    // db.run(`
-    //     INSERT INTO session_results (session_key, race_id, circuit_name, driver_number, position, points, laps, dnf, dns, dsq, session_name, team_name, driver_name)
-    //     SELECT session_key, race_id, circuit_name, driver_number, position, points, laps, dnf, dns, dsq, session_name, team_name, driver_name
-    //     FROM session_results
-    //   `);
-
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS team_race_results (
-    //         session_key INTEGER,
-    //         race_id INTEGER,
-    //         circuit_name TEXT,
-    //         team_name TEXT,
-    //         driver_1_position INTEGER DEFAULT 0,
-    //         driver_1_points INTEGER DEFAULT 0,
-    //         driver_1_name TEXT,
-    //         driver_2_position INTEGER DEFAULT 0,
-    //         driver_2_points INTEGER DEFAULT 0,
-    //         driver_2_name TEXT,
-    //         team_post_position INTEGER DEFAULT 0,
-    //         team_post_points INTEGER DEFAULT 0,
-    //         min_pit_stop FLOAT DEFAULT 0.0,
-    //         max_pit_stop FLOAT DEFAULT 0.0,
-    //         avg_pit_stop FLOAT DEFAULT 0.0,
-
-    //         FOREIGN KEY (race_id) REFERENCES sessions (race_id),
-    //         FOREIGN KEY (circuit_name) REFERENCES sessions (circuit_name),
-    //         FOREIGN KEY (team_name) REFERENCES teams (name),
-
-    //         PRIMARY KEY (session_key, team_name)
-    //     )
-    //     `);
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS team_sprint_race_results (
-    //         session_key INTEGER,
-    //         race_id INTEGER,
-    //         circuit_name TEXT,
-    //         team_name TEXT,
-    //         driver_1_position INTEGER DEFAULT 0,
-    //         driver_1_points INTEGER DEFAULT 0,
-    //         driver_1_name TEXT,
-    //         driver_2_position INTEGER DEFAULT 0,
-    //         driver_2_points INTEGER DEFAULT 0,
-    //         driver_2_name TEXT,
-    //         team_post_position INTEGER DEFAULT 0,
-    //         team_post_points INTEGER DEFAULT 0,
-    //         min_pit_stop FLOAT DEFAULT 0.0,
-    //         max_pit_stop FLOAT DEFAULT 0.0,
-    //         avg_pit_stop FLOAT DEFAULT 0.0,
-
-    //         FOREIGN KEY (race_id) REFERENCES sessions (race_id),
-    //         FOREIGN KEY (circuit_name) REFERENCES sessions (circuit_name),
-    //         FOREIGN KEY (team_name) REFERENCES teams (name),
-
-    //         PRIMARY KEY (session_key, team_name)
-    // )
-    // `);
-
-    // db.run(`
-    //     CREATE TABLE IF NOT EXISTS team_season_results (
-    //         circuit_name TEXT,
-    //         team_name TEXT,
-    //         team_position INTEGER DEFAULT 0,
-    //         team_points INTEGER DEFAULT 0,
-    //         session_num INTEGER DEFAULT 0,
-
-    //         FOREIGN KEY (circuit_name) REFERENCES sessions (circuit_name),
-    //         FOREIGN KEY (team_name) REFERENCES teams (name),
-
-    //         PRIMARY KEY (circuit_name, team_name)
-    // )
-    // `);
-
+    // db.all(`DROP TABLE teams`,
+    //     [], (err, rows) => {
+    //         if (err) {
+    //             console.error(err.message);
+    //             return;
+    //         }
+    //         console.log("All rows:", rows); // Logs an array of objects
+    //     });
+    createTables();
 });
 
 async function populateDrivers() {
     const url = "https://api.openf1.org/v1/drivers?session_key=latest";
-
+    // const baseKey = 1254;
+    // const url = `https://api.openf1.org/v1/drivers?meeting_key%3E%3D${baseKey}&meeting_key%3C%3D${baseKey+24}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`)
         }
         const drivers = await response.json();
+        // const data = await response.json();
+        // let drivers = new Map();
+        // data.forEach(driver => {
+        //     if (!drivers.has(driver.driver_number)) {
+        //         drivers.set(driver.driver_number, driver);
+        //     }
+        // })
 
         const statement = db.prepare(`
                 INSERT OR REPLACE INTO drivers
@@ -346,6 +52,15 @@ async function populateDrivers() {
             `);
 
         await Promise.all(drivers.map(driver => {
+            const base = "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/";
+            const fnUp = driver.first_name[0].toUpperCase();
+            const fnUpSub = driver.first_name.substring(0, 3).toUpperCase();
+            const lnUpSub = driver.last_name.substring(0, 3).toUpperCase();
+            const fn = driver.first_name;
+            const ln = driver.last_name;
+            const fnLowSub = driver.first_name.substring(0, 3).toLowerCase();
+            const lnLowSub = driver.last_name.substring(0, 3).toLowerCase();
+
             statement.run(
                 driver.driver_number,
                 driver.first_name,
@@ -353,7 +68,8 @@ async function populateDrivers() {
                 `${driver.first_name} ${driver.last_name}`,
                 driver.team_name,
                 driver.name_acronym,
-                driver.headshot_url !== null ? driver.headshot_url.slice(0, driver.headshot_url.indexOf(".transform")) : `https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/${driver.first_name[0].toUpperCase()}/${driver.first_name.substring(0, 3).toUpperCase()}${driver.last_name.substring(0, 3).toUpperCase()}01_${driver.first_name}_${driver.last_name}/${driver.first_name.substring(0, 3).toLowerCase()}${driver.last_name.substring(0, 3).toLowerCase()}01.png`
+                // driver.headshot_url !== null ? driver.headshot_url.slice(0, driver.headshot_url.indexOf(".transform")) : `https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/${driver.first_name[0].toUpperCase()}/${driver.first_name.substring(0, 3).toUpperCase()}${driver.last_name.substring(0, 3).toUpperCase()}01_${driver.first_name}_${driver.last_name}/${driver.first_name.substring(0, 3).toLowerCase()}${driver.last_name.substring(0, 3).toLowerCase()}01.png`
+                driver.headshot_url !== null ? driver.headshot_url.slice(0, driver.headshot_url.indexOf(".transform")) : `${base}${fnUp}/${fnUpSub}${lnUpSub}01_${fn}_${ln}/${fnLowSub}${lnLowSub}01.png`
             );
         }));
 
@@ -370,20 +86,83 @@ async function populateDrivers() {
 async function populateTeams() {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
+            db.run('BEGIN TRANSACTION', (err) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                const updateStmt = db.prepare(`
+                        INSERT OR REPLACE INTO teams
+                        (team_name, location, image, founding_year, latest_year, active_year_count, team_principal, ceo, country_code)
+                        VALUES (?,?,?,?,?,?,?,?,?)
+                      `);
+
+                try {
+                    for (let i = 0; i < teamData.length; i++) {
+                        let name = teamData[i].name;
+                        let location = teamData[i].location;
+                        let country_code = teamData[i].country_code;
+                        let ceo = teamData[i].ceo;
+                        let team_principal = teamData[i].team_principal;
+                        let founding_year = teamData[i].founding_year;
+                        let latest_year = teamData[i].latest_year;
+                        let image = teamData[i].image;
+                        // CHANGEME to different method
+                        let active_count = latest_year - founding_year;
+
+                        updateStmt.run(
+                            name,
+                            location,
+                            image,
+                            founding_year,
+                            latest_year,
+                            active_count,
+                            team_principal,
+                            ceo,
+                            country_code
+                        );
+                    }
+
+                    updateStmt.finalize((err) => {
+                        if (err) {
+                            console.log("Failed to populate team information");
+
+                            db.run('ROLLBACK', () => reject(err));
+                            return;
+                        }
+
+                        db.run('COMMIT', (err) => {
+                            if (err) {
+                                db.run('ROLLBACK', () => reject(err));
+                            } else {
+                                resolve();
+                            }
+                        });
+                    });
+                } catch (err) {
+                    db.run('ROLLBACK', () => reject(err));
+                }
+            });
+        });
+    });
+}
+
+async function populateTeamRaceStats() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
             db.all(`
-                SELECT team AS name, 
+                SELECT dr.team AS name, 
                     SUM(race_wins) AS race_wins,
                     SUM(race_podiums) AS race_podiums,
                     SUM(race_points) AS race_points,
                     SUM(race_top_10) AS race_top_10,
-                    SUM(race_pole_count) AS race_pole,
-                    SUM(sprint_wins) AS sprint_wins,
-                    SUM(sprint_podiums) AS sprint_podiums,
-                    SUM(sprint_points) AS sprint_points,
-                    SUM(sprint_top_8_count) AS sprint_top_8,
-                    SUM(sprint_pole_count) AS sprint_pole
-                FROM drivers
-                GROUP BY team`, (err, rows) => {
+                    SUM(race_pole_count) AS race_pole
+                FROM driver_race_stats AS ds
+                LEFT JOIN drivers AS dr 
+                ON ds.driver_number = dr.driver_number
+                GROUP BY dr.team
+                ORDER BY name`, (err, rows) => {
                 if (err) {
                     reject(err);
                     return;
@@ -396,135 +175,99 @@ async function populateTeams() {
                     }
 
                     const updateStmt = db.prepare(`
-                        INSERT OR REPLACE INTO teams
-                        (name, location, image, founding_year, team_principal, ceo, race_wins, race_podiums, race_points, race_top_10, race_pole, sprint_wins, sprint_podiums, sprint_points, sprint_top_8, sprint_pole, country_code)
-                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                        INSERT OR REPLACE INTO team_race_stats
+                        (team_name, race_wins, race_podiums, race_points, race_top_10, race_pole)
+                        VALUES (?,?,?,?,?,?)
                       `);
 
                     try {
                         rows.forEach(row => {
-                            let location = null;
-                            let country_code = null;
-                            let ceo = "N/A";
-                            let team_principal = null;
-                            let founding_year = null;
-                            let image = null;
-
-                            switch (row.name) {
-                                case "Alpine":
-                                    location = "France";
-                                    country_code = "FRA";
-                                    break;
-                                case "Aston Martin":
-                                case "McLaren":
-                                case "Red Bull Racing":
-                                case "Williams":
-                                    location = "United Kingdom";
-                                    country_code = "GBR";
-                                    break;
-                                case "Ferrari":
-                                case "Racing Bulls":
-                                    location = "Italy";
-                                    country_code = "ITA";
-                                    break;
-                                case "Mercedes":
-                                case "Kick Sauber":
-                                    location = "Germany";
-                                    country_code = "DEU";
-                                    break;
-                                case "Haas F1 Team":
-                                    location = "United States of America";
-                                    country_code = "USA";
-                                    break;
-                                default:
-                                    break;
+                            if (row.name !== null) {
+                                updateStmt.run(
+                                    row.name || "",
+                                    row.race_wins || 0,
+                                    row.race_podiums || 0,
+                                    row.race_points || 0,
+                                    row.race_top_10 || 0,
+                                    row.race_pole || 0
+                                );
                             }
-
-                            switch (row.name) {
-                                case "Alpine":
-                                    ceo = "Luca de Meo";
-                                    team_principal = "Flavio Briatore";
-                                    founding_year = 1981;
-                                    image = "alpine.svg";
-                                    break;
-                                case "Aston Martin":
-                                    ceo = "Andy Cowell";
-                                    team_principal = "Andy Cowell";
-                                    founding_year = 1991;
-                                    image = "aston-martin.svg";
-                                    break;
-                                case "McLaren":
-                                    ceo = "Zak Brown";
-                                    team_principal = "Andrea Stella";
-                                    founding_year = 1966;
-                                    image = "mclaren.svg";
-                                    break;
-                                case "Red Bull Racing":
-                                    ceo = "Laurent Mekies";
-                                    team_principal = "Laurent Mekies";
-                                    founding_year = 2005;
-                                    image = "redbull.svg";
-                                    break;
-                                case "Williams":
-                                    team_principal = "James Vowles";
-                                    founding_year = 1978;
-                                    image = "williams.svg";
-                                    break;
-                                case "Ferrari":
-                                    ceo = "Frederic Vasseur";
-                                    team_principal = "Frederic Vasseur";
-                                    founding_year = 1950;
-                                    image = "ferrari.svg";
-                                    break;
-                                case "Racing Bulls":
-                                    team_principal = "Alan Permane";
-                                    founding_year = 2006;
-                                    image = "racing-bulls.svg";
-                                    break;
-                                case "Mercedes":
-                                    ceo = "Toto Wolff";
-                                    team_principal = "Toto Wolff";
-                                    founding_year = 1954;
-                                    image = "mercedes.svg";
-                                    break;
-                                case "Kick Sauber":
-                                    team_principal = "Jonathan Wheatley";
-                                    founding_year = 1993;
-                                    image = "sauber.svg";
-                                    break;
-                                case "Haas F1 Team":
-                                    team_principal = "Ayao Komatsu";
-                                    founding_year = 2016;
-                                    image = "haas.svg";
-                                    break;
-                                default:
-                                    break;
-                            }
-
-                            updateStmt.run(
-                                row.name || "",
-                                location,
-                                image,
-                                founding_year,
-                                team_principal,
-                                ceo,
-                                row.race_wins || 0,
-                                row.race_podiums || 0,
-                                row.race_points || 0,
-                                row.race_top_10 || 0,
-                                row.race_pole || 0,
-                                row.sprint_wins || 0,
-                                row.sprint_podiums || 0,
-                                row.sprint_points || 0,
-                                row.sprint_top_8 || 0,
-                                row.sprint_pole || 0,
-                                country_code
-                            );
                         });
 
                         updateStmt.finalize((err) => {
                             if (err) {
-                                console.log("Failed to update team information");
+                                console.log("Failed to populate team race statistics");
+
+                                db.run('ROLLBACK', () => reject(err));
+                                return;
+                            }
+
+                            db.run('COMMIT', (err) => {
+                                if (err) {
+                                    db.run('ROLLBACK', () => reject(err));
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    } catch (err) {
+                        db.run('ROLLBACK', () => reject(err));
+                    }
+                });
+            });
+        });
+    });
+}
+
+async function populateTeamSprintStats() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT dr.team AS name, 
+                    SUM(sprint_wins) AS sprint_wins,
+                    SUM(sprint_podium_count) AS sprint_podiums,
+                    SUM(sprint_points) AS sprint_points,
+                    SUM(sprint_top_8_count) AS sprint_top_8,
+                    SUM(sprint_pole_count) AS sprint_pole
+                FROM driver_sprint_stats AS ds
+                LEFT JOIN drivers AS dr
+                ON ds.driver_number = dr.driver_number
+                GROUP BY dr.team
+                ORDER BY name`, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                db.run('BEGIN TRANSACTION', (err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    const updateStmt = db.prepare(`
+                        INSERT OR REPLACE INTO team_sprint_stats
+                        (team_name, sprint_wins, sprint_podiums, sprint_points, sprint_top_8, sprint_pole)
+                        VALUES (?,?,?,?,?,?)
+                      `);
+
+                    try {
+                        rows.forEach(row => {
+                            if (row.name !== null) {
+                                updateStmt.run(
+                                    row.name || "",
+                                    row.sprint_wins || 0,
+                                    row.sprint_podiums || 0,
+                                    row.sprint_points || 0,
+                                    row.sprint_top_8 || 0,
+                                    row.sprint_pole || 0
+                                );
+                            }
+                        });
+
+                        updateStmt.finalize((err) => {
+                            if (err) {
+                                console.log("Failed to populate team sprint race statistics");
 
                                 db.run('ROLLBACK', () => reject(err));
                                 return;
@@ -549,7 +292,8 @@ async function populateTeams() {
 
 async function populateSessions() {
     const date = new Date();
-    const url = `https://api.openf1.org/v1/sessions?date_start>=${date.getFullYear()}-01-01&date_end<=2025-07-06`
+    // const url = `https://api.openf1.org/v1/sessions?date_start>=${date.getFullYear()}-01-01&date_end<=2025-07-06`
+    const url = `https://api.openf1.org/v1/sessions?date_start>=${date.getFullYear()}-01-01&date_end<=2025-${date.getMonth()}-${date.getDay()}`
 
     try {
         let session_num = 1;
@@ -697,35 +441,29 @@ async function populateSessionResults() {
 
 
 async function populateTracks() {
-    const date = new Date();
-    const url = `https://api.openf1.org/v1/sessions?date_start>=${date.getFullYear()}-01-01&date_end<=${date.getFullYear()}-12-31`
-
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`)
-        }
-        const sessions = await response.json();
-
         const stmt = db.prepare(`
         INSERT OR REPLACE INTO tracks
-        (circuit_name, location, init_year, latest_year, lap_distance_mi, lap_distance_km, lap_count, race_distance_mi, race_distance_km, corners, fastest_lap_time, fastest_lap_holder, fastest_lap_year, track_type, image, country_code, c1_compound, c2_compound, c3_compound, c4_compound, c5_compound, c6_compound)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        (circuit_name, location, init_year, latest_year, appearances, lap_distance_mi, lap_distance_km, lap_count, race_distance_mi, race_distance_km, altitude_imperial, altitude_metric, elevation_imperial, elevation_metric, corners, fastest_lap_time, fastest_lap_holder, fastest_lap_year, track_type, image, country_code, c1_compound, c2_compound, c3_compound, c4_compound, c5_compound, c6_compound, car_setup, air_temp_low_fah, air_temp_low_cel, air_temp_high_fah, air_temp_high_cel, support_race, sprint_race)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       `);
 
-
-        jsonData.forEach(item => {
-            // console.log(item);
+        trackData.forEach(item => {
             stmt.run(
                 item.name,
                 item.location,
                 item.firstHeld,
                 item.latestYear,
+                item.appearanceCount,
                 item.lapDistance.mi,
                 item.lapDistance.km,
                 item.lapCount,
                 item.totalDistance.mi,
                 item.totalDistance.km,
+                item.altitudeImperial,
+                item.altitudeMetric,
+                item.elevationImperial,
+                item.elevationMetric,
                 item.corners,
                 item.fastestLap.time,
                 item.fastestLap.driver,
@@ -738,39 +476,16 @@ async function populateTracks() {
                 item.c3Compound,
                 item.c4Compound,
                 item.c5Compound,
-                item.c6Compound
+                item.c6Compound,
+                item.carSetup,
+                item.airTempLow.fah,
+                item.airTempLow.cel,
+                item.airTempHigh.fah,
+                item.airTempHigh.cel,
+                item.supportRace,
+                item.sprint
             )
         });
-
-
-        // const statement = db.prepare(`
-        //         INSERT OR REPLACE INTO tracks
-        //         (circuit_name, location, latest_year, country_code)
-        //         VALUES (?,?,?,?)
-        //     `);
-
-        // await Promise.all(sessions.map(session => {
-        //     const country = session?.country_name ?? null;
-        //     let code = session?.country_code ?? null;
-
-        //     if (country.toLowerCase() === "monaco")
-        //         code = "MCO";
-        //     else if (country.toLowerCase() === "bahrain")
-        //         code = "BHR";
-
-        //     if (session.session_type === "Race") {
-        //         statement.run(
-        //             session.circuit_short_name,
-        //             session.country_name,
-        //             session.year,
-        //             code
-        //         );
-        //     }
-
-        // }));
-        // await new Promise((resolve, reject) => {
-        //     statement.finalize(err => err ? reject(err) : resolve());
-        // });
         console.log("Tracks populated");
     }
     catch (error) {
@@ -778,7 +493,7 @@ async function populateTracks() {
     }
 }
 
-async function updateDriverStats() {
+async function updateDriverRaceStats() {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.all(`
@@ -799,7 +514,79 @@ async function updateDriverStats() {
                     COUNT(CASE WHEN session_name IN ('Qualifying') AND position > 10 AND position <= 15 THEN 1 END) AS race_q2_exits,
                     SUM(CASE WHEN session_name IN ('Race') AND dnf = 1 THEN 1 ELSE 0 END) AS race_dnf,
                     SUM(CASE WHEN session_name IN ('Race') AND dns = 1 THEN 1 ELSE 0 END) AS race_dns,
-                    SUM(CASE WHEN session_name IN ('Race') AND dsq = 1 THEN 1 ELSE 0 END) AS race_dsq,
+                    SUM(CASE WHEN session_name IN ('Race') AND dsq = 1 THEN 1 ELSE 0 END) AS race_dsq
+                FROM session_results
+                GROUP BY driver_number`, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                db.run('BEGIN TRANSACTION', (err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    const updateStmt = db.prepare(`
+            INSERT OR REPLACE INTO driver_race_stats
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+          `);
+
+                    try {
+                        rows.forEach(row => {
+                            updateStmt.run(
+                                row.driver_number,
+                                row.complete_race_count || 0,
+                                row.incomplete_race_count || 0,
+                                row.total_race_count || 0,
+                                row.race_wins || 0,
+                                row.race_pole_count || 0,
+                                row.race_podiums || 0,
+                                row.race_top_10 || 0,
+                                row.race_points || 0,
+                                row.laps || 0,
+                                row.race_q1_count || 0,
+                                row.race_q2_count || 0,
+                                row.race_q3_count || 0,
+                                row.race_q1_exits || 0,
+                                row.race_q2_exits || 0,
+                                row.race_dnf || 0,
+                                row.race_dns || 0,
+                                row.race_dsq || 0
+                            );
+                        });
+
+                        updateStmt.finalize((err) => {
+                            if (err) {
+                                console.log("Failed to update race statistics");
+
+                                db.run('ROLLBACK', () => reject(err));
+                                return;
+                            }
+
+                            db.run('COMMIT', (err) => {
+                                if (err) {
+                                    db.run('ROLLBACK', () => reject(err));
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    } catch (err) {
+                        db.run('ROLLBACK', () => reject(err));
+                    }
+                });
+            });
+        });
+    });
+}
+
+async function updateDriverSprintStats() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT driver_number, 
                     COUNT(CASE WHEN session_name IN ('Sprint') AND dnf != 1 AND dns != 1 AND dsq != 1 THEN 1 END) AS complete_sprint_count,
                     COUNT(CASE WHEN session_name IN ('Sprint') AND (dnf = 1 OR dns = 1 OR dsq = 1) THEN 1 END) AS incomplete_sprint_count,
                     COUNT(CASE WHEN session_name IN ('Sprint') THEN 1 END) AS total_sprint_count,
@@ -830,63 +617,14 @@ async function updateDriverStats() {
                     }
 
                     const updateStmt = db.prepare(`
-            UPDATE drivers
-            SET complete_race_count = ?,
-                incomplete_race_count = ?,
-                total_race_count = ?,
-                race_wins = ?,
-                race_pole_count = ?,
-                race_podiums = ?,
-                race_top_10 = ?,
-                race_points = ?,
-                laps = ?,
-                race_q1_count = ?,
-                race_q2_count = ?,
-                race_q3_count = ?,
-                race_q1_exits = ?,
-                race_q2_exits = ?,
-                race_dnf = ?,
-                race_dns = ?,
-                race_dsq = ?,
-                complete_sprint_count = ?,
-                incomplete_sprint_count = ?,
-                total_sprint_count = ?,
-                sprint_wins = ?,
-                sprint_pole_count = ?,
-                sprint_podiums = ?,
-                sprint_top_8_count = ?,
-                sprint_q1_count = ?,
-                sprint_q2_count = ?,
-                sprint_q3_count = ?,
-                sprint_q1_exits = ?,
-                sprint_q2_exits = ?,
-                sprint_dnf = ?,
-                sprint_dns = ?,
-                sprint_dsq = ?,
-                sprint_points = ?
-            WHERE driver_number = ?
+            INSERT OR REPLACE INTO driver_sprint_stats
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
           `);
 
                     try {
                         rows.forEach(row => {
                             updateStmt.run(
-                                row.complete_race_count || 0,
-                                row.incomplete_race_count || 0,
-                                row.total_race_count || 0,
-                                row.race_wins || 0,
-                                row.race_pole_count || 0,
-                                row.race_podiums || 0,
-                                row.race_top_10 || 0,
-                                row.race_points || 0,
-                                row.laps || 0,
-                                row.race_q1_count || 0,
-                                row.race_q2_count || 0,
-                                row.race_q3_count || 0,
-                                row.race_q1_exits || 0,
-                                row.race_q2_exits || 0,
-                                row.race_dnf || 0,
-                                row.race_dns || 0,
-                                row.race_dsq || 0,
+                                row.driver_number,
                                 row.complete_sprint_count || 0,
                                 row.incomplete_sprint_count || 0,
                                 row.total_sprint_count || 0,
@@ -894,6 +632,7 @@ async function updateDriverStats() {
                                 row.sprint_pole_count || 0,
                                 row.sprint_podiums || 0,
                                 row.sprint_top_8_count || 0,
+                                row.sprint_points || 0,
                                 row.sprint_q1_count || 0,
                                 row.sprint_q2_count || 0,
                                 row.sprint_q3_count || 0,
@@ -901,15 +640,13 @@ async function updateDriverStats() {
                                 row.sprint_q2_exits || 0,
                                 row.sprint_dnf || 0,
                                 row.sprint_dns || 0,
-                                row.sprint_dsq || 0,
-                                row.sprint_points || 0,
-                                row.driver_number
+                                row.sprint_dsq || 0
                             );
                         });
 
                         updateStmt.finalize((err) => {
                             if (err) {
-                                console.log("Failed to update driver information");
+                                console.log("Failed to update driver sprint statistics");
 
                                 db.run('ROLLBACK', () => reject(err));
                                 return;
@@ -993,6 +730,157 @@ async function updateSessionResults() {
                         updateStmt.finalize((err) => {
                             if (err) {
                                 console.log("Failed to update driver information");
+
+                                db.run('ROLLBACK', () => reject(err));
+                                return;
+                            }
+
+                            db.run('COMMIT', (err) => {
+                                if (err) {
+                                    db.run('ROLLBACK', () => reject(err));
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    } catch (err) {
+                        db.run('ROLLBACK', () => reject(err));
+                    }
+                });
+            });
+        });
+    });
+}
+
+async function populateDriverRaceResults() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT driver_name,
+                session_key,
+                race_id,
+                circuit_name,
+                session_num,
+                points AS driver_points,
+                position AS driver_position
+                FROM session_results
+                WHERE session_name = "Race"
+                GROUP BY driver_name, session_key, race_id, circuit_name
+                ORDER BY session_num ASC;
+               `, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                db.run('BEGIN TRANSACTION', (err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    const insertStmt = db.prepare(`
+                        INSERT OR REPLACE INTO driver_race_results
+                        (session_key, race_id, circuit_name, driver_name, driver_position, driver_points, driver_post_points, session_num)
+                        VALUES (?,?,?,?,?,?,?,?)
+                      `);
+
+                    try {
+                        rows.forEach(row => {
+                            // console.log(row);
+
+                            if (row.driver_name != null) {
+                                insertStmt.run(
+                                    row.session_key || null,
+                                    row.race_id || null,
+                                    row.circuit_name || null,
+                                    row.driver_name || null,
+                                    row.driver_position || null,
+                                    row.driver_points || 0,
+                                    row.driver_points,
+                                    row.session_num || 0
+                                );
+                            }
+                        });
+
+                        insertStmt.finalize((err) => {
+                            if (err) {
+                                console.log("Failed to update team race results");
+
+                                db.run('ROLLBACK', () => reject(err));
+                                return;
+                            }
+
+                            db.run('COMMIT', (err) => {
+                                if (err) {
+                                    db.run('ROLLBACK', () => reject(err));
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    } catch (err) {
+                        db.run('ROLLBACK', () => reject(err));
+                    }
+                });
+            });
+        });
+    });
+}
+
+async function populateDriverSprintRaceResults() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT driver_name,
+                session_key,
+                race_id,
+                circuit_name,
+                session_num,
+                points AS driver_points,
+                position AS driver_position
+                FROM session_results
+                WHERE session_name = "Sprint"
+                GROUP BY driver_name, session_key, race_id, circuit_name
+                ORDER BY session_num ASC;
+                `, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                db.run('BEGIN TRANSACTION', (err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    const insertStmt = db.prepare(`
+                        INSERT OR REPLACE INTO driver_sprint_race_results
+                        (session_key, race_id, circuit_name, driver_name, driver_position, driver_points, driver_post_points, session_num)
+                        VALUES (?,?,?,?,?,?,?,?)
+                      `);
+
+
+                    try {
+                        rows.forEach(row => {
+                            if (row.driver_name != null) {
+                                insertStmt.run(
+                                    row.session_key || null,
+                                    row.race_id || null,
+                                    row.circuit_name || null,
+                                    row.driver_name || null,
+                                    row.driver_position || null,
+                                    row.driver_points || 0,
+                                    row.driver_points,
+                                    row.session_num || 0
+                                );
+                            }
+                        });
+
+                        insertStmt.finalize((err) => {
+                            if (err) {
+                                console.log("Failed to update team race results");
 
                                 db.run('ROLLBACK', () => reject(err));
                                 return;
@@ -1157,7 +1045,7 @@ async function populateTeamSprintRaceResults() {
 
                     try {
                         rows.forEach(row => {
-                            if (row.team_name != null) {
+                            if (row.team_name !== null) {
                                 const totalPoints = (row.driver_1_points || 0) + (row.driver_2_points || 0);
 
                                 insertStmt.run(
@@ -1198,6 +1086,153 @@ async function populateTeamSprintRaceResults() {
                     }
                 });
             });
+        });
+    });
+}
+
+async function populateDriverSeasonResults() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT dr.driver_name,
+                dr.circuit_name,
+                dr.session_num,
+                dr.driver_points AS driver_race_points,
+                sr.driver_points AS driver_sprint_points
+                FROM driver_race_results AS dr
+                LEFT JOIN driver_sprint_race_results AS sr
+                ON dr.circuit_name = sr.circuit_name AND dr.driver_name = sr.driver_name
+                GROUP BY dr.circuit_name, dr.driver_name
+                ORDER BY dr.session_num ASC;
+               `, (err, rows) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+
+                db.run('BEGIN TRANSACTION', (err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    const insertStmt = db.prepare(`
+                        INSERT OR REPLACE INTO driver_season_results
+                        (circuit_name, driver_name, driver_points, session_num)
+                        VALUES (?,?,?,?)
+                      `);
+
+
+                    try {
+                        const driverTotals = {}
+                        rows.forEach(row => {
+                            // console.log(row);
+
+                            if (row.driver_name != null) {
+                                if (!driverTotals[row.driver_name]) {
+                                    driverTotals[row.driver_name] = 0;
+                                }
+                                driverTotals[row.driver_name] += ((row.driver_race_points || 0) + (row.driver_sprint_points || 0));
+
+                                insertStmt.run(
+                                    row.circuit_name || null,
+                                    row.driver_name || null,
+                                    driverTotals[row.driver_name],
+                                    row.session_num
+                                );
+                            }
+                        });
+
+                        insertStmt.finalize((err) => {
+                            if (err) {
+                                console.log("Failed to update driver season results");
+
+                                db.run('ROLLBACK', () => reject(err));
+                                return;
+                            }
+
+                            db.run('COMMIT', (err) => {
+                                if (err) {
+                                    db.run('ROLLBACK', () => reject(err));
+                                } else {
+                                    resolve();
+                                }
+                            });
+                        });
+                    } catch (err) {
+                        db.run('ROLLBACK', () => reject(err));
+                    }
+                });
+            });
+        });
+    });
+}
+
+async function updateDriverSeasonPositions() {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.all(`
+                SELECT 
+                circuit_name,
+                driver_name,
+                driver_points,
+                RANK() OVER (PARTITION BY session_num ORDER BY driver_points DESC) AS driver_rank
+                FROM driver_season_results
+                GROUP BY circuit_name, driver_name
+               `,
+                (err, rows) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+
+                    db.run('BEGIN TRANSACTION', (err) => {
+                        if (err) {
+                            reject(err);
+                            return;
+                        }
+
+                        const updateStmt = db.prepare(`
+                        UPDATE driver_season_results
+                        SET driver_position = ?
+                        WHERE driver_name = ? AND circuit_name = ?
+                      `);
+
+
+                        try {
+                            rows.forEach(row => {
+                                // console.log(row);
+
+                                if (row.driver_name != null) {
+                                    updateStmt.run(
+                                        row.driver_rank || null,
+                                        row.driver_name || null,
+                                        row.circuit_name || null
+                                    );
+                                }
+                            });
+
+                            updateStmt.finalize((err) => {
+                                if (err) {
+                                    console.log("Failed to update driver season positions");
+
+                                    db.run('ROLLBACK', () => reject(err));
+                                    return;
+                                }
+
+                                db.run('COMMIT', (err) => {
+                                    if (err) {
+                                        db.run('ROLLBACK', () => reject(err));
+                                    } else {
+                                        resolve();
+                                    }
+                                });
+                            });
+                        } catch (err) {
+                            db.run('ROLLBACK', () => reject(err));
+                        }
+                    });
+                });
         });
     });
 }
@@ -1257,7 +1292,7 @@ async function populateTeamSeasonResults() {
 
                         insertStmt.finalize((err) => {
                             if (err) {
-                                console.log("Failed to update team race results");
+                                console.log("Failed to update team season results");
 
                                 db.run('ROLLBACK', () => reject(err));
                                 return;
@@ -1310,10 +1345,9 @@ async function updateTeamSeasonPositions() {
                         WHERE team_name = ? AND circuit_name = ?
                       `);
 
-
                         try {
                             rows.forEach(row => {
-                                console.log(row);
+                                // console.log(row);
 
                                 if (row.team_name != null) {
                                     updateStmt.run(
@@ -1326,7 +1360,7 @@ async function updateTeamSeasonPositions() {
 
                             updateStmt.finalize((err) => {
                                 if (err) {
-                                    console.log("Failed to update team season points");
+                                    console.log("Failed to update team season ranks");
 
                                     db.run('ROLLBACK', () => reject(err));
                                     return;
@@ -1351,7 +1385,10 @@ async function updateTeamSeasonPositions() {
 
 
 app.get("/api/drivers/", (req, res) => {
-    db.all("SELECT * FROM drivers", [], (err, rows) => {
+    db.all(`SELECT * FROM drivers
+        LEFT JOIN driver_race_stats ON driver_race_stats.driver_number = drivers.driver_number
+        LEFT JOIN driver_sprint_stats ON driver_sprint_stats.driver_number = drivers.driver_number
+        `, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -1374,6 +1411,7 @@ app.get("/api/race_results/", (req, res) => {
     db.all(`
         SELECT * FROM session_results
         WHERE session_name = "Race"
+        ORDER BY session_num
         `, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -1409,6 +1447,7 @@ app.get("/api/qualifying_results/", (req, res) => {
     db.all(`
         SELECT * FROM session_results
         WHERE session_name = "Qualifying"
+        ORDER BY session_num
         `, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -1442,6 +1481,7 @@ app.get("/api/sprint_race_results/", (req, res) => {
     db.all(`
         SELECT * FROM session_results
         WHERE session_name = "Sprint"
+        ORDER BY session_num
         `, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -1477,6 +1517,7 @@ app.get("/api/sprint_qualifying_results/", (req, res) => {
     db.all(`
         SELECT * FROM session_results
         WHERE session_name = "Sprint Qualifying"
+        ORDER BY session_num
         `, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
@@ -1507,7 +1548,10 @@ app.get("/api/sprint_qualifying_results/", (req, res) => {
 });
 
 app.get("/api/teams/", (req, res) => {
-    db.all("SELECT * FROM teams", [], (err, rows) => {
+    db.all(`SELECT * FROM teams
+        LEFT JOIN team_race_stats ON team_race_stats.team_name = teams.team_name
+        LEFT JOIN team_sprint_stats ON team_sprint_stats.team_name = teams.team_name
+        `, [], (err, rows) => {
         if (err) {
             res.status(500).json({ error: err.message });
             return;
@@ -1592,6 +1636,35 @@ app.get("/api/team_sprint_race_results/", (req, res) => {
     })
 });
 
+app.get("/api/driver_season_results/", (req, res) => {
+    db.all(`
+        SELECT * FROM driver_season_results`, [], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+
+        const resultsMap = {};
+
+        rows.forEach(row => {
+            const circuit = row.circuit_name;
+
+            if (!resultsMap[circuit]) {
+                resultsMap[circuit] = {};
+            }
+
+            resultsMap[circuit][row.driver_name] = {
+                driver_name: row.driver_name,
+                driver_position: row.driver_position,
+                driver_points: row.driver_points,
+                session_num: row.session_num
+            };
+        });
+
+        res.json(resultsMap);
+    })
+});
+
 app.get("/api/team_season_results/", (req, res) => {
     db.all(`
         SELECT * FROM team_season_results`, [], (err, rows) => {
@@ -1633,12 +1706,19 @@ app.get("/api/tracks/", (req, res) => {
 });
 
 // await populateDrivers();
-// await populateTeams();
+await populateTeams();
 // await populateSessions();
 // await populateSessionResults();
-// await updateDriverStats();
 // await updateSessionResults();
+// await updateDriverRaceStats();
+// await updateDriverSprintStats();
+// await populateTeamRaceStats();
+// await populateTeamSprintStats();
 // await populateTracks();
+// await populateDriverRaceResults();
+// await populateDriverSprintRaceResults();
+// await populateDriverSeasonResults();
+// await updateDriverSeasonPositions();
 // await populateTeamRaceResults();
 // await populateTeamSprintRaceResults();
 // await populateTeamSeasonResults();

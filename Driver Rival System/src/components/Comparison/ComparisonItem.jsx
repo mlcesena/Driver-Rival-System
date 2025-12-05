@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDriverContext } from "../../contexts/DriverContext";
 
-function DriverCompItem({ title = "Null", team1Color = "#FFFFFF", team2Color = "#FFFFFF", team2Accent = "#FFFFFF", stat1 = 0, stat2 = 0, inverse = false }) {
+function DriverCompItem({ title = "Null", team1Color = "var(--clr-neutral-400)", team2Color = "var(--clr-neutral-400)", team2Accent = "var(--clr-neutral-400)", stat1 = 0, stat2 = 0, inverse = false }) {
     // const {team1Primary, team2Primary, }
     const [statWidth1, setStatWidth1] = useState(0);
     const [statWidth2, setStatWidth2] = useState(0);

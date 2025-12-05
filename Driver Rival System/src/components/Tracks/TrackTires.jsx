@@ -16,9 +16,9 @@ function TrackTires({ activeCompounds = [false, false, false, false, false, fals
                     const pos = activeIndices.indexOf(idx);
 
                     if (activeIndices.length !== 0) {
-                        if (pos === activeIndices.length - 1)
+                        if (pos === 0)
                             fill = "var(--clr-soft-low)";
-                        else if (pos === activeIndices.length - 2)
+                        else if (pos === 1)
                             fill = "var(--clr-medium-low)";
                     }
                     else {
@@ -26,7 +26,7 @@ function TrackTires({ activeCompounds = [false, false, false, false, false, fals
                     }
 
                     return (
-                        <TireItem title={`C${idx + 1}`} active={active} fill={fill} key={idx} />
+                        <TireItem title={`C${6 - idx}`} active={active} fill={fill} key={idx} />
                     )
                 })}
             </div>

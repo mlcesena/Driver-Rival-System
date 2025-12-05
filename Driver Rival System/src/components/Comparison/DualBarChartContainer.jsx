@@ -1,101 +1,63 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar } from 'recharts';
 import { useState } from 'react';
-import DualToolTip from './DualToolTip';
 import "./Comparison.css"
-import { useTeamContext } from '../../contexts/TeamContext';
-function StackedBarChartContainer({ xAxisLabel = "X Axis", yAxisLabel = "Y Axis", teamData = [], yAxisMin = 0, yAxisMax = 100, reversed = false, tooltipLabel = "Value" }) {
-    const { teams, firstTeamName, secondTeamName, team1Primary, team2Primary } = useTeamContext();
-    const trackMap = new Map(teamData.map(d => [d.x, d.track]));
+import ChartWrapper from './ChartWrapper';
+import ChartFrame from './ChartFrame';
 
-    const CustomizedXAxisTick = (props) => {
-        const { x, y, payload } = props;
-
-        const trackName = trackMap.get(payload.value) || "";
-
-        return (
-            <g transform={`translate(${x},${y})`}>
-                <text x={0} y={0} textAnchor="end" fill="#aaaaaa" transform="rotate(-55)">
-                    {trackName}
-                </text>
-            </g>
-        );
-    };
-
-    const CustomizedYAxisTick = (props) => {
-        const { x, y, payload } = props;
-
-        return (
-            <g transform={`translate(${x},${y})`}>
-                <text x={0} y={0} textAnchor="end" fill="#aaaaaa">
-                    {payload.value}
-                </text>
-            </g>
-        );
-    };
-
-    function CustomTooltip({ payload, active }) {
-        if (active) {
-            return (
-                <div className="scatter-tooltip">
-                    <h1>{trackMap.get(payload[0]?.value)}</h1>
-                    <div className="divider"></div>
-                    <h2>{firstTeamName !== "" ? teams.get(firstTeamName).name : "No Team"}</h2>
-                    <p>{`${tooltipLabel}: ${payload[0]?.value ?? "None"}`}</p>
-
-                    <h2>{secondTeamName !== "" ? teams.get(secondTeamName).name : "No Team"}</h2>
-                    <p>{`${tooltipLabel}: ${payload[1]?.value ?? "None"}`}</p>
-                </div>
-            );
-        }
-
-        return null;
-    }
-
+function StackedBarChartContainer({
+    xAxisLabel = "X Axis",
+    yAxisLabel = "Y Axis",
+    data = [],
+    yAxisMin = 0,
+    yAxisMax = 100,
+    reversed = false,
+    tooltipLabel = "Value",
+    entity1 = "None",
+    entity2 = "None",
+    primary1 = "var(--clr-neutral-400)",
+    primary2 = "var(--clr-neutral-400)",
+    accent1 = "var(--clr-neutral-400)",
+    accent2 = "var(--clr-neutral-400)"
+}) {
     return (
-        <>
-            <div className="bar-chart-container">
-                <ResponsiveContainer width="100%" height={600} minWidth={450} style={{ marginBottom: "2rem" }}>
-                    <BarChart
-                        data={teamData}
-                        margin={{
-                            top: 15,
-                            right: 20,
-                            bottom: 100,
-                            left: 20,
-                        }}
-                    >
-                        <CartesianGrid stroke="#3e3e3e" strokeDasharray={"3 3"} />
-                        <XAxis
-                            type="number"
-                            dataKey="x"
-                            ticks={teamData.map(d => d.x)}
-                            name={xAxisLabel}
-                            unit=""
-                            minTickGap={10}
-                            tickMargin={15}
-                            interval={0}
-                            domain={[0, teamData.length - 1]}
-                            label={{ value: xAxisLabel, position: "insideBottom", dy: 100 }}
-                            tick={<CustomizedXAxisTick />} />
-                        <YAxis
-                            type='number'
-                            domain={[yAxisMin, yAxisMax]}
-                            allowDataOverflow={false}
-                            name={yAxisLabel}
-                            unit=""
-                            reversed={reversed}
-                            tickMargin={10}
-                            tickCount={yAxisMax}
-                            label={{ value: yAxisLabel, position: "insideLeft", angle: -90 }}
-                            tick={<CustomizedYAxisTick />}
-                        />
-                        <Tooltip cursor={{ strokeDasharray: '3 3', fill: "rgba(100, 100, 100, 0.15)" }} content={<CustomTooltip />} />
-                        <Bar dataKey="ps1" fill={team1Primary} />
-                        <Bar dataKey="ps2" fill={team2Primary} />
-                    </BarChart>
-                </ResponsiveContainer>
-            </div>
-        </>
+        <ChartWrapper
+            chartType="dual-bar"
+            xTickLabels={data.map(d => d.track)}
+            tooltipLabel={tooltipLabel}
+            toolTipEntity1={entity1}
+            toolTipEntity2={entity2}
+            xAxisLabel={xAxisLabel}
+            yAxisLabel={yAxisLabel}>
+            {({
+                XAxisTick,
+                YAxisTick,
+                ChartTooltip,
+                xAxisLabel,
+                yAxisLabel,
+                margins
+            }) =>
+                <BarChart data={data} margin={margins}>
+                    <ChartFrame
+                        xType="number"
+                        xDataKey="x"
+                        xTicks={data.map((d, index) => index + 1)}
+                        xName={xAxisLabel}
+                        xDomain={[0, data.length - 1]}
+                        xAxisTick={<XAxisTick />}
+                        xLabelMargin={margins.bottom}
+                        yDomain={[yAxisMin, yAxisMax]}
+                        yDataKey={`ps1`}
+                        yName={yAxisLabel}
+                        yTickCount={10}
+                        reversed={reversed}
+                        yAxisTick={<YAxisTick />}
+                        chartTooltip={<ChartTooltip />}
+                    />
+                    <Bar dataKey="ps1" fill={primary1} />
+                    <Bar dataKey="ps2" fill={primary2} />
+                </BarChart>
+            }
+        </ChartWrapper>
     );
 }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Donut({ color = "#FFFFFF", colorAccent = "#FFFFFF", value = 0, total = 0, matching = false }) {
+function Donut({ color = "var(--clr-neutral-100)", colorAccent = "var(--clr-neutral-100)", value = 0, total = 0, matching = false }) {
     const radius = 50;
     const circumference = 2 * Math.PI * radius;
     const [percentage, setPercentage] = useState(0);

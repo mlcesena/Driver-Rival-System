@@ -18,7 +18,6 @@ function PageCard({ title = "Null", description = "", imageList = [""], elementL
             setActiveElement(elementList[0]);
             setRunning(true);
         }
-
     }, [imageList]);
 
     useEffect(() => {
@@ -73,8 +72,8 @@ function PageCard({ title = "Null", description = "", imageList = [""], elementL
         <div className="page-card">
             <h1>{title}</h1>
             {loop && activeImage !== "" ?
-                <div className="page-card-image" ref={imageRef} style={{ "--active-content": `"${activeElement ?? ""}"` }}>
-                    <img src={activeImage}></img>
+                <div className="page-card-image" style={{ "--active-content": `"${activeElement ?? ""}"` }}>
+                    <img ref={imageRef} src={activeImage}></img>
                 </div>
                 :
                 <div className="page-card-placeholder">

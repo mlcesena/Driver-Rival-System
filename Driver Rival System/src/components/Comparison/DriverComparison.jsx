@@ -6,6 +6,7 @@ import ComparisonBarChart from "./ComparisonBarChart"
 import DonutChartContainer from "./DonutChartContainer"
 import ScatterChartContainer from "./ScatterChartContainer"
 import ComparisonContainer from "./ComparisonContainer";
+import LineChartContainer from "./LineChartContainer";
 import Disclaimer from "../Disclaimer";
 
 function Comparison() {
@@ -13,11 +14,13 @@ function Comparison() {
     const [qualiOption, setQualiOption] = useState(1);
     const [sprintRaceOption, setSprintRaceOption] = useState(1);
     const [sprintQualiOption, setSprintQualiOption] = useState(1);
+    const [seasonOption, setSeasonOption] = useState(1);
     const { drivers,
         raceResults,
         qualiResults,
         sprintRaceResults,
         sprintQualiResults,
+        seasonResults,
         firstDriverNumber,
         secondDriverNumber,
         team1Primary,
@@ -30,6 +33,7 @@ function Comparison() {
     const sprintRacePointData = [[], []];
     const sprintRacePositionData = [[], []];
     const sprintQualiPositionData = [[], []];
+    const seasonData = [];
     let i = 1;
     const highlightMap = new Map([
         ["Wins", [
@@ -139,10 +143,10 @@ function Comparison() {
             d2Pos = value.get(secondDriverNumber).position;
         }
 
-        racePointData[0].push({ x: i, y: d1Points, track: key })
-        racePointData[1].push({ x: i, y: d2Points, track: key })
-        racePositionData[0].push({ x: i, y: d1Pos, track: key })
-        racePositionData[1].push({ x: i, y: d2Pos, track: key })
+        racePointData[0].push({ track: key, x: i, y: d1Points })
+        racePointData[1].push({ track: key, x: i, y: d2Points })
+        racePositionData[0].push({ track: key, x: i, y: d1Pos })
+        racePositionData[1].push({ track: key, x: i, y: d2Pos })
         i++;
     }
 
@@ -184,8 +188,41 @@ function Comparison() {
         i++;
     }
 
+    i = 1;
+    for (const [key, value] of seasonResults) {
+        let d1Points = "None", d2Points = "None";
+        let d1Pos = "Did Not Race", d2Pos = "Did Not Race";
+        let d1Name = null, d2Name = null;
+
+        if (firstDriverNumber !== -1 && value.has(drivers.get(firstDriverNumber).full_name)) {
+            const team1 = value.get(drivers.get(firstDriverNumber).full_name);
+            d1Points = team1.driver_points;
+            d1Pos = team1.driver_position;
+            d1Name = team1.driver_name;
+            i = team1.session_num;
+        }
+
+        if (secondDriverNumber !== -1 && value.has(drivers.get(secondDriverNumber).full_name)) {
+            const team2 = value.get(drivers.get(secondDriverNumber).full_name);
+            d2Points = team2.driver_points;
+            d2Pos = team2.driver_position;
+            d2Name = team2.driver_name;
+        }
+
+        seasonData.push({
+            track: key, x: i,
+            t1v1: d1Points,
+            t1v2: d1Pos,
+            t1n: d1Name,
+            t2v1: d2Points,
+            t2v2: d2Pos,
+            t2n: d2Name
+        })
+        i++;
+    }
+
     return (
-        <>
+        <div className="justify-flex-center">
             <ComparisonContainer
                 title="Highlights"
                 controlType="combobox"
@@ -212,12 +249,19 @@ function Comparison() {
                 childComponent={<ScatterChartContainer
                     xAxisLabel="Circuit"
                     yAxisLabel={raceOption === 1 ? "Points" : "Position"}
-                    driver1Data={raceOption === 1 ? racePointData[0] : racePositionData[0]}
-                    driver2Data={raceOption === 1 ? racePointData[1] : racePositionData[1]}
+                    data1={raceOption === 1 ? racePointData[0] : racePositionData[0]}
+                    data2={raceOption === 1 ? racePointData[1] : racePositionData[1]}
                     yAxisMin={0}
                     yAxisMax={raceOption === 1 ? 25 : 20}
                     reversed={raceOption === 1 ? false : true}
-                    tooltipLabel={raceOption === 1 ? "Points" : "Position"} />}
+                    tooltipLabel={raceOption === 1 ? "Points" : "Position"}
+                    entity1={drivers.get(firstDriverNumber)?.full_name ?? "None"}
+                    entity2={drivers.get(secondDriverNumber)?.full_name ?? "None"}
+                    primary1={team1Primary}
+                    primary2={team2Primary}
+                    accent1={team1Accent}
+                    accent2={team2Accent}
+                />}
                 description={raceOption === 1 ?
                     "After each race concludes, drivers score points based on their final position. Drivers in the top 10 positions are awarded points in decreasing amounts from 25 to 1. Outside of those positions 0 points are received."
                     : "At the end of each race, final driver positions are based on where the driver finished and any time penalties. First being indicated by 1 (best) and last indicated by 20 (worst)."}>
@@ -238,12 +282,18 @@ function Comparison() {
                     : <ScatterChartContainer
                         xAxisLabel="Circuit"
                         yAxisLabel={"Position"}
-                        driver1Data={racePositionData[0]}
-                        driver2Data={racePositionData[1]}
+                        data1={racePositionData[0]}
+                        data2={racePositionData[1]}
                         yAxisMin={0}
                         yAxisMax={20}
                         reversed={true}
                         tooltipLabel="Position"
+                        entity1={drivers.get(firstDriverNumber)?.full_name ?? "None"}
+                        entity2={drivers.get(secondDriverNumber)?.full_name ?? "None"}
+                        primary1={team1Primary}
+                        primary2={team2Primary}
+                        accent1={team1Accent}
+                        accent2={team2Accent}
                     ></ScatterChartContainer>}>
             </ComparisonContainer>
             <ComparisonContainer
@@ -257,12 +307,18 @@ function Comparison() {
                         <ScatterChartContainer
                             xAxisLabel="Circuit"
                             yAxisLabel={sprintRaceOption === 1 ? "Points" : "Position"}
-                            driver1Data={sprintRaceOption === 1 ? sprintRacePointData[0] : sprintRacePositionData[0]}
-                            driver2Data={sprintRaceOption === 1 ? sprintRacePointData[1] : sprintRacePositionData[1]}
+                            data1={sprintRaceOption === 1 ? sprintRacePointData[0] : sprintRacePositionData[0]}
+                            data2={sprintRaceOption === 1 ? sprintRacePointData[1] : sprintRacePositionData[1]}
                             yAxisMin={0}
                             yAxisMax={sprintRaceOption === 1 ? 10 : 20}
                             reversed={sprintRaceOption === 1 ? false : true}
-                            tooltipLabel={sprintRaceOption === 1 ? "Points" : "Position"} />
+                            tooltipLabel={sprintRaceOption === 1 ? "Points" : "Position"}
+                            entity1={drivers.get(firstDriverNumber)?.full_name ?? "None"}
+                            entity2={drivers.get(secondDriverNumber)?.full_name ?? "None"}
+                            primary1={team1Primary}
+                            primary2={team2Primary}
+                            accent1={team1Accent}
+                            accent2={team2Accent} />
                     </>}
                 description={sprintRaceOption === 1 ?
                     "After each race concludes, drivers score points based on their final position. Drivers in the top 8 positions are awarded points in decreasing amounts from 10 to 1. Outside of those positions 0 points are received."
@@ -287,16 +343,44 @@ function Comparison() {
                             : <ScatterChartContainer
                                 xAxisLabel="Circuit"
                                 yAxisLabel={"Position"}
-                                driver1Data={sprintQualiPositionData[0]}
-                                driver2Data={sprintQualiPositionData[1]}
+                                data1={sprintQualiPositionData[0]}
+                                data2={sprintQualiPositionData[1]}
                                 yAxisMin={0}
                                 yAxisMax={20}
                                 reversed={true}
                                 tooltipLabel="Position"
+                                entity1={drivers.get(firstDriverNumber)?.full_name ?? "None"}
+                                entity2={drivers.get(secondDriverNumber)?.full_name ?? "None"}
+                                primary1={team1Primary}
+                                primary2={team2Primary}
+                                accent1={team1Accent}
+                                accent2={team2Accent}
                             />}
                     </>}>
             </ComparisonContainer>
-        </>
+            <ComparisonContainer
+                title="Season Performance"
+                containerType="driver"
+                controlType="toggle"
+                controlProps={{ label1: "Points", label2: "Position", updaterFunction: (option) => { setSeasonOption(option) } }}
+                childComponent={
+                    <LineChartContainer
+                        xAxisLabel="Circuit"
+                        yAxisLabel={seasonOption === 1 ? "Points" : "Position"}
+                        data={seasonData}
+                        yAxisMin={seasonOption === 1 ? 0 : 1}
+                        yAxisMax={seasonOption === 1 ? null : 10}
+                        dataOption={seasonOption}
+                        reversed={seasonOption === 1 ? false : true}
+                        tooltipLabel={seasonOption === 1 ? "Points" : "Position"}
+                        entity1={firstDriverNumber > -1 ? drivers.get(firstDriverNumber).full_name : "None"}
+                        entity2={secondDriverNumber > -1 ? drivers.get(secondDriverNumber).full_name : "None"}
+                        primary1={team1Primary}
+                        primary2={team2Primary !== team1Primary ? team2Primary : team2Accent}
+                    />}>
+
+            </ComparisonContainer>
+        </div>
     )
 }
 

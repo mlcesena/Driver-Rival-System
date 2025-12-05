@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Alpine",
+    "location": "France",
+    "country_code": "FRA",
+    "image": "alpine.svg",
+    "founding_year": 1981,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Flavio Briatore",
+    "ceo": "Luca de Meo"
+  },
+  {
+    "name": "Aston Martin",
+    "location": "United Kingdom",
+    "country_code": "GBR",
+    "image": "aston-martin.svg",
+    "founding_year": 1991,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Andy Cowell",
+    "ceo": "Andy Cowell"
+  },
+  {
+    "name": "Ferrari",
+    "location": "Italy",
+    "country_code": "ITA",
+    "image": "ferrari.svg",
+    "founding_year": 1950,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Frederic Vasseur",
+    "ceo": "Benedetto Vigna"
+  },
+  {
+    "name": "Haas F1 Team",
+    "location": "United States of America",
+    "country_code": "USA",
+    "image": "haas.svg",
+    "founding_year": 2016,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Ayao Komatsu",
+    "ceo": "Ayao Komatsu"
+  },
+  {
+    "name": "Kick Sauber",
+    "location": "Germany",
+    "country_code": "DEU",
+    "image": "sauber.svg",
+    "founding_year": 1981,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Jonathan Wheatley",
+    "ceo": "Jonathan Wheatley"
+  },
+  {
+    "name": "McLaren",
+    "location": "United Kingdom",
+    "country_code": "GBR",
+    "image": "mclaren.svg",
+    "founding_year": 1966,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Andrea Stella",
+    "ceo": "Zak Brown"
+  },
+  {
+    "name": "Mercedes",
+    "location": "Germany",
+    "country_code": "DEU",
+    "image": "mercedes.svg",
+    "founding_year": 1954,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Toto Wolff",
+    "ceo": "Toto Wolff"
+  },
+  {
+    "name": "Racing Bulls",
+    "location": "Italy",
+    "country_code": "ITA",
+    "image": "racing-bulls.svg",
+    "founding_year": 2006,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Alan Permane",
+    "ceo": "Peter Bayer"
+  },
+  {
+    "name": "Red Bull Racing",
+    "location": "United Kingdom",
+    "country_code": "GBR",
+    "image": "redbull.svg",
+    "founding_year": 2005,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "Laurent Mekies",
+    "ceo": "Laurent Mekies"
+  },
+  {
+    "name": "Williams",
+    "location": "United Kingdom",
+    "country_code": "GBR",
+    "image": "williams.svg",
+    "founding_year": 1978,
+    "latest_year": 2025,
+    "active_count": null,
+    "team_principal": "James Vowles",
+    "ceo": null
+  }
+]

@@ -2,9 +2,28 @@ import { useEffect, useRef, useState } from "react";
 import { convertCountryCode } from "../../services/GlobalServices";
 import "./Card.css"
 
-function DriverCard({ firstName = "", lastName = "", team = "", number = "", acronym = "", image = "", primaryColor = "", accentColor = "", country = "" }) {
+function DriverCard({
+    firstName = "First",
+    lastName = "Last",
+    team = "No Team",
+    number = "0",
+    acronym = "---",
+    image = "",
+    primaryColor = "var(--clr-neutra-400)",
+    accentColor = "var(--clr-neutra-400)",
+    country = "",
+    driverData = [],
+    reverse = false
+}) {
     const [alpha2, setAlpha2] = useState("xx");
     const [alpha3, setAlpha3] = useState("");
+    const aboutTitles = [
+        "Date of Birth",
+        "Nationality",
+        "Number of Seasons",
+        "Career Race Wins",
+        "Career Points"
+    ];
 
     useEffect(() => {
         getDriverNationality();
@@ -82,15 +101,28 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                     </div>
                     <label className="driver-number" style={{ backgroundColor: `${accentColor}` }}>{number}</label>
                 </div>
-                <div className="card-body" style={{ "--racing-stripe-clr": accentColor }}>
-                    <div className="card-img-container" >
-                        <img
-                            className="card-img"
-                            data-type="driver"
-                            src={image}
-                            alt={`Photo of ${firstName} ${lastName}`}></img>
-                    </div>
-                </div>
+                {!reverse ?
+                    <div className="card-body" style={{ "--racing-stripe-clr": accentColor }}>
+                        <div className="card-img-container" style={{ "--container-bg-clr": accentColor }} >
+                            <img
+                                className="card-img"
+                                data-type="driver"
+                                src={image}
+                                alt={`Photo of ${firstName} ${lastName}`}></img>
+                        </div>
+                    </div> :
+                    <>
+                        <div className="divider" style={{ "--divider-color": accentColor, "--divider-margin": "0.75rem" }}></div>
+                        <div className="card-info-body">
+                            {aboutTitles.map((title, idx) => (
+                                <span>
+                                    <h2 className="ff-body fw-bold">{title}</h2>
+                                    <p className="ff-body">{driverData[idx] ?? "Null"}</p>
+                                </span>
+                            ))}
+                        </div>
+                    </>
+                }
                 <div className="driver-card-footer">
                     <h1 className="driver-acronym">{acronym}</h1>
                     <div className="flag-container">
@@ -98,7 +130,7 @@ function DriverCard({ firstName = "", lastName = "", team = "", number = "", acr
                     </div>
                 </div>
             </div >
-        </div>
+        </div >
 
     );
 }

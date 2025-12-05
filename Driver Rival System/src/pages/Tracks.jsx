@@ -29,24 +29,30 @@ function Tracks() {
 
     const data = trackData.has(activeTrack) ? [
         trackData.get(activeTrack)?.location,
-        trackData.get(activeTrack).init_year,
-        trackData.get(activeTrack).latest_year,
+        trackData.get(activeTrack)?.init_year,
+        trackData.get(activeTrack)?.latest_year,
+        trackData.get(activeTrack)?.appearances,
+        trackData.get(activeTrack)?.corners,
         `${trackData.get(activeTrack).lap_distance_mi} mi / ${trackData.get(activeTrack).lap_distance_km} km`,
-        trackData.get(activeTrack).lap_count,
+        trackData.get(activeTrack)?.lap_count,
         `${trackData.get(activeTrack).race_distance_mi} mi / ${trackData.get(activeTrack).race_distance_km} km`,
-        // `${trackData.get(activeTrack).elevation_imperial} ft / ${trackData.get(activeTrack).elevation_meteric} m`,
-        trackData.get(activeTrack).corners,
+        `${trackData.get(activeTrack).altitude_imperial} ft / ${trackData.get(activeTrack).altitude_metric} m`,
+        `${trackData.get(activeTrack).elevation_imperial} ft / ${trackData.get(activeTrack).elevation_metric} m`,
         `${trackData.get(activeTrack).fastest_lap_time} s (${trackData.get(activeTrack).fastest_lap_year}) ${trackData.get(activeTrack).fastest_lap_holder}`,
-        trackData.get(activeTrack).track_type,
+        `(${trackData.get(activeTrack).air_temp_low_fah} ℉ / ${trackData.get(activeTrack).air_temp_low_cel} ℃) - (${trackData.get(activeTrack).air_temp_high_fah} ℉ / ${trackData.get(activeTrack).air_temp_high_cel} ℃)`,
+        trackData.get(activeTrack)?.track_type,
+        trackData.get(activeTrack)?.car_setup,
+        trackData.get(activeTrack)?.support_race,
+        trackData.get(activeTrack)?.sprint_race
     ] : [];
 
     const compounds = trackData.has(activeTrack) ? [
-        trackData.get(activeTrack)?.c1_compound,
-        trackData.get(activeTrack)?.c2_compound,
-        trackData.get(activeTrack)?.c3_compound,
-        trackData.get(activeTrack)?.c4_compound,
-        trackData.get(activeTrack)?.c5_compound,
         trackData.get(activeTrack)?.c6_compound,
+        trackData.get(activeTrack)?.c5_compound,
+        trackData.get(activeTrack)?.c4_compound,
+        trackData.get(activeTrack)?.c3_compound,
+        trackData.get(activeTrack)?.c2_compound,
+        trackData.get(activeTrack)?.c1_compound,
     ] : [0, 0, 0, 0, 0, 0]
 
     return (
@@ -54,7 +60,7 @@ function Tracks() {
             error ? <LoadingError message={error} />
                 :
                 <div className="track-body-wrapper">
-                    <div className="track-content-wrapper" style={{ height: "500px" }}>
+                    <div className="track-content-wrapper">
                         <div>
                             <TrackNav options={Array.from(trackData.keys())} updaterFunction={handleTrackChange}></TrackNav>
                         </div>

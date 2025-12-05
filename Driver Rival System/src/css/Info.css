@@ -9,8 +9,8 @@ section {
 .info-section {
   display: flex;
   width: 100%;
-  /* height: fit-content; */
-  /* gap: 1rem; */
+  max-width: 1200px;
+  margin-inline: auto;
 }
 
 .module-guide-wrapper {
@@ -132,9 +132,10 @@ section {
 .flag-indicator {
   --indicator-clr: white;
   position: relative;
+  margin-left: 1.5rem;
 }
 
-.flag-indicator::after {
+.flag-indicator::before {
   content: "";
   position: absolute;
   width: 1rem;
@@ -142,7 +143,8 @@ section {
   background-color: var(--indicator-clr);
   border: var(--clr-neutral-200) 1px solid;
   top: 0.15rem;
-  right: 0;
+  left: -1.5rem;
+  /* right: 0; */
   border-radius: 0.25rem;
 }
 

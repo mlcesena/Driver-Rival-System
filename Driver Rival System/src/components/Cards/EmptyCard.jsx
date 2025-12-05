@@ -1,9 +1,9 @@
 import "./Card.css"
 
-function EmptyCard() {
+function EmptyCard({ text = "null" }) {
     return (
         <div className="card-wrapper">
-            <div className="card empty-card"><h1>Select a driver</h1></div>
+            <div className="card empty-card"><h1>{text}</h1></div>
         </div>
     )
 }

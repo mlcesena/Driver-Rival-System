@@ -127,11 +127,11 @@ function TeamComparison() {
     const { pointData: sprintPointData, positionData: sprintPositionData } =
         processResults(sprintResults, true);
 
+    let i = 1;
     for (const [key, value] of seasonResults) {
         let t1Points = "None", t2Points = "None";
         let t1Pos = "Did Not Race", t2Pos = "Did Not Race";
         let t1Name = null, t2Name = null;
-        let i = 1;
 
         if (firstTeamName !== "" && value.has(firstTeamName)) {
             const team1 = value.get(firstTeamName);
@@ -157,6 +157,7 @@ function TeamComparison() {
             t2v2: t2Pos,
             t2n: t2Name
         })
+        i++;
     }
 
     return (
@@ -181,11 +182,18 @@ function TeamComparison() {
                     <DualBarChartContainer
                         xAxisLabel="Circuit"
                         yAxisLabel={"Duration"}
-                        teamData={racePitData}
+                        data={racePitData}
                         yAxisMin={0}
                         yAxisMax={10}
                         reversed={false}
-                        tooltipLabel={"Time"} />}>
+                        tooltipLabel={"Time"}
+                        entity1={firstTeamName ? firstTeamName : "Team 1"}
+                        entity2={secondTeamName ? secondTeamName : "Team 2"}
+                        primary1={team1Primary}
+                        primary2={team2Primary}
+                        accent1={team1Accent}
+                        accent2={team2Accent}
+                    />}>
             </ComparisonContainer>
             <ComparisonContainer
                 title="Race Results"
@@ -197,11 +205,18 @@ function TeamComparison() {
                     <GroupedBarChartContainer
                         xAxisLabel="Circuit"
                         yAxisLabel={raceOption === 1 ? "Points" : "Position"}
-                        teamData={raceOption === 1 ? racePointData : racePositionData}
+                        data={raceOption === 1 ? racePointData : racePositionData}
                         yAxisMin={0}
                         yAxisMax={raceOption === 1 ? 25 : 20}
                         reversed={raceOption === 1 ? false : true}
-                        tooltipLabel={raceOption === 1 ? "Points" : "Position"} />}>
+                        tooltipLabel={raceOption === 1 ? "Points" : "Position"}
+                        entity1={teams.get(firstTeamName)?.team_name ?? "No Name"}
+                        entity2={teams.get(secondTeamName)?.team_name ?? "No Name"}
+                        primary1={team1Primary}
+                        primary2={team2Primary}
+                        accent1={team1Accent}
+                        accent2={team2Accent}
+                    />}>
 
             </ComparisonContainer>
             <ComparisonContainer
@@ -216,13 +231,19 @@ function TeamComparison() {
                         <GroupedBarChartContainer
                             xAxisLabel="Circuit"
                             yAxisLabel={sprintOption === 1 ? "Points" : "Position"}
-                            teamData={sprintOption === 1 ? sprintPointData : sprintPositionData}
+                            data={sprintOption === 1 ? sprintPointData : sprintPositionData}
                             yAxisMin={0}
                             yAxisMax={sprintOption === 1 ? 25 : 20}
                             reversed={sprintOption === 1 ? false : true}
-                            tooltipLabel={sprintOption === 1 ? "Points" : "Position"} />
+                            tooltipLabel={sprintOption === 1 ? "Points" : "Position"}
+                            entity1={teams.get(firstTeamName)?.team_name ?? "No Name"}
+                            entity2={teams.get(secondTeamName)?.team_name ?? "No Name"}
+                            primary1={team1Primary}
+                            primary2={team2Primary}
+                            accent1={team1Accent}
+                            accent2={team2Accent}
+                        />
                     </>}>
-
             </ComparisonContainer>
             <ComparisonContainer
                 title="Season Performance"
@@ -233,12 +254,16 @@ function TeamComparison() {
                     <LineChartContainer
                         xAxisLabel="Circuit"
                         yAxisLabel={seasonOption === 1 ? "Points" : "Position"}
-                        teamData={seasonData}
+                        data={seasonData}
                         yAxisMin={seasonOption === 1 ? 0 : 1}
                         yAxisMax={seasonOption === 1 ? null : 10}
                         dataOption={seasonOption}
                         reversed={seasonOption === 1 ? false : true}
                         tooltipLabel={seasonOption === 1 ? "Points" : "Position"}
+                        entity1={firstTeamName}
+                        entity2={secondTeamName}
+                        primary1={team1Primary}
+                        primary2={team2Primary}
                     />}>
 
             </ComparisonContainer>

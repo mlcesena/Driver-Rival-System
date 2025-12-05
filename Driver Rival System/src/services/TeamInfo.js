@@ -6,8 +6,7 @@ export async function fetchTeamInfo() {
 
         const teamMap = new Map();
         data.forEach(team => {
-            // team.image = setTeamImage(team.name);
-            teamMap.set(team.name, team);
+            teamMap.set(team.team_name, team);
         });
 
         return teamMap;

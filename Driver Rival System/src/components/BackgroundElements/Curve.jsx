@@ -131,7 +131,7 @@ function curveSnake(className, style, stroke) {
     </>);
 }
 
-function Curve({ option = 0, className = "", style = {}, stroke = "#262524" }) {
+function Curve({ option = 0, className = "", style = {}, stroke = "var(--clr-neutral-800)" }) {
     let element;
 
     switch (option) {

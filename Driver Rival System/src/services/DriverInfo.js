@@ -37,7 +37,7 @@ export async function fetchRaceResults() {
         return resultsMap;
 
     } catch (error) {
-        // console.error("Error fetching drivers:", error);
+        // console.error("Error fetching race results:", error);
         throw error;
     }
 }
@@ -63,7 +63,7 @@ export async function fetchQualifyingResults() {
         return resultsMap;
 
     } catch (error) {
-        // console.error("Error fetching drivers:", error);
+        // console.error("Error fetching qualifying results:", error);
         throw error;
     }
 }
@@ -89,7 +89,7 @@ export async function fetchSprintRaceResults() {
         return resultsMap;
 
     } catch (error) {
-        console.error("Error fetching drivers:", error);
+        // console.error("Error fetching sprint race results:", error);
         throw error;
     }
 }
@@ -115,7 +115,33 @@ export async function fetchSprintQualifyingResults() {
         return resultsMap;
 
     } catch (error) {
-        // console.error("Error fetching drivers:", error);
+        // console.error("Error fetching sprint qualifying results:", error);
+        throw error;
+    }
+}
+
+export async function fetchDriverSeasonResults() {
+    try {
+        const response = await fetch("http://localhost:3001/api/driver_season_results/");
+        if (!response.ok) throw new Error("Failed to fetch driver season results");
+        const data = await response.json();
+
+        const resultsMap = new Map();
+
+        for (const [circuit, team] of Object.entries(data)) {
+            const driverMap = new Map();
+
+            for (const [driverName, data] of Object.entries(team)) {
+                driverMap.set(driverName, data);
+            }
+
+            resultsMap.set(circuit, driverMap);
+        }
+
+        return resultsMap;
+
+    } catch (error) {
+        // console.error("Error fetching team sprint results:", error);
         throw error;
     }
 }

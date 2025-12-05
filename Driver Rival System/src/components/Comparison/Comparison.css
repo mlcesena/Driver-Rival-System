@@ -1,16 +1,7 @@
 .comparison-container {
-  background-color: var(--clr-neutral-800);
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-  padding: 1.5rem;
   text-align: left;
   margin-block: 5rem;
-  border-radius: 2rem;
-  /* box-shadow: 1px 2px 1px rgba(0, 255, 170, 0.1),
-    5px 3px 1px hsla(0, 100%, 50%, 0.1), -1px -3px 1px hsla(250, 50%, 50%, 0.1); */
 }
 
 .comparison-header {
@@ -105,7 +96,6 @@
 }
 
 .comparison-desc p {
-  color: var(--clr-neutral-100);
   font-family: var(--ff-body);
 }
 
@@ -171,14 +161,30 @@
   color: var(--clr-neutral-200);
 }
 
-.scatter-chart-container {
+.chart-container {
   font-family: var(--ff-body);
   padding-block: 1rem;
   overflow-x: scroll;
   user-select: none;
 }
 
-.scatter-tooltip {
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 6px;
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: #6c757d;
+  border-radius: 6px;
+}
+
+/* Style the scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #495057;
+}
+
+.chart-tooltip {
   height: fit-content;
   width: fit-content;
   padding: 1rem;
@@ -187,26 +193,20 @@
   border-radius: 1rem;
 }
 
-.scatter-tooltip h1 {
+.chart-tooltip h1 {
   font-size: var(--fs-body);
   margin-bottom: 0.5rem;
 }
 
-.scatter-tooltip h2 {
+.chart-tooltip h2 {
   font-style: italic;
   font-weight: var(--fw-semi-bold);
   margin-top: 0.75rem;
 }
 
-.scatter-tooltip h2,
+.chart-tooltip h2,
 p {
   font-family: var(--ff-body);
-}
-
-.bar-chart-container {
-  font-family: var(--ff-body);
-  padding-block: 1rem;
-  overflow-x: scroll;
 }
 
 @media (max-width: 32em) {

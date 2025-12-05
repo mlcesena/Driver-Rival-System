@@ -5,9 +5,9 @@
 
 .track-content-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: 500px;
-  gap: 1rem;
+  grid-template-columns: 0.5fr 1fr;
+  height: 550px;
+  gap: 3rem;
 }
 
 .track-visuals {
@@ -22,16 +22,20 @@
 }
 
 .track-item-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  column-gap: 2rem;
+  row-gap: 1rem;
   flex-wrap: wrap;
   margin-top: 2rem;
-  gap: 2rem 1rem;
+  /* gap: 2rem 1rem; */
   margin-bottom: 1rem;
   overflow: hidden;
 }
 
 .track-info-item {
-  width: 200px;
+  width: 100%;
+  height: 90px;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -109,12 +113,47 @@ p {
   gap: 0.5rem;
 }
 
+@keyframes fadeColor {
+  0% {
+    background-color: var(--clr-hard-low);
+  }
+  100% {
+    background-color: var(--tire-clr);
+  }
+}
+
+.compound-row .compound-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+.compound-row .compound-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.compound-row .compound-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.compound-row .compound-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.compound-row .compound-bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.compound-row .compound-bar:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
 .compound-bar {
   height: 1rem;
   width: 100%;
   border: var(--clr-neutral-100) solid 2px;
   border-radius: 100vh;
   background-color: var(--clr-hard-low);
+
+  --tire-clr: var(--clr-hard-low);
+
+  animation-name: fadeColor;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 
 .track-img {
@@ -137,14 +176,36 @@ p {
 .track-nav-controls {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  /* gap: 0.5rem; */
   margin-block: auto;
-  margin-right: 3rem;
+  /* background-color: var(--clr-neutral-800);
+  border-radius: 100vh;
+  padding: 0.75rem 0.5rem; */
+  /* margin-right: 3rem; */
+}
+
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0.5;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.track-nav-options li {
+  animation-name: fadeInSlideUp;
+  animation-duration: 0.25s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
 }
 
 .track-nav-options {
   list-style: none;
-  margin-top: 1.5rem;
+  margin-top: 0.75rem;
   width: 325px;
 }
 
@@ -160,7 +221,7 @@ p {
   font-family: var(--ff-primary);
   font-size: var(--fs-sub-heading);
   color: var(--clr-neutral-600);
-  transition: all 0.25s ease-in-out;
+  transition: all 0.125s ease-in-out;
 }
 
 .track-nav-options input[type="radio"]:hover + label {
@@ -171,12 +232,12 @@ p {
 
 .track-nav-options input[type="radio"]:checked + label {
   color: var(--clr-neutral-100);
-  transition: all 0.25s ease-in-out;
+  transition: all 0.125s ease-in-out;
 }
 
 .track-nav-container {
-  display: flex;
-  height: 500px;
+  /* display: flex; */
+  height: 100%;
   /* align-items: center; */
   /* overflow-y: hidden; */
   overflow: hidden;

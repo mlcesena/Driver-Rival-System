@@ -9,9 +9,9 @@ function NavBar() {
     const [collapseByResize, setCollapseByResize] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const breakpoint = 59 * 16;
+    const navRef = useRef();
     const linkRef = useRef();
     const [showOptions, setShowOptions] = useState(false);
-
 
     useEffect(() => {
         const handleResize = () => {
@@ -20,10 +20,24 @@ function NavBar() {
 
         window.addEventListener('resize', handleResize);
 
+
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    useEffect(() => {
+        const handleDocumentClick = (e) => {
+            if (navRef.current && !navRef.current.contains(e.target) && expanded) {
+                document.querySelector("main").classList.remove("blur-active");
+                setExpanded(false);
+            }
+        }
+        document.addEventListener('click', handleDocumentClick);
+        return () => {
+            document.removeEventListener('click', handleDocumentClick);
+        };
+    }, [expanded])
 
     useEffect(() => {
         if (windowWidth > breakpoint) {
@@ -41,7 +55,6 @@ function NavBar() {
     }, [windowWidth]);
 
     useEffect(() => {
-
         if (!expanded && !collapseByResize && linkRef.current) {
             linkRef.current.animate(
                 [
@@ -52,7 +65,8 @@ function NavBar() {
             );
 
             setTimeout(() => {
-                linkRef.current.style.maxHeight = "0px";
+                if (linkRef.current)
+                    linkRef.current.style.maxHeight = "0px";
                 setShowOptions(false);
             }, 250);
         }
@@ -91,7 +105,7 @@ function NavBar() {
 
     return (
         <>
-            <nav className="primary-navigation">
+            <nav className="primary-navigation" ref={navRef}>
                 {windowWidth > breakpoint ?
                     <div className="nav-row">
                         <div className="navbar-links">

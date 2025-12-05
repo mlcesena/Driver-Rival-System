@@ -20,18 +20,25 @@
 }
 
 .toggle-group input[type="radio"]:hover + label {
-  background-color: var(--clr-neutral-300);
+  background-color: var(--clr-neutral-500);
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.toggle-group input[type="radio"]:hover:active + label {
+  background-color: var(--clr-neutral-600);
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 }
 
 .toggle-group input[type="radio"]:checked + label {
-  background-color: var(--clr-accent-400);
+  background-color: var(--clr-accent-500);
   transition: all 0.25s ease-in-out;
+  color: var(--clr-neutral-750);
 }
 
 .toggle-group input[type="radio"]:checked:hover + label {
-  background-color: var(--clr-accent-300);
+  background-color: var(--clr-accent-400);
   transition: all 0.25s ease-in-out;
 }
 
@@ -41,5 +48,10 @@
   padding: 0.5rem 1rem;
   border-radius: 100vh;
   font-family: var(--ff-body);
+  font-weight: var(--fw-semi-bold);
   color: var(--clr-neutral-100);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

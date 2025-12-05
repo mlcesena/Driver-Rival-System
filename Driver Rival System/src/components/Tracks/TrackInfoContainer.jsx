@@ -7,26 +7,42 @@ function TrackInfoContainer({ data = [] }) {
     // const {trackData} = useTrackContext();
     const [expanded, setExpanded] = useState(true);
     const itemRef = useRef();
-    const infoLabels = ["Location:",
+    const infoLabels = [
+        "Location:",
         "First Held:",
         "Last Appearance:",
+        "Total Appearances:",
+        "Corners:",
         "Lap Distance:",
         "Lap Count:",
         "Total Distance:",
-        // "Elevation:",
-        "Corners:",
+        "Altitude:",
+        "Elevation Change:",
         "Fastest Lap:",
-        "Track Type"]
-    const infoIcons = ["location_on",
+        "Air Temp Range",
+        "Track Type",
+        "Car Setup",
+        "Support Races",
+        "Sprint",
+    ]
+    const infoIcons = [
+        "location_on",
         "account_balance",
         "sports_score",
+        "star",
+        "turn_sharp_right",
         "timer",
         "laps",
         "route",
-        // "elevation",
-        "turn_sharp_right",
+        "altitude",
+        "elevation",
         "bolt",
-        "stadium"]
+        "thermometer",
+        "stadium",
+        "build",
+        "sports_motorsports",
+        "trophy"
+    ]
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const breakpoint = 50 * 16;
@@ -74,7 +90,7 @@ function TrackInfoContainer({ data = [] }) {
                     <TrackInfoItem title={label} content={data?.[idx] ?? "null"} icon={infoIcons[idx]} key={idx}></TrackInfoItem>
                 ))}
             </div>
-            {windowWidth <= breakpoint && <button className="collapsible-btn" onClick={() => setExpanded((e) => !e)}>
+            {windowWidth <= breakpoint && <button className="collapsible-btn" style={{ width: "100%" }} onClick={() => setExpanded((e) => !e)}>
                 <span className="material-symbols-outlined">
                     {expanded ? "keyboard_arrow_up" : "keyboard_arrow_down"}
                 </span>

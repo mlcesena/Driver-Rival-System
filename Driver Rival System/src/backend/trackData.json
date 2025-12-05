@@ -5,9 +5,14 @@
     "location": "Melbourne, Australia",
     "firstHeld": 1996,
     "latestYear": 2025,
+    "appearanceCount": 28,
     "lapDistance": { "km": 5.278, "mi": 3.279 },
     "lapCount": 58,
     "totalDistance": { "km": 306.124, "mi": 190.217 },
+    "altitudeImperial": 36.0,
+    "altitudeMetric": 11.0,
+    "elevationImperial": 8.53,
+    "elevationMetric": 2.6,
     "corners": 16,
     "fastestLap": {
       "time": "1:19.813",
@@ -22,7 +27,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Top Speed",
+    "airTempLow": { "fah": 53.0, "cel": 12.0 },
+    "airTempHigh": { "fah": 71.0, "cel": 22.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Shanghai International Circuit",
@@ -30,9 +40,14 @@
     "location": "Shanghai, China",
     "firstHeld": 2004,
     "latestYear": 2025,
+    "appearanceCount": 18,
     "lapDistance": { "km": 5.451, "mi": 3.387 },
     "lapCount": 56,
     "totalDistance": { "km": 305.066, "mi": 189.7 },
+    "altitudeImperial": 13.0,
+    "altitudeMetric": 4.0,
+    "elevationImperial": 24.28,
+    "elevationMetric": 7.4,
     "corners": 16,
     "fastestLap": {
       "time": "1:32.238",
@@ -47,7 +62,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 54.0, "cel": 12.0 },
+    "airTempHigh": { "fah": 71.0, "cel": 22.0 },
+    "supportRace": "Yes",
+    "sprint": "Yes"
   },
   {
     "circuit": "Suzuka Circuit",
@@ -55,13 +75,18 @@
     "location": "Suzuka, Japan",
     "firstHeld": 1987,
     "latestYear": 2025,
+    "appearanceCount": 35,
     "lapDistance": { "km": 5.807, "mi": 3.608 },
     "lapCount": 53,
     "totalDistance": { "km": 307.471, "mi": 191.054 },
+    "altitudeImperial": 115.0,
+    "altitudeMetric": 35.0,
+    "elevationImperial": 132.54,
+    "elevationMetric": 40.4,
     "corners": 18,
     "fastestLap": {
       "time": "1:30.965",
-      "driver": "Andrea Kimi Antonelli",
+      "driver": "Kimi Räikkönen",
       "year": 2025
     },
     "trackType": "Permanent Circuit",
@@ -72,7 +97,12 @@
     "c3Compound": 1,
     "c4Compound": 0,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 50.0, "cel": 10.0 },
+    "airTempHigh": { "fah": 64.0, "cel": 18.0 },
+    "supportRace": "No",
+    "sprint": "No"
   },
   {
     "circuit": "Bahrain International Circuit",
@@ -80,9 +110,14 @@
     "location": "Sakhir, Bahrain",
     "firstHeld": 2004,
     "latestYear": 2025,
+    "appearanceCount": 22,
     "lapDistance": { "km": 5.412, "mi": 3.363 },
     "lapCount": 57,
     "totalDistance": { "km": 308.238, "mi": 191.531 },
+    "altitudeImperial": 49.0,
+    "altitudeMetric": 15.0,
+    "elevationImperial": 55.45,
+    "elevationMetric": 16.9,
     "corners": 15,
     "fastestLap": {
       "time": "1:31.447",
@@ -97,7 +132,12 @@
     "c3Compound": 1,
     "c4Compound": 0,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 73.0, "cel": 23.0 },
+    "airTempHigh": { "fah": 85.0, "cel": 29.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Jeddah Corniche Circuit",
@@ -105,9 +145,14 @@
     "location": "Jeddah, Saudi Arabia",
     "firstHeld": 2021,
     "latestYear": 2025,
+    "appearanceCount": 5,
     "lapDistance": { "km": 6.174, "mi": 3.836 },
     "lapCount": 50,
     "totalDistance": { "km": 308.7, "mi": 191.805 },
+    "altitudeImperial": 20.0,
+    "altitudeMetric": 6.0,
+    "elevationImperial": 9.19,
+    "elevationMetric": 2.8,
     "corners": 27,
     "fastestLap": {
       "time": "1:30.734",
@@ -122,7 +167,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Top Speed",
+    "airTempLow": { "fah": 81.0, "cel": 27.0 },
+    "airTempHigh": { "fah": 98.0, "cel": 37.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Miami International Autodrome",
@@ -130,9 +180,14 @@
     "location": "Miami, USA",
     "firstHeld": 2022,
     "latestYear": 2025,
+    "appearanceCount": 4,
     "lapDistance": { "km": 5.412, "mi": 3.363 },
     "lapCount": 57,
     "totalDistance": { "km": 308.326, "mi": 191.584 },
+    "altitudeImperial": 5.0,
+    "altitudeMetric": 1.5,
+    "elevationImperial": 22.97,
+    "elevationMetric": 7.0,
     "corners": 19,
     "fastestLap": {
       "time": "1:29.708",
@@ -147,7 +202,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Top Speed",
+    "airTempLow": { "fah": 76.0, "cel": 25.0 },
+    "airTempHigh": { "fah": 86.0, "cel": 30.0 },
+    "supportRace": "Yes",
+    "sprint": "Yes"
   },
   {
     "circuit": "Imola (Autodromo Enzo e Dino Ferrari)",
@@ -155,9 +215,14 @@
     "location": "Imola, Italy",
     "firstHeld": 1980,
     "latestYear": 2025,
+    "appearanceCount": 32,
     "lapDistance": { "km": 4.909, "mi": 3.05 },
     "lapCount": 63,
     "totalDistance": { "km": 309.949, "mi": 192.034 },
+    "altitudeImperial": 545.0,
+    "altitudeMetric": 166.0,
+    "elevationImperial": 112.86,
+    "elevationMetric": 34.4,
     "corners": 18,
     "fastestLap": {
       "time": "1:15.484",
@@ -172,7 +237,12 @@
     "c3Compound": 0,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 1
+    "c6Compound": 1,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 57.0, "cel": 14.0 },
+    "airTempHigh": { "fah": 77.0, "cel": 25.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Circuit de Monaco",
@@ -180,9 +250,14 @@
     "location": "Monte Carlo, Monaco",
     "firstHeld": 1950,
     "latestYear": 2025,
+    "appearanceCount": 71,
     "lapDistance": { "km": 3.337, "mi": 2.073 },
     "lapCount": 78,
     "totalDistance": { "km": 260.286, "mi": 161.772 },
+    "altitudeImperial": 98.0,
+    "altitudeMetric": 30.0,
+    "elevationImperial": 17.39,
+    "elevationMetric": 5.3,
     "corners": 19,
     "fastestLap": {
       "time": "1:12.909",
@@ -197,7 +272,12 @@
     "c3Compound": 0,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 1
+    "c6Compound": 1,
+    "carSetup": "Maximum Downforce",
+    "airTempLow": { "fah": 61.0, "cel": 16.0 },
+    "airTempHigh": { "fah": 72.0, "cel": 22.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Circuit de Barcelona-Catalunya",
@@ -205,9 +285,14 @@
     "location": "Barcelona, Spain",
     "firstHeld": 1991,
     "latestYear": 2025,
+    "appearanceCount": 35,
     "lapDistance": { "km": 4.657, "mi": 2.905 },
     "lapCount": 66,
     "totalDistance": { "km": 307.236, "mi": 191.646 },
+    "altitudeImperial": 390.0,
+    "altitudeMetric": 119.0,
+    "elevationImperial": 97.11,
+    "elevationMetric": 29.6,
     "corners": 16,
     "fastestLap": {
       "time": "1:15.743",
@@ -222,7 +307,12 @@
     "c3Compound": 1,
     "c4Compound": 0,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Downforce",
+    "airTempLow": { "fah": 59.0, "cel": 15.0 },
+    "airTempHigh": { "fah": 73.0, "cel": 23.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Circuit Gilles Villeneuve",
@@ -230,9 +320,14 @@
     "location": "Montreal, Canada",
     "firstHeld": 1978,
     "latestYear": 2025,
+    "appearanceCount": 60,
     "lapDistance": { "km": 4.361, "mi": 2.709 },
     "lapCount": 70,
     "totalDistance": { "km": 305.27, "mi": 189.694 },
+    "altitudeImperial": 43.0,
+    "altitudeMetric": 13.0,
+    "elevationImperial": 17.06,
+    "elevationMetric": 5.2,
     "corners": 15,
     "fastestLap": {
       "time": "1:13.078",
@@ -247,7 +342,12 @@
     "c3Compound": 0,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 1
+    "c6Compound": 1,
+    "carSetup": "High Downforce",
+    "airTempLow": { "fah": 62.0, "cel": 17.0 },
+    "airTempHigh": { "fah": 78.0, "cel": 26.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Red Bull Ring",
@@ -255,12 +355,17 @@
     "location": "Spielberg, Austria",
     "firstHeld": 1970,
     "latestYear": 2025,
+    "appearanceCount": 35,
     "lapDistance": { "km": 4.318, "mi": 2.683 },
     "lapCount": 71,
     "totalDistance": { "km": 306.452, "mi": 190.42 },
+    "altitudeImperial": 2297.0,
+    "altitudeMetric": 700.0,
+    "elevationImperial": 208.3,
+    "elevationMetric": 63.5,
     "corners": 8,
     "fastestLap": {
-      "time": "1:05.609",
+      "time": "1:05.619",
       "driver": "Carlos Sainz Jr.",
       "year": 2020
     },
@@ -272,7 +377,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Top Speed",
+    "airTempLow": { "fah": 49.0, "cel": 9.0 },
+    "airTempHigh": { "fah": 69.0, "cel": 20.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Silverstone Circuit",
@@ -280,9 +390,14 @@
     "location": "Towcester, UK",
     "firstHeld": 1950,
     "latestYear": 2025,
+    "appearanceCount": 60,
     "lapDistance": { "km": 5.891, "mi": 3.66 },
     "lapCount": 52,
     "totalDistance": { "km": 306.198, "mi": 190.263 },
+    "altitudeImperial": 482.0,
+    "altitudeMetric": 147.0,
+    "elevationImperial": 37.07,
+    "elevationMetric": 11.3,
     "corners": 18,
     "fastestLap": {
       "time": "1:27.097",
@@ -297,7 +412,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Top Speed",
+    "airTempLow": { "fah": 53.0, "cel": 12.0 },
+    "airTempHigh": { "fah": 72.0, "cel": 22.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Circuit de Spa-Francorchamps",
@@ -305,14 +425,19 @@
     "location": "Stavelot, Belgium",
     "firstHeld": 1950,
     "latestYear": 2025,
+    "appearanceCount": 57,
     "lapDistance": { "km": 7.004, "mi": 4.352 },
     "lapCount": 44,
     "totalDistance": { "km": 308.052, "mi": 191.415 },
+    "altitudeImperial": 1542.0,
+    "altitudeMetric": 470.0,
+    "elevationImperial": 335.3,
+    "elevationMetric": 102.2,
     "corners": 21,
     "fastestLap": {
-      "time": "1:44.861",
-      "driver": "Kimi Antonelli",
-      "year": 2025
+      "time": "1:44.701",
+      "driver": "Sergio Pérez",
+      "year": 2024
     },
     "trackType": "Permanent Circuit",
     "image": "spa.svg",
@@ -322,7 +447,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Top Speed",
+    "airTempLow": { "fah": 54.0, "cel": 12.0 },
+    "airTempHigh": { "fah": 74.0, "cel": 23.0 },
+    "supportRace": "Yes",
+    "sprint": "Yes"
   },
   {
     "circuit": "Hungaroring",
@@ -330,9 +460,14 @@
     "location": "Budapest, Hungary",
     "firstHeld": 1986,
     "latestYear": 2025,
+    "appearanceCount": 41,
     "lapDistance": { "km": 4.381, "mi": 2.722 },
     "lapCount": 70,
     "totalDistance": { "km": 306.63, "mi": 190.531 },
+    "altitudeImperial": 886.0,
+    "altitudeMetric": 270.0,
+    "elevationImperial": 113.85,
+    "elevationMetric": 34.7,
     "corners": 16,
     "fastestLap": {
       "time": "1:16.627",
@@ -347,7 +482,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Maximum Downforce",
+    "airTempLow": { "fah": 61.0, "cel": 16.0 },
+    "airTempHigh": { "fah": 81.0, "cel": 27.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Circuit Zandvoort",
@@ -355,9 +495,14 @@
     "location": "Zandvoort, Netherlands",
     "firstHeld": 1952,
     "latestYear": 2025,
+    "appearanceCount": 35,
     "lapDistance": { "km": 4.259, "mi": 2.646 },
     "lapCount": 72,
     "totalDistance": { "km": 306.648, "mi": 190.504 },
+    "altitudeImperial": 23.0,
+    "altitudeMetric": 7.0,
+    "elevationImperial": 29.2,
+    "elevationMetric": 8.9,
     "corners": 14,
     "fastestLap": {
       "time": "1:11.097",
@@ -372,7 +517,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Downforce",
+    "airTempLow": { "fah": 58.0, "cel": 14.0 },
+    "airTempHigh": { "fah": 69.0, "cel": 21.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Autodromo Nazionale Monza",
@@ -380,14 +530,19 @@
     "location": "Monza, Italy",
     "firstHeld": 1950,
     "latestYear": 2025,
+    "appearanceCount": 75,
     "lapDistance": { "km": 5.793, "mi": 3.6 },
     "lapCount": 53,
     "totalDistance": { "km": 306.72, "mi": 190.586 },
+    "altitudeImperial": 532.0,
+    "altitudeMetric": 162.0,
+    "elevationImperial": 42.0,
+    "elevationMetric": 12.8,
     "corners": 10,
     "fastestLap": {
-      "time": "1:21.046",
-      "driver": "Rubens Barrichello",
-      "year": 2004
+      "time": "1:18.792",
+      "driver": "Max Verstappen",
+      "year": 2025
     },
     "trackType": "Permanent Circuit",
     "image": "monza.svg",
@@ -397,7 +552,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Maximum Top Speed",
+    "airTempLow": { "fah": 55.0, "cel": 13.0 },
+    "airTempHigh": { "fah": 79.0, "cel": 26.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Baku City Circuit",
@@ -405,9 +565,14 @@
     "location": "Baku, Azerbaijan",
     "firstHeld": 2016,
     "latestYear": 2025,
+    "appearanceCount": 9,
     "lapDistance": { "km": 6.003, "mi": 3.73 },
     "lapCount": 51,
     "totalDistance": { "km": 306.049, "mi": 190.17 },
+    "altitudeImperial": -46.0,
+    "altitudeMetric": -14.0,
+    "elevationImperial": 87.92,
+    "elevationMetric": 26.8,
     "corners": 20,
     "fastestLap": {
       "time": "1:43.009",
@@ -422,7 +587,12 @@
     "c3Compound": 0,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 1
+    "c6Compound": 1,
+    "carSetup": "Maximum Top Speed",
+    "airTempLow": { "fah": 61.0, "cel": 16.0 },
+    "airTempHigh": { "fah": 74.0, "cel": 23.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Marina Bay Street Circuit",
@@ -430,9 +600,14 @@
     "location": "Singapore",
     "firstHeld": 2008,
     "latestYear": 2025,
+    "appearanceCount": 16,
     "lapDistance": { "km": 5.063, "mi": 3.146 },
     "lapCount": 61,
     "totalDistance": { "km": 308.706, "mi": 191.805 },
+    "altitudeImperial": 43.0,
+    "altitudeMetric": 13.0,
+    "elevationImperial": 17.39,
+    "elevationMetric": 5.3,
     "corners": 19,
     "fastestLap": {
       "time": "1:34.486",
@@ -447,7 +622,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Maximum Downforce",
+    "airTempLow": { "fah": 76.0, "cel": 24.0 },
+    "airTempHigh": { "fah": 87.0, "cel": 31.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Circuit of the Americas",
@@ -455,9 +635,14 @@
     "location": "Austin, USA",
     "firstHeld": 2012,
     "latestYear": 2025,
+    "appearanceCount": 13,
     "lapDistance": { "km": 5.513, "mi": 3.426 },
     "lapCount": 56,
     "totalDistance": { "km": 308.405, "mi": 191.646 },
+    "altitudeImperial": 518.0,
+    "altitudeMetric": 158.0,
+    "elevationImperial": 132.87,
+    "elevationMetric": 40.5,
     "corners": 20,
     "fastestLap": {
       "time": "1:36.169",
@@ -472,7 +657,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 60.0, "cel": 15.0 },
+    "airTempHigh": { "fah": 84.0, "cel": 29.0 },
+    "supportRace": "No",
+    "sprint": "Yes"
   },
   {
     "circuit": "Autódromo Hermanos Rodríguez",
@@ -480,14 +670,19 @@
     "location": "Mexico City, Mexico",
     "firstHeld": 1963,
     "latestYear": 2025,
+    "appearanceCount": 25,
     "lapDistance": { "km": 4.304, "mi": 2.674 },
     "lapCount": 71,
     "totalDistance": { "km": 305.354, "mi": 189.738 },
+    "altitudeImperial": 7323.0,
+    "altitudeMetric": 2232.0,
+    "elevationImperial": 9.19,
+    "elevationMetric": 2.8,
     "corners": 17,
     "fastestLap": {
-      "time": "1:18.336",
-      "driver": "Charles Leclerc",
-      "year": null
+      "time": "1:17.774",
+      "driver": "Valtteri Bottas",
+      "year": 2021
     },
     "trackType": "Permanent Circuit",
     "image": "mexico.svg",
@@ -497,7 +692,12 @@
     "c3Compound": 0,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Downforce",
+    "airTempLow": { "fah": 49.0, "cel": 9.0 },
+    "airTempHigh": { "fah": 73.0, "cel": 23.0 },
+    "supportRace": "No",
+    "sprint": "No"
   },
   {
     "circuit": "Autódromo José Carlos Pace",
@@ -505,13 +705,18 @@
     "location": "São Paulo, Brazil",
     "firstHeld": 1973,
     "latestYear": 2025,
+    "appearanceCount": 53,
     "lapDistance": { "km": 4.309, "mi": 2.677 },
     "lapCount": 71,
     "totalDistance": { "km": 305.879, "mi": 190.064 },
+    "altitudeImperial": 2510.0,
+    "altitudeMetric": 765.0,
+    "elevationImperial": 141.08,
+    "elevationMetric": 43.0,
     "corners": 15,
     "fastestLap": {
       "time": "1:10.540",
-      "driver": "Lewis Hamilton",
+      "driver": "Valtteri Bottas",
       "year": 2018
     },
     "trackType": "Permanent Circuit",
@@ -522,7 +727,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 62.0, "cel": 17.0 },
+    "airTempHigh": { "fah": 79.0, "cel": 26.0 },
+    "supportRace": "No",
+    "sprint": "Yes"
   },
   {
     "circuit": "Las Vegas Street Circuit",
@@ -530,14 +740,19 @@
     "location": "Las Vegas, USA",
     "firstHeld": 2023,
     "latestYear": 2025,
+    "appearanceCount": 3,
     "lapDistance": { "km": 6.201, "mi": 3.853 },
     "lapCount": 50,
     "totalDistance": { "km": 310.05, "mi": 192.656 },
+    "altitudeImperial": 2034.0,
+    "altitudeMetric": 620.0,
+    "elevationImperial": 3.28,
+    "elevationMetric": 1.0,
     "corners": 17,
     "fastestLap": {
-      "time": "1:35.490",
-      "driver": "George Russell",
-      "year": 2023
+      "time": "1:34.876",
+      "driver": "Lando Norris",
+      "year": 2024
     },
     "trackType": "Street Circuit",
     "image": "lasvegas.svg",
@@ -547,7 +762,12 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Maximum Top Speed",
+    "airTempLow": { "fah": 47.0, "cel": 8.0 },
+    "airTempHigh": { "fah": 66.0, "cel": 19.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   },
   {
     "circuit": "Lusail International Circuit",
@@ -555,13 +775,18 @@
     "location": "Doha, Qatar",
     "firstHeld": 2021,
     "latestYear": 2025,
+    "appearanceCount": 4,
     "lapDistance": { "km": 5.38, "mi": 3.343 },
     "lapCount": 57,
     "totalDistance": { "km": 308.611, "mi": 191.762 },
+    "altitudeImperial": 14.0,
+    "altitudeMetric": 4.0,
+    "elevationImperial": 16.4,
+    "elevationMetric": 5.0,
     "corners": 22,
     "fastestLap": {
-      "time": "1:24.319",
-      "driver": "Max Verstappen",
+      "time": "1:22.384",
+      "driver": "Lando Norris",
       "year": 2023
     },
     "trackType": "Permanent Circuit",
@@ -572,7 +797,12 @@
     "c3Compound": 1,
     "c4Compound": 0,
     "c5Compound": 0,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "High Downforce",
+    "airTempLow": { "fah": 67.0, "cel": 19.0 },
+    "airTempHigh": { "fah": 85.0, "cel": 29.0 },
+    "supportRace": "Yes",
+    "sprint": "Yes"
   },
   {
     "circuit": "Yas Marina Circuit",
@@ -580,14 +810,19 @@
     "location": "Abu Dhabi, UAE",
     "firstHeld": 2009,
     "latestYear": 2025,
+    "appearanceCount": 17,
     "lapDistance": { "km": 5.281, "mi": 3.281 },
     "lapCount": 58,
     "totalDistance": { "km": 306.183, "mi": 190.253 },
+    "altitudeImperial": 7.0,
+    "altitudeMetric": 2.0,
+    "elevationImperial": 35.1,
+    "elevationMetric": 10.7,
     "corners": 21,
     "fastestLap": {
-      "time": "1:26.103",
-      "driver": "Max Verstappen",
-      "year": 2021
+      "time": "1:25.637",
+      "driver": "Kevin Magnussen",
+      "year": 2024
     },
     "trackType": "Permanent Circuit",
     "image": "abudhabi.svg",
@@ -597,6 +832,11 @@
     "c3Compound": 1,
     "c4Compound": 1,
     "c5Compound": 1,
-    "c6Compound": 0
+    "c6Compound": 0,
+    "carSetup": "Balanced Downforce/Speed",
+    "airTempLow": { "fah": 63.0, "cel": 17.0 },
+    "airTempHigh": { "fah": 80.0, "cel": 27.0 },
+    "supportRace": "Yes",
+    "sprint": "No"
   }
 ]
